@@ -8,18 +8,19 @@ using System.Xml;
 
 public class ItemCatalogueConstantValues : MonoBehaviour
 {
+    public static ItemCatalogueConstantValues itemCataloguePointer;
     //each value in each array represents the variables of each item
     //values are taken from this class and used to create an item in the ItemCatalogueData.cs file
-    public bool[] ARTEFACTYESNO = new bool[16];
-    public int[] CASHVALUEOFITEM = new int[16]; //16 is a placeholder value
-    public string[] NAMEOFITEM = new string[16];
+    public static bool[] ARTEFACTYESNO = new bool[16];
+    public static int[] CASHVALUEOFITEM = new int[16]; //16 is a placeholder value
+    public static string[] NAMEOFITEM = new string[16];
     public Sprite[] ICONOFITEM = new Sprite[16];
-    public Sprite[] PORTRAITOFITEM = new Sprite[16];
-    public string[] ITEMDESCRIPTION = new string[16];
-    public int[] IDOFITEM = new int[16];
-    public float[] ODDSOFFINDING = new float[16];
-    public int[] MAXAMOUNTTOFIND = new int[16];
-    public int[] ITEMTYPEID = new int[16];
+    public static Sprite[] PORTRAITOFITEM = new Sprite[16];
+    public static string[] ITEMDESCRIPTION = new string[16];
+    public static int[] IDOFITEM = new int[16];
+    public static float[] ODDSOFFINDING = new float[16];
+    public static int[] MAXAMOUNTTOFIND = new int[16];
+    public static int[] ITEMTYPEID = new int[16];
 
     private void Awake()
     {

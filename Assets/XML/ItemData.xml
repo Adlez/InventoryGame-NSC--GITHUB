@@ -1,4 +1,4 @@
 <ItemInformation>
-	<ArtefactsYesNo item01="0" item02="0" item03="0" item04="0" item05="0" item06="0" item07="0" item08="0" 
-		item09="0" item10="0" item11="0" item12="0" item13="0" item14="0" item15="0" item16="0"  />
+	<ArtefactYesNo item01="true" item02="false" item03="false" item04="false" item05="false" item06="false" item07="false" item08="false" 
+		item09="false" item10="false" item11="false" item12="false" item13="false" item14="false" item15="false" item16="false"  />
 </ItemInformation>

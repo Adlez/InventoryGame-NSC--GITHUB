@@ -23,10 +23,7 @@ public class DisplayInventory : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-		if(di_ItemObj.GetComponent<ItemCatalogueConstantValues>().NAMEOFITEM.Length > 0)
-        {
-
-        }
+		
 	}
 	
     public void PopulateIconButtonList()

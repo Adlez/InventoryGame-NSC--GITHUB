@@ -6,18 +6,19 @@ using UnityEngine.UI;
 public class IconObj : MonoBehaviour
 {
     //public as necessary
-    protected Sprite io_IconBox;
-    protected Sprite io_IconImage;
-    protected Text io_Name;
-    protected GameObject io_ObjectForThisIcon;
+    public Sprite io_IconBox;
+    public Sprite io_IconImage;
+    public Text io_Name;
+    public GameObject io_ObjectForThisIcon;
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public static GameObject MakeIconObject(GameObject item)
+    {
+        GameObject icon = new GameObject("IconObject");
+        int thisItemID = item.GetComponent<ItemObj>().idInArrays;
+        icon.AddComponent<IconObj>();
+        //icon.GetComponent<IconObj>().io_Name.text = item.GetComponent<ItemObj>().itemName;
+        //icon.GetComponent<IconObj>().io_IconImage = ItemCatalogueConstantValues.itemCataloguePointer.ICONOFITEM[thisItemID];
+        icon.GetComponent<IconObj>().io_IconBox = null;
+        return icon;
+    }
 }
