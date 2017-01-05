@@ -22,7 +22,7 @@ public class ItemCatalogueConstantValues : MonoBehaviour
     public static int[] MAXAMOUNTTOFIND = new int[16];
     public static int[] ITEMTYPEID = new int[16];
 
-    public Sprite[] iccv_itemIcons = new Sprite[16];
+    //public Sprite[] iccv_itemIcons = new Sprite[16];
 
     private void Awake()
     {
@@ -37,7 +37,7 @@ public class ItemCatalogueConstantValues : MonoBehaviour
             CASHVALUEOFITEM[i] = 0;
             NAMEOFITEM[i] = "EmptyName";
             ICONOFITEM[i] = Resources.Load<Sprite>("Sprites/TempIconSprite-1-32x32");
-            itemCataloguePointer.iccv_itemIcons[i] = ICONOFITEM[i];
+            //itemCataloguePointer.iccv_itemIcons[i] = ICONOFITEM[i];
             PORTRAITOFITEM[i] = null;
             ITEMDESCRIPTION[i] = "No Description";
             IDOFITEM[i] = i;
