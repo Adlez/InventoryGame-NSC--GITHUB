@@ -98,8 +98,9 @@ public class GameControllerScript : MonoBehaviour
     }
 
 	// Use this for initialization
-	void Start () {
-		
+	void Start ()
+    {
+        ItemCatalogueConstantValues.PopulateItemArrays();
 	}
 	
 	// Update is called once per frame

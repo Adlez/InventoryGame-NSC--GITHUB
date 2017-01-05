@@ -14,21 +14,28 @@ public class ItemCatalogueData : MonoBehaviour
     private float _invenDisplaySlotY = 25.0f;
     private float _iconWidthOffset = 32.0f;
     private float _iconHeightOffset = 32.0f;
-    private int _invenColumns = 5;
+    private int _invenColumns = 4;
 
     public void CreateItems()
     {
+        GameObject _InventoryContainer = new GameObject("InventoryContainer");
+        GameObject _ItemIconContainer = new GameObject("InvenIconContainer");
         for(int i = 0; i < icd_ArrayOfItems.Length; ++i)
         {
             //GameObject newItem = Instantiate(itemObjPrefab) as GameObject;
             GameObject newItem = new GameObject("Item");//Temp name
+            newItem.transform.parent = _InventoryContainer.transform;
             //ItemObj item = newItem.GetComponent<ItemObj>();
             newItem.AddComponent<ItemObj>();
+            newItem.transform.localScale = newItem.transform.localScale * 100;
 
             newItem.GetComponent<ItemObj>().isArtefact = ItemCatalogueConstantValues.ARTEFACTYESNO[i];
             newItem.GetComponent<ItemObj>().cashValue = ItemCatalogueConstantValues.CASHVALUEOFITEM[i];
-            newItem.GetComponent<ItemObj>().invIconObject = IconObj.MakeIconObject(newItem);
             newItem.GetComponent<ItemObj>().itemName = "TEMP_ITEM";
+            newItem.GetComponent<ItemObj>().idInArrays = 0;// ItemCatalogueConstantValues.IDOFITEM[i];
+            GameObject iconObj = IconObj.MakeIconObject(newItem, _ItemIconContainer);
+            newItem.GetComponent<ItemObj>().invIconObject = iconObj;
+
             //remaining values assigned here
             //add to array
             icd_ArrayOfItems[i] = newItem;
@@ -45,8 +52,11 @@ public class ItemCatalogueData : MonoBehaviour
         for(int i = 0; i < icd_ArrayOfItems.Length; ++i)
         {
             GameObject go = icd_ArrayOfItems[i].GetComponent<ItemObj>().invIconObject;
-            go.transform.position = new Vector2(_invenDisplaySlotX * i + _iconWidthOffset, 
-                _invenDisplaySlotY * (i / _invenColumns) + _iconHeightOffset);
+            go.transform.position = new Vector2
+                (
+                _invenDisplaySlotX * (i % _invenColumns) + _iconWidthOffset, 
+                (_invenDisplaySlotY * (i / _invenColumns) - _iconHeightOffset)*-1
+                );
         }
     }
 }

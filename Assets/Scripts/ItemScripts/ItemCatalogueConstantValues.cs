@@ -14,7 +14,7 @@ public class ItemCatalogueConstantValues : MonoBehaviour
     public static bool[] ARTEFACTYESNO = new bool[16];
     public static int[] CASHVALUEOFITEM = new int[16]; //16 is a placeholder value
     public static string[] NAMEOFITEM = new string[16];
-    public Sprite[] ICONOFITEM = new Sprite[16];
+    public static Sprite[] ICONOFITEM = new Sprite[16];
     public static Sprite[] PORTRAITOFITEM = new Sprite[16];
     public static string[] ITEMDESCRIPTION = new string[16];
     public static int[] IDOFITEM = new int[16];
@@ -22,20 +22,22 @@ public class ItemCatalogueConstantValues : MonoBehaviour
     public static int[] MAXAMOUNTTOFIND = new int[16];
     public static int[] ITEMTYPEID = new int[16];
 
+    public Sprite[] iccv_itemIcons = new Sprite[16];
+
     private void Awake()
     {
-        PopulateItemArrays();
-        
+        //PopulateItemArrays();
     }
 
-    void PopulateItemArrays()
+    public static void PopulateItemArrays()
     {
         //Temp Code Begins
         for (int i = 0; i < CASHVALUEOFITEM.Length; ++i)
         {
             CASHVALUEOFITEM[i] = 0;
             NAMEOFITEM[i] = "EmptyName";
-            ICONOFITEM[i] = null;
+            ICONOFITEM[i] = Resources.Load<Sprite>("Sprites/TempIconSprite-1-32x32");
+            itemCataloguePointer.iccv_itemIcons[i] = ICONOFITEM[i];
             PORTRAITOFITEM[i] = null;
             ITEMDESCRIPTION[i] = "No Description";
             IDOFITEM[i] = i;
@@ -43,6 +45,7 @@ public class ItemCatalogueConstantValues : MonoBehaviour
             MAXAMOUNTTOFIND[i] = 2;
             ITEMTYPEID[i] = 0;
         }
+        
         //Temp Code Ends
 
         XmlDocument xmlDoc = new XmlDocument();
