@@ -42,14 +42,18 @@ public class ItemCatalogueData : MonoBehaviour
             newItem.GetComponent<ItemObj>().cashValue = ItemCatalogueConstantValues.CASHVALUEOFITEM[i];
             newItem.GetComponent<ItemObj>().itemName = ItemCatalogueConstantValues.NAMEOFITEM[i];
             newItem.GetComponent<ItemObj>().idInArrays = ItemCatalogueConstantValues.IDOFITEM[i];
-            GameObject iconObj = IconObj.MakeIconObject(newItem, icd_InvenScrollViewPanel);
-            newItem.GetComponent<ItemObj>().invIconObject = iconObj;
             newItem.GetComponent<ItemObj>().invIcon = ItemCatalogueConstantValues.ICONOFITEM[i]; //Necessary?
             newItem.GetComponent<ItemObj>().fullImage = ItemCatalogueConstantValues.PORTRAITOFITEM[i];
             newItem.GetComponent<ItemObj>().description = ItemCatalogueConstantValues.ITEMDESCRIPTION[i];
             newItem.GetComponent<ItemObj>().oddsOfFinding = ItemCatalogueConstantValues.ODDSOFFINDING[i];
             newItem.GetComponent<ItemObj>().maxFindAtOnce = ItemCatalogueConstantValues.MAXAMOUNTTOFIND[i];
             newItem.GetComponent<ItemObj>().typeID = ItemCatalogueConstantValues.ITEMTYPEID[i];
+
+            GameObject iconObj = IconObj.MakeIconObject(newItem, icd_InvenScrollViewPanel);
+            newItem.GetComponent<ItemObj>().invIconObject = iconObj;
+
+            newItem.name = newItem.GetComponent<ItemObj>().itemName;
+            newItem.GetComponent<ItemObj>().invIconObject.GetComponent<IconObj>().GetComponent<Image>().sprite = ItemCatalogueConstantValues.ICONOFITEM[i];
 
 
             //remaining values assigned here

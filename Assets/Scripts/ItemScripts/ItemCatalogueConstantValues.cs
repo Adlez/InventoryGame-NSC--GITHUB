@@ -69,28 +69,28 @@ public class ItemCatalogueConstantValues : MonoBehaviour
                     NAMEOFITEM[i] = node.Attributes[i].Value;
                 }
             }
-            if(node.Name == "DescriptionOfItem")
+            if (node.Name == "DescriptionOfItem")
             {
                 for(int i = 0; i < ITEMDESCRIPTION.Length; ++i)
                 {
                     ITEMDESCRIPTION[i] = node.Attributes[i].Value;
                 }
             }
-            if(node.Name == "OddsOfFinding")
+            if (node.Name == "OddsOfFinding")
             {
                 for(int i = 0; i < ODDSOFFINDING.Length; ++i)
                 {
                     ODDSOFFINDING[i] = int.Parse(node.Attributes[i].Value);
                 }
             }
-            if(node.Name == "MaxFindAtOnce")
+            if (node.Name == "MaxFindAtOnce")
             {
                 for(int i = 0; i < MAXAMOUNTTOFIND.Length; ++i)
                 {
                     MAXAMOUNTTOFIND[i] = int.Parse(node.Attributes[i].Value);
                 }
             }
-            if(node.Name == "TypeID")
+            if (node.Name == "TypeID")
             {
                 for(int i = 0; i < ITEMTYPEID.Length; ++i)
                 {
