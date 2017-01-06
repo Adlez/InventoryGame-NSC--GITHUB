@@ -31,22 +31,15 @@ public class ItemCatalogueConstantValues : MonoBehaviour
 
     public static void PopulateItemArrays()
     {
-        //Temp Code Begins
+        //Load Images
         for (int i = 0; i < CASHVALUEOFITEM.Length; ++i)
         {
-            CASHVALUEOFITEM[i] = 0;
-            NAMEOFITEM[i] = "EmptyName";
-            ICONOFITEM[i] = Resources.Load<Sprite>("Sprites/TempIconSprite-1-32x32");
-            //itemCataloguePointer.iccv_itemIcons[i] = ICONOFITEM[i];
+            string tempString = "Sprites/TempIconSprite-" + i.ToString() + "-32x32";
+            ICONOFITEM[i] = Resources.Load<Sprite>(tempString);
             PORTRAITOFITEM[i] = null;
-            ITEMDESCRIPTION[i] = "No Description";
-            IDOFITEM[i] = i;
-            ODDSOFFINDING[i] = 100.0f;
-            MAXAMOUNTTOFIND[i] = 2;
-            ITEMTYPEID[i] = 0;
         }
         
-        //Temp Code Ends
+        //Load Items from XML
 
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.Load("./Assets/XML/ItemData.xml");
@@ -62,9 +55,48 @@ public class ItemCatalogueConstantValues : MonoBehaviour
                     ARTEFACTYESNO[i] = bool.Parse(node.Attributes[i].Value);
                 }
             }
-            else
+            if (node.Name == "CashValueOfItem")
             {
-                return;
+                for(int i = 0; i < CASHVALUEOFITEM.Length; ++i)
+                {
+                    CASHVALUEOFITEM[i] = int.Parse(node.Attributes[i].Value);
+                }
+            }
+            if (node.Name == "NameOfItem")
+            {
+                for (int i = 0; i < NAMEOFITEM.Length; ++i)
+                {
+                    NAMEOFITEM[i] = node.Attributes[i].Value;
+                }
+            }
+            if(node.Name == "DescriptionOfItem")
+            {
+                for(int i = 0; i < ITEMDESCRIPTION.Length; ++i)
+                {
+                    ITEMDESCRIPTION[i] = node.Attributes[i].Value;
+                }
+            }
+            if(node.Name == "OddsOfFinding")
+            {
+                for(int i = 0; i < ODDSOFFINDING.Length; ++i)
+                {
+                    ODDSOFFINDING[i] = int.Parse(node.Attributes[i].Value);
+                }
+            }
+            if(node.Name == "MaxFindAtOnce")
+            {
+                for(int i = 0; i < MAXAMOUNTTOFIND.Length; ++i)
+                {
+                    MAXAMOUNTTOFIND[i] = int.Parse(node.Attributes[i].Value);
+                }
+            }
+            if(node.Name == "TypeID")
+            {
+                for(int i = 0; i < ITEMTYPEID.Length; ++i)
+                {
+                    ITEMTYPEID[i] = int.Parse(node.Attributes[i].Value);
+                    //0 == Tool, 1 == Treasure, 2 == Artefact? Necessary?
+                }
             }
         }
     }

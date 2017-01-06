@@ -21,8 +21,8 @@ public class ItemCatalogueData : MonoBehaviour
         GameObject _InventoryContainer = new GameObject("InventoryContainer");
         GameObject _ItemIconContainer = new GameObject("InvenIconContainer");
         _ItemIconContainer.transform.SetParent (icd_InvenScrollViewPanel.transform);
-        _ItemIconContainer.GetComponentInParent<Transform>().position = new Vector3(0.0f, 0.0f, 0.0f);
-        _ItemIconContainer.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+        //_ItemIconContainer.GetComponentInParent<Transform>().position = new Vector3(0.0f, 0.0f, 0.0f);
+        //_ItemIconContainer.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
         /*_ItemIconContainer.transform.localPosition = new Vector3(
             _ItemIconContainer.transform.position.x,
             _ItemIconContainer.transform.position.y,
@@ -40,10 +40,17 @@ public class ItemCatalogueData : MonoBehaviour
 
             newItem.GetComponent<ItemObj>().isArtefact = ItemCatalogueConstantValues.ARTEFACTYESNO[i];
             newItem.GetComponent<ItemObj>().cashValue = ItemCatalogueConstantValues.CASHVALUEOFITEM[i];
-            newItem.GetComponent<ItemObj>().itemName = "TEMP_ITEM";
-            newItem.GetComponent<ItemObj>().idInArrays = 0;// ItemCatalogueConstantValues.IDOFITEM[i];
-            GameObject iconObj = IconObj.MakeIconObject(newItem, _ItemIconContainer);
+            newItem.GetComponent<ItemObj>().itemName = ItemCatalogueConstantValues.NAMEOFITEM[i];
+            newItem.GetComponent<ItemObj>().idInArrays = ItemCatalogueConstantValues.IDOFITEM[i];
+            GameObject iconObj = IconObj.MakeIconObject(newItem, icd_InvenScrollViewPanel);
             newItem.GetComponent<ItemObj>().invIconObject = iconObj;
+            newItem.GetComponent<ItemObj>().invIcon = ItemCatalogueConstantValues.ICONOFITEM[i]; //Necessary?
+            newItem.GetComponent<ItemObj>().fullImage = ItemCatalogueConstantValues.PORTRAITOFITEM[i];
+            newItem.GetComponent<ItemObj>().description = ItemCatalogueConstantValues.ITEMDESCRIPTION[i];
+            newItem.GetComponent<ItemObj>().oddsOfFinding = ItemCatalogueConstantValues.ODDSOFFINDING[i];
+            newItem.GetComponent<ItemObj>().maxFindAtOnce = ItemCatalogueConstantValues.MAXAMOUNTTOFIND[i];
+            newItem.GetComponent<ItemObj>().typeID = ItemCatalogueConstantValues.ITEMTYPEID[i];
+
 
             //remaining values assigned here
             //add to array
@@ -59,12 +66,26 @@ public class ItemCatalogueData : MonoBehaviour
         }
         for(int i = 0; i < icd_ArrayOfItems.Length; ++i)
         {
-            GameObject go = icd_ArrayOfItems[i].GetComponent<ItemObj>().invIconObject;
-            go.transform.position = new Vector2
-                (
-                _invenDisplaySlotX * (i % _invenColumns) + _iconWidthOffset, 
-                (_invenDisplaySlotY * (i / _invenColumns) - _iconHeightOffset)*-1
-                );
+            //GameObject go = icd_ArrayOfItems[i].GetComponent<ItemObj>().invIconObject;
+            //go.transform.position = new Vector2
+                //(
+                //_invenDisplaySlotX * (i % _invenColumns) + _iconWidthOffset, 
+                //(_invenDisplaySlotY * (i / _invenColumns) - _iconHeightOffset)*-1
+                //);
+        }
+        PositionIconsOnScreen();
+    }
+
+    public void PositionIconsOnScreen()
+    {
+        for(int i = 0; i < icd_ArrayOfItems.Length; ++i)
+        {
+            Vector3 iconPos = icd_ArrayOfItems[i].GetComponent<ItemObj>().invIconObject.GetComponent<Transform>().position;
+            iconPos.x = _invenDisplaySlotX * (i % _invenColumns) + _iconWidthOffset;
+            iconPos.y = (_invenDisplaySlotY * (i / _invenColumns) - _iconHeightOffset) * -1;
+            iconPos.x = 0.0f;
+            iconPos.y = 0.0f;
+            icd_ArrayOfItems[i].GetComponent<ItemObj>().invIconObject.GetComponent<Transform>().position = new Vector3(iconPos.x, iconPos.y, 100.0f);
         }
     }
 }

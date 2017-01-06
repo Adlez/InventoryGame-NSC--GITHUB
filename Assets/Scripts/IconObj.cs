@@ -16,8 +16,8 @@ public class IconObj : MonoBehaviour
     public static GameObject MakeIconObject(GameObject item, GameObject iconContainer)
     {
         GameObject icon = new GameObject("IconObject"); // create the game object
-        icon.transform.SetParent (iconContainer.transform);
-        icon.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+        icon.transform.SetParent(iconContainer.GetComponentInParent<Transform>());//.transform);
+        //icon.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
         int thisItemID = item.GetComponent<ItemObj>().idInArrays;
         icon.AddComponent<IconObj>();
         icon.AddComponent<SpriteRenderer>();

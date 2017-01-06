@@ -1,4 +1,25 @@
 <ItemInformation>
-	<ArtefactYesNo item01="true" item02="false" item03="false" item04="false" item05="false" item06="false" item07="false" item08="false" 
-		item09="false" item10="false" item11="false" item12="false" item13="false" item14="false" item15="false" item16="false"  />
+	<ArtefactYesNo item01="false" item02="false" item03="false" item04="false" item05="false" item06="false" item07="false" item08="false" 
+		item09="false" item10="false" item11="false" item12="false" item13="false" item14="false" item15="false" item16="true"  />
+
+  <NameOfItem item01= "Item00" item02="Item01" item03="Item02" item04="Item03" item05="Item04" item06="Item05" item07="Item06" item08="Item07"
+		item09="Item08" item10="Item09" item11="Item10" item12="Item11" item13="Item12" item14="Item13" item15="Item14" item16="Item15" />
+  
+	<CashValueOfItem item01= "10" item02="20" item03="30" item04="40" item05="50" item06="60" item07="70" item08="80" 
+		item09="90" item10="100" item11="110" item12="120" item13="130" item14="140" item15="150" item16="160"  />
+
+  <DescriptionOfItem item01= "This is the first item, item 0." item02="This is the second item." item03="This is the third item, eat shit." item04="This item is apparently worth 40 munnies." 
+                     item05="Item O'Five." item06="This item is probably drugs." item07="Forman and Toab are high on Vicodin." item08="Is this gold?" 
+                     item09="How many breasts are in this game?" item10="I like Turtles." item11="Bet this is a turtle." item12="No, this is a turtle." 
+                     item13="How about this one, Gold or Turtle?" item14="Cameron == Bitch" item15="Second to last item, item O'Fourteen A.K.A item 15." item16="Final test item."  />
+  
+  <OddsOfFinding item01= "100" item02="50" item03="50" item04="75" item05="75" item06="50" item07="70" item08="80"
+		item09="90" item10="100" item11="25" item12="13" item13="10" item14="10" item15="5" item16="1"  />
+
+  <MaxFindAtOnce item01= "1" item02="1" item03="1" item04="1" item05="1" item06="1" item07="2" item08="1"
+		item09="1" item10="2" item11="1" item12="1" item13="1" item14="1" item15="1" item16="1"  />
+
+  <TypeID item01= "1" item02="1" item03="1" item04="1" item05="1" item06="1" item07="1" item08="1"
+		item09="1" item10="1" item11="1" item12="1" item13="1" item14="1" item15="1" item16="2" />
+  
 </ItemInformation>
