@@ -27,7 +27,7 @@ public class GameControllerScript : MonoBehaviour
 
     public void AttemptAnAdventure(int partyID, int levelID)
     {
-        var theLevel = gc_Levels[levelID].GetComponent<LevelScript>();
+        var theLevel = gc_Levels[levelID].GetComponent<LevelObj>();
         var theParty = gc_Parties[partyID].GetComponent<PartyCompanyGroupScript>();
         //function called by a UI button
         for (int i = 0; i < gc_SelectedLevelToolRequired.Length; ++i)
@@ -55,7 +55,7 @@ public class GameControllerScript : MonoBehaviour
             if (gc_GoodToGoOnJourney != false)
             {
                 theParty.pcg_PartyIsActive = true; //set bool so party doesn't go on multi adventures
-                theLevel.GetComponent<LevelScript>().lv_IsActive = true;//set bool so level only has one party at a time
+                theLevel.GetComponent<LevelObj>().lv_IsActive = true;//set bool so level only has one party at a time
                 theParty.pcg_TravelTime = theLevel.lv_Distance;
                 theParty.pcg_LevelExploring = levelID;
             }
@@ -82,13 +82,13 @@ public class GameControllerScript : MonoBehaviour
                 if (party.pcg_TimeGoneFor >= party.pcg_TravelTime && party.pcg_ExcavationComplete == false)
                 {
                     //ExcavateLevel(party);
-                    //function is likely stored in LevelScript.cs
+                    //function is likely stored in LevelObj.cs
                 }
                 else if(party.pcg_TimeGoneFor > party.pcg_TravelTime *2 && party.pcg_ExcavationComplete == true)
                 {
                     //reduce extra energy according to loot carried
                     party.pcg_PartyIsActive = false;
-                    gc_Levels[party.pcg_LevelExploring].GetComponent<LevelScript>().lv_IsActive = false;
+                    gc_Levels[party.pcg_LevelExploring].GetComponent<LevelObj>().lv_IsActive = false;
                 }
 
 
@@ -101,6 +101,7 @@ public class GameControllerScript : MonoBehaviour
 	void Start ()
     {
         ItemCatalogueConstantValues.PopulateItemArrays();
+        LevelCatalogueConstantValues.PopulateItemArrays();
 	}
 	
 	// Update is called once per frame

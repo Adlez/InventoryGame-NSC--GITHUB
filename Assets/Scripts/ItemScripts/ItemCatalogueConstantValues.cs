@@ -11,7 +11,7 @@ public class ItemCatalogueConstantValues : MonoBehaviour
     public static ItemCatalogueConstantValues itemCataloguePointer;
     //each value in each array represents the variables of each item
     //values are taken from this class and used to create an item in the ItemCatalogueData.cs file
-    public static bool[] ARTEFACTYESNO = new bool[16];
+    public static bool[] ARTEFACTYESNO = new bool[16];//Consider seperate arrays for tool, treasure, and artefacts
     public static int[] CASHVALUEOFITEM = new int[16]; //16 is a placeholder value
     public static string[] NAMEOFITEM = new string[16];
     public static Sprite[] ICONOFITEM = new Sprite[16];
@@ -21,13 +21,6 @@ public class ItemCatalogueConstantValues : MonoBehaviour
     public static float[] ODDSOFFINDING = new float[16];
     public static int[] MAXAMOUNTTOFIND = new int[16];
     public static int[] ITEMTYPEID = new int[16];
-
-    //public Sprite[] iccv_itemIcons = new Sprite[16];
-
-    private void Awake()
-    {
-        //PopulateItemArrays();
-    }
 
     public static void PopulateItemArrays()
     {
@@ -40,7 +33,6 @@ public class ItemCatalogueConstantValues : MonoBehaviour
         }
         
         //Load Items from XML
-
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.Load("./Assets/XML/ItemData.xml");
 

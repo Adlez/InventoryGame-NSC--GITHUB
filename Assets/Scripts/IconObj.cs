@@ -5,12 +5,6 @@ using UnityEngine.UI;
 
 public class IconObj : MonoBehaviour
 {
-    //public as necessary
-    //public Sprite io_IconBox;
-    //public Sprite io_IconImage;
-    //public Image io_ImageIconImage;
-    //public Text io_TextName;
-    //public string io_StringName;
     public GameObject io_ObjectForThisIcon;
     
     public static GameObject MakeIconObject(GameObject item, GameObject iconContainer)

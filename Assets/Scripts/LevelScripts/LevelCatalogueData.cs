@@ -18,30 +18,28 @@ public class LevelCatalogueData : MonoBehaviour
             GameObject newLevel = new GameObject("Level");
             newLevel.transform.SetParent(lcd_LevelDisplayAreas[i]);
 
-            newLevel.AddComponent<LevelScript>();
+            newLevel.AddComponent<LevelObj>();
 
-            newLevel.GetComponent<LevelScript>().lv_GameController = lcd_GameController;
-            newLevel.GetComponent<LevelScript>().lv_Name = LevelCatalogueConstantValues.LEVELNAMES[i];
-            newLevel.GetComponent<LevelScript>().lv_Distance = LevelCatalogueConstantValues.LEVELDISTANCES[i];
-            newLevel.GetComponent<LevelScript>().lv_ToolRequiredIndex = LevelCatalogueConstantValues.LEVELREQUIREDTOOLS[i];
-            newLevel.GetComponent<LevelScript>().lv_LootIndex = LevelCatalogueConstantValues.LEVELLOOTINDEX[i];
+            newLevel.GetComponent<LevelObj>().lv_GameController = lcd_GameController;
+            newLevel.GetComponent<LevelObj>().lv_Name = LevelCatalogueConstantValues.LEVELNAMES[i];
+            newLevel.GetComponent<LevelObj>().lv_Distance = LevelCatalogueConstantValues.LEVELDISTANCES[i];
+            //int[] tempArray = new int[16];
+            //tempArray = LevelCatalogueConstantValues.LEVELREQUIREDTOOLS[i];
+            //int tempInt = tempArray[5];
+            newLevel.GetComponent<LevelObj>().lv_ToolRequiredIndex = LevelCatalogueConstantValues.LEVELREQUIREDTOOLS[i]; //STAR - not doing the thing
+            newLevel.GetComponent<LevelObj>().lv_LootIndex = LevelCatalogueConstantValues.LEVELLOOTINDEX[i];
 
-            newLevel.name = newLevel.GetComponent<LevelScript>().lv_Name;
+            newLevel.name = newLevel.GetComponent<LevelObj>().lv_Name;
+            newLevel.transform.SetParent(_LevelContainer.transform);
             lcd_ArrayOfLevels[i] = newLevel;
-            /*
-            public GameObject lv_GameController;
-            public GameObject lv_PartyObject;
-            string lv_Name;
-
-            int[] lv_ToolRequiredIndex;
-            int[] lv_LootIndex; //corresponds to treasure array, used to search for the right item
-            List<GameObject> lv_PotentialLootList = new List<GameObject>();
-
-            public float lv_Distance;
-            public bool lv_IsActive;
-            */
 
         }
     }
-	
+	public void DisplayAllLevels()
+    {
+        if(lcd_ArrayOfLevels[0] == null)
+        {
+            CreateLevels();
+        }
+    }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelScript : MonoBehaviour
+public class LevelObj : MonoBehaviour
 {
     //add "public" as necessary
     public GameObject lv_GameController;
@@ -16,6 +16,4 @@ public class LevelScript : MonoBehaviour
     public float lv_Distance;
     public bool lv_IsActive;
 
-    //public void 
-    
 }
