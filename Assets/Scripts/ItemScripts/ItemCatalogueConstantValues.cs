@@ -90,6 +90,13 @@ public class ItemCatalogueConstantValues : MonoBehaviour
                     //0 == Tool, 1 == Treasure, 2 == Artefact? Necessary?
                 }
             }
+            if(node.Name == "IDInArrays")
+            {
+                for(int i = 0; i < IDOFITEM.Length; ++i)
+                {
+                    IDOFITEM[i] = int.Parse(node.Attributes[i].Value);
+                }
+            }
         }
     }
 }

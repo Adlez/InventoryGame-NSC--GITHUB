@@ -12,10 +12,10 @@ public class LevelCatalogueConstantValues : MonoBehaviour
     
     public static string[] LEVELNAMES = new string[8];
     public static int[][] LEVELREQUIREDTOOLS = new int[8][];
-    public static int[][] LEVELLOOTINDEX = new int[8][]; //corresponds to treasure array, used to search for the right item
+    public static int[][] LEVELLOOTINDEX = new int[8][]; //corresponds to tool,treasure,artefact array, used to search for the right item
     public static float[] LEVELDISTANCES = new float[8];
     public static Sprite[] LEVELICONS = new Sprite[8];
-
+    
     public static void PopulateItemArrays()
     {
         //Load Images
@@ -41,28 +41,30 @@ public class LevelCatalogueConstantValues : MonoBehaviour
                     LEVELNAMES[i] = node.Attributes[i].Value;
                 }
             }
+            //Works fine
+            //INDECIES, 0-4 = Tools, 5-14 = Treasure, 15 = Artefact
             for(int i = 0; i < LEVELREQUIREDTOOLS.Length; ++i)
             {
-                //int tempInt = LEVELREQUIREDTOOLS.Length;
                 if (node.Name == "Level" + i + "ToolRequirements")
                 {
                     int[] tempArray = new int[16];
                     for (int j = 0; j < tempArray.Length; ++j)
                     {
-                        int tempInt = int.Parse(node.Attributes[j].Value);
-                        tempArray[j] = int.Parse(node.Attributes[j].Value); //STAR - might be doing the thing?
+                        tempArray[j] = int.Parse(node.Attributes[j].Value);
                     }
                     LEVELREQUIREDTOOLS[i] = tempArray;
                 }
             }
-            for(int i = 0; i < LEVELLOOTINDEX.Length; ++i)
+            for (int i = 0; i < LEVELLOOTINDEX.Length; ++i)
             {
                 if (node.Name == "Level" + i + "PossibleLoot")
                 {
-                    for (int j = 0; j < LEVELREQUIREDTOOLS[i].Length; ++j)
+                    int[] tempArray = new int[16];
+                    for (int j = 0; j < tempArray.Length; ++j)
                     {
-                        LEVELREQUIREDTOOLS[i][j] = int.Parse(node.Attributes[i].Value);
+                        tempArray[j] = int.Parse(node.Attributes[j].Value);
                     }
+                    LEVELLOOTINDEX[i] = tempArray;
                 }
             }
             if (node.Name == "LevelDistances")

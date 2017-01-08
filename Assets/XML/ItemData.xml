@@ -1,17 +1,32 @@
 <ItemInformation>
+  <PhonyInfoChart item00="All the following values are temporary as of 2017/Jan/08 02:15. Though they are temporary, it is important to note that a lot of the strings here will remain
+                  or at least inspire the future greatness they will achieve." />
+  
 	<ArtefactYesNo item01="false" item02="false" item03="false" item04="false" item05="false" item06="false" item07="false" item08="false" 
 		item09="false" item10="false" item11="false" item12="false" item13="false" item14="false" item15="false" item16="true"  />
 
-  <NameOfItem item01= "Item00" item02="Item01" item03="Item02" item04="Item03" item05="Item04" item06="Item05" item07="Item06" item08="Item07"
-		item09="Item08" item10="Item09" item11="Item10" item12="Item11" item13="Item12" item14="Item13" item15="Item14" item16="Item15" />
+  <NameOfItem item01= "Ax" item02="Rope" item03="MatchBook" item04="Waterskin" item05="'Rotted' Firearm" item06="Piece of Platemail" item07="Thousand Year Old Coin" item08="Bullet Casing"
+		item09="Scratched Vinyl Disc" item10="Small Gear" item11="Jeweled Scabbard" item12="Rusted Firearm" item13="Oil Painting" item14="Silverware" item15="Cask of Ale" item16="Sigil Ring of a King's Knight" />
   
 	<CashValueOfItem item01= "10" item02="20" item03="30" item04="40" item05="50" item06="60" item07="70" item08="80" 
 		item09="90" item10="100" item11="110" item12="120" item13="130" item14="140" item15="150" item16="160"  />
 
-  <DescriptionOfItem item01= "This is the first item, item 0." item02="This is the second item." item03="This is the third item, eat shit." item04="This item is apparently worth 40 munnies." 
-                     item05="Item O'Five." item06="This item is probably drugs." item07="Forman and Toab are high on Vicodin." item08="Is this gold?" 
-                     item09="How many breasts are in this game?" item10="I like Turtles." item11="Bet this is a turtle." item12="No, this is a turtle." 
-                     item13="How about this one, Gold or Turtle?" item14="Cameron == Bitch" item15="Second to last item, item O'Fourteen A.K.A item 15." item16="Final test item."  />
+  <DescriptionOfItem item01= "This is an Ax, it is a very useful tool in many situations." 
+                     item02="Rope is a tool that will probably be used in caves." 
+                     item03="Matchbooks are tools that contain matches, a good quick way to make a flame." 
+                     item04="Waterskins are a handy tool for keeping the party hydrated." 
+                     item05="An old gun, one where it looks like something has rotted away most of the metal." 
+                     item06="A piece of a piece of armour. This item is probably drugs." 
+                     item07="Is this gold?" 
+                     item08="Today's guns don't use bullets like this, they're mostly just balls of metal. This is different but seems to match those of the rotted and rusted firearms we've found before." 
+                     item09="This would probably be better used as clothing than whatever it is now." 
+                     item10="These are usually found with other larger pieces of metal that have been rotted away." 
+                     item11="Bet this is a turtle engraved on the ruby. There's no ruby? Oh. What is this?" 
+                     item12="This gun looks older than the ones that have been rotted, but it's rusted instead." 
+                     item13="No, this is a turtle. Right here in the corner by the frame." 
+                     item14="How about this one, Gold or Turtle? Silver? But it's all black." 
+                     item15="If we don't give this to the king he might exile us." 
+                     item16="This ring was worn by some kind of noble, one of great importance to someone else."  />
   
   <OddsOfFinding item01= "100" item02="50" item03="50" item04="75" item05="75" item06="50" item07="70" item08="80"
 		item09="90" item10="100" item11="25" item12="13" item13="10" item14="10" item15="5" item16="1"  />
@@ -19,7 +34,10 @@
   <MaxFindAtOnce item01= "1" item02="1" item03="1" item04="1" item05="1" item06="1" item07="2" item08="1"
 		item09="1" item10="2" item11="1" item12="1" item13="1" item14="1" item15="1" item16="1"  />
 
-  <TypeID item01= "1" item02="1" item03="1" item04="1" item05="1" item06="1" item07="1" item08="1"
+  <TypeID item01= "0" item02="0" item03="0" item04="0" item05="1" item06="1" item07="1" item08="1"
 		item09="1" item10="1" item11="1" item12="1" item13="1" item14="1" item15="1" item16="2" />
+
+  <IDInArrays item01 ="0" item02="1" item03="2" item04="3" item05="4" item06="5" item07="6" item08="7"
+              item09="8" item10="9" item11="10" item12="11" item13="12" item14="13" item15="14" item16="15" />
   
 </ItemInformation>

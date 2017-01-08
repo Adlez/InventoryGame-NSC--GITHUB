@@ -23,13 +23,9 @@ public class LevelCatalogueData : MonoBehaviour
             newLevel.GetComponent<LevelObj>().lv_GameController = lcd_GameController;
             newLevel.GetComponent<LevelObj>().lv_Name = LevelCatalogueConstantValues.LEVELNAMES[i];
             newLevel.GetComponent<LevelObj>().lv_Distance = LevelCatalogueConstantValues.LEVELDISTANCES[i];
-            //int[] tempArray = new int[16];
-            //tempArray = LevelCatalogueConstantValues.LEVELREQUIREDTOOLS[i];
-            //int tempInt = tempArray[5];
-            newLevel.GetComponent<LevelObj>().lv_ToolRequiredIndex = LevelCatalogueConstantValues.LEVELREQUIREDTOOLS[i]; //STAR - not doing the thing
-            newLevel.GetComponent<LevelObj>().lv_LootIndex = LevelCatalogueConstantValues.LEVELLOOTINDEX[i];
-
             newLevel.name = newLevel.GetComponent<LevelObj>().lv_Name;
+            newLevel.GetComponent<LevelObj>().lv_ToolRequiredIndex = LevelCatalogueConstantValues.LEVELREQUIREDTOOLS[i];
+            newLevel.GetComponent<LevelObj>().lv_LootIndex = LevelCatalogueConstantValues.LEVELLOOTINDEX[i];
             newLevel.transform.SetParent(_LevelContainer.transform);
             lcd_ArrayOfLevels[i] = newLevel;
 
