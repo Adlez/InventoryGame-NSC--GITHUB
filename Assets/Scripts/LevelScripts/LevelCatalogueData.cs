@@ -28,9 +28,9 @@ public class LevelCatalogueData : MonoBehaviour
             newLevel.GetComponent<LevelObj>().lv_LootIndex = LevelCatalogueConstantValues.LEVELLOOTINDEX[i];
             newLevel.transform.SetParent(_LevelContainer.transform);
             lcd_ArrayOfLevels[i] = newLevel;
-
         }
     }
+
 	public void DisplayAllLevels()
     {
         if(lcd_ArrayOfLevels[0] == null)

@@ -68,15 +68,6 @@ public class ItemCatalogueData : MonoBehaviour
         {
             CreateItems();
         }
-        for(int i = 0; i < icd_ArrayOfItems.Length; ++i)
-        {
-            //GameObject go = icd_ArrayOfItems[i].GetComponent<ItemObj>().invIconObject;
-            //go.transform.position = new Vector2
-                //(
-                //_invenDisplaySlotX * (i % _invenColumns) + _iconWidthOffset, 
-                //(_invenDisplaySlotY * (i / _invenColumns) - _iconHeightOffset)*-1
-                //);
-        }
         PositionIconsOnScreen();
     }
 

@@ -11,7 +11,7 @@ public class LootIconObjScript : IconObj
 
     public void Click(GameObject openContainer)//could likely pass in a bool value and have the icon button itself say whether it's going in the wagon or inventory
     {
-        var curParty = io_Party.GetComponent<PartyCompanyGroupScript>();
+        var curParty = io_Party.GetComponent<PartyObj>();
         int idOfItem = 0;//io_ObjectForThisIcon.GetComponent<scriptWithAllTheItems>().idOfItem;
         //Make sure to name Click and newContainer better
         if (io_InLootList)
@@ -19,10 +19,10 @@ public class LootIconObjScript : IconObj
             #region Place Item in Inventory/Wagon
             if (openContainer == openContainer)//if the newContainer == Inventory
             {
-                if (curParty.pcg_MaxInventorySize > curParty.pcg_CurInventorySize)
+                if (curParty.po_MaxInventorySize > curParty.po_CurInventorySize)
                 {
-                    curParty.pcg_CurInventorySize++;
-                    curParty.pcg_InventoryIndex[idOfItem]++;
+                    curParty.po_CurInventorySize++;
+                    curParty.po_InventoryIndex[idOfItem]++;
                 }
                 else
                 {
@@ -32,10 +32,10 @@ public class LootIconObjScript : IconObj
             }
             else //new container is the wagon
             {
-                if (curParty.pcg_MaxWagonInventorySize > curParty.pcg_CurWagonInventorySize)
+                if (curParty.po_MaxWagonInventorySize > curParty.po_CurWagonInventorySize)
                 {
-                    curParty.pcg_CurWagonInventorySize++;
-                    curParty.pcg_WagonIndex[idOfItem]++;
+                    curParty.po_CurWagonInventorySize++;
+                    curParty.po_WagonIndex[idOfItem]++;
                 }
                 else
                 {
@@ -51,13 +51,13 @@ public class LootIconObjScript : IconObj
             #region Move Into Loot Pile
             if(openContainer == openContainer)//if container is inventory
             {
-                curParty.pcg_InventoryIndex[idOfItem]--;
-                curParty.pcg_CurInventorySize--;
+                curParty.po_InventoryIndex[idOfItem]--;
+                curParty.po_CurInventorySize--;
             }
             else //container is wagon
             {
-                curParty.pcg_WagonIndex[idOfItem]--;
-                curParty.pcg_CurWagonInventorySize--;
+                curParty.po_WagonIndex[idOfItem]--;
+                curParty.po_CurWagonInventorySize--;
             }
             //PotentialLootList.AddItem(idOfItem); //potential loot list does not yet exist, but it will
             io_InLootList = true;

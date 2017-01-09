@@ -1,0 +1,240 @@
+<ItemInformation>
+  <PhonyInfoChart item00="All the following values are temporary as of 2017/Jan/09 14:15. Though they are temporary, it is important to note that a lot of the strings here will remain
+                  or at least inspire the future greatness they will achieve.
+                  I think it would be fun if each charact'er name started with a different letter of the alphabet" />
+
+  <CharacterNames ch00 ="James" ch01="Helen" ch02="Phillipe" ch03="Andrew"
+                  ch04="Emilia" ch05="Jessica" ch06="Damon" ch07="Frederick"
+                  ch08="Truanve" ch09="Martin" ch10="Allison" ch11="Barkley"
+                  ch12="Brandon" ch13="Bianca" ch14="Cleo" ch15="George"
+                  ch16="Ian" ch17="Ken" ch18="Lilly" ch19="Nicholas"
+                  ch20="Oscar" ch21="Qui'Lang" ch22="Roland" ch23="Samantha"/>
+  
+  <CharacterDescriptions ch00 ="James is not a loser." 
+                         ch01="Helen is not a queen." 
+                         ch02="Phillipe ain't no knight." 
+                         ch03="Andrew is friends with Martin."
+                         ch04="Emilia has a toolkit." 
+                         ch05="Jessica has been a town guard for 4 years." 
+                         ch06="Damon likes to eat a lot." 
+                         ch07="Frederick has slept with a more women than men." 
+                         ch08="Truanve hates his parents." 
+                         ch09="Martin is an only child." 
+                         ch10="Allison has an unnatural love for her sister." 
+                         ch11="Barkley has owned dogs for his entire life." 
+                         ch12="Brendan has probably helped code this game." 
+                         ch13="Bianca is a bitch." 
+                         ch14="Cleo was not a queen." 
+                         ch15="George is no clown." 
+                         ch16="Ian writes plays." 
+                         ch17="Ken broke his father's back." 
+                         ch18="Lilly hates her namesake." 
+                         ch19="Nivek has certainly helped code." 
+                         ch20="Oscar wears a green hat." 
+                         ch21="Qui'Lang seems like the odd one out." 
+                         ch22="Roland is a great soldier." 
+                         ch23="Samantha slaps a lot."/>
+
+  <CharacterIDs ch00 ="00" ch01="01" ch02="02" ch03="03"
+                ch04="04" ch05="05" ch06="06" ch07="07"
+                ch08="08" ch09="09" ch10="10" ch11="11"
+                ch12="12" ch13="13" ch14="14" ch15="15"
+                ch16="16" ch17="17" ch18="18" ch19="19"
+                ch20="20" ch21="21" ch22="22" ch23="23"/>
+
+  <CharacterCarryingCapacity ch00 ="3" ch01="3" ch02="3" ch03="3"
+              ch04="3" ch05="3" ch06="3" ch07="3"
+              ch08="3" ch09="3" ch10="3" ch11="3"
+              ch12="3" ch13="3" ch14="3" ch15="3"
+              ch16="3" ch17="3" ch18="3" ch19="3"
+              ch20="3" ch21="3" ch22="3" ch23="3"/>
+
+  <CharacterEnergy ch00 ="10" ch01="10" ch02="10" ch03="10"
+              ch04="10" ch05="10" ch06="10" ch07="10"
+              ch08="10" ch09="10" ch10="10" ch11="10"
+              ch12="10" ch13="10" ch14="10" ch15="10"
+              ch16="10" ch17="10" ch18="10" ch19="10"
+              ch20="10" ch21="10" ch22="10" ch23="10"/>
+
+  <Character0ToolBeltContents chtool00 ="0" chtool01="0" chtool02="0" chtool03="0"
+              chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+              chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+              chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+              chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+              chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character1ToolBeltContents chtool00 ="0" chtool01="0" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character2ToolBeltContents chtool00 ="1" chtool01="0" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character3ToolBeltContents chtool00 ="0" chtool01="1" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character4ToolBeltContents chtool00 ="0" chtool01="1" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character5ToolBeltContents chtool00 ="1" chtool01="0" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character6ToolBeltContents chtool00 ="1" chtool01="0" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character7ToolBeltContents chtool00 ="0" chtool01="0" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character8ToolBeltContents chtool00 ="0" chtool01="0" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character9ToolBeltContents chtool00 ="0" chtool01="0" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character10ToolBeltContents chtool00 ="0" chtool01="0" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character11ToolBeltContents chtool00 ="0" chtool01="0" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character12ToolBeltContents chtool00 ="0" chtool01="0" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character13ToolBeltContents chtool00 ="0" chtool01="0" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character14ToolBeltContents chtool00 ="0" chtool01="0" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character15ToolBeltContents chtool00 ="0" chtool01="0" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character16ToolBeltContents chtool00 ="0" chtool01="0" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character17ToolBeltContents chtool00 ="0" chtool01="0" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character18ToolBeltContents chtool00 ="0" chtool01="0" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character19ToolBeltContents chtool00 ="0" chtool01="0" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character20ToolBeltContents chtool00 ="0" chtool01="0" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character21ToolBeltContents chtool00 ="0" chtool01="0" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character22ToolBeltContents chtool00 ="0" chtool01="0" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+
+  <Character23ToolBeltContents chtool00 ="0" chtool01="0" chtool02="0" chtool03="0"
+            chtool04="0" chtool05="0" chtool06="0" chtool07="0"
+            chtool08="0" chtool09="0" chtool10="0" chtool11="0"
+            chtool12="0" chtool13="0" chtool14="0" chtool15="0"
+            chtool16="0" chtool17="0" chtool18="0" chtool19="0"
+            chtool20="0" chtool21="0" chtool22="0" chtool23="0"/>
+  
+  <CharacterHasARepairKit ch00 ="false" ch01="true" ch02="false" ch03="false"
+                  ch04="false" ch05="false" ch06="false" ch07="false"
+                  ch08="false" ch09="false" ch10="false" ch11="false"
+                  ch12="false" ch13="false" ch14="false" ch15="false"
+                  ch16="false" ch17="false" ch18="false" ch19="false"
+                  ch20="false" ch21="false" ch22="false" ch23="false"/>
+
+  <CharacterTravelTimeMods ch00 ="-0.5" ch01="0.1" ch02="0.1" ch03="0.1"
+                  ch04="0.1" ch05="0.1" ch06="0.1" ch07="0.1"
+                  ch08="0.1" ch09="0.1" ch10="0.1" ch11="0.1"
+                  ch12="0.1" ch13="0.1" ch14="0.1" ch15="0.1"
+                  ch16="0.1" ch17="0.1" ch18="0.1" ch19="0.1"
+                  ch20="0.1" ch21="0.1" ch22="0.1" ch23="0.1"/>
+</ItemInformation>

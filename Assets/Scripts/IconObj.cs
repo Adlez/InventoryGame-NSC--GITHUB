@@ -17,17 +17,28 @@ public class IconObj : MonoBehaviour
         icon.AddComponent<Image>();
 
         icon.GetComponent<IconObj>().io_ObjectForThisIcon = item;
-        int thisItemID = item.GetComponent<ItemObj>().idInArrays;
-
-        Sprite tempSprite = ItemCatalogueConstantValues.ICONOFITEM[thisItemID];
-        icon.transform.localScale = item.transform.localScale;
-
-        //Button Code
-         //tempSprite;//icon.GetComponent<IconObj>().io_IconImage;
-        icon.GetComponent<Button>().name = item.GetComponent<ItemObj>().itemName + " Icon";// "Item Name";
-        icon.GetComponent<Image>().sprite = ItemCatalogueConstantValues.ICONOFITEM[thisItemID];
-        icon.GetComponent<Button>().onClick.AddListener(delegate { icon.GetComponent<IconObj>().TestFunction(icon); });
-
+        var ItemIsCharacter = item.GetComponent<CharacterObj>(); //create variable to check if item is a character or an item
+        int thisItemID = 0;
+        if (ItemIsCharacter == null)
+        {
+            thisItemID = item.GetComponent<ItemObj>().idInArrays;
+            icon.GetComponent<Button>().name = item.GetComponent<ItemObj>().itemName + " Icon";// "Item Name";
+            icon.GetComponent<Image>().sprite = ItemCatalogueConstantValues.ICONOFITEM[thisItemID];
+            icon.GetComponent<Button>().onClick.AddListener(delegate { icon.GetComponent<IconObj>().TestFunction(icon); });
+            Sprite tempSprite = ItemCatalogueConstantValues.ICONOFITEM[thisItemID];
+            icon.transform.localScale = item.transform.localScale;
+        }
+        else
+        {
+            thisItemID = item.GetComponent<CharacterObj>().co_CharacterIDNumber;
+            string tempString = item.GetComponent<CharacterObj>().co_Name + " Icon";
+            icon.GetComponent<Button>().name = item.GetComponent<CharacterObj>().co_Name + " Icon";// "Item Name";
+            icon.GetComponent<Image>().sprite = CharacterCatalogueConstantValues.CHARACTERICONS[thisItemID];
+            icon.GetComponent<Button>().onClick.AddListener(delegate { icon.GetComponent<IconObj>().TestFunction(icon); });
+            Sprite tempSprite = CharacterCatalogueConstantValues.CHARACTERICONS[thisItemID];
+            icon.transform.localScale = item.transform.localScale;
+        }
+        
         return icon;
     }
 

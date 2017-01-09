@@ -28,7 +28,7 @@ public class GameControllerScript : MonoBehaviour
     public void AttemptAnAdventure(int partyID, int levelID)
     {
         var theLevel = gc_Levels[levelID].GetComponent<LevelObj>();
-        var theParty = gc_Parties[partyID].GetComponent<PartyCompanyGroupScript>();
+        var theParty = gc_Parties[partyID].GetComponent<PartyObj>();
         //function called by a UI button
         for (int i = 0; i < gc_SelectedLevelToolRequired.Length; ++i)
         {
@@ -54,10 +54,10 @@ public class GameControllerScript : MonoBehaviour
             }
             if (gc_GoodToGoOnJourney != false)
             {
-                theParty.pcg_PartyIsActive = true; //set bool so party doesn't go on multi adventures
+                theParty.po_PartyIsActive = true; //set bool so party doesn't go on multi adventures
                 theLevel.GetComponent<LevelObj>().lv_IsActive = true;//set bool so level only has one party at a time
-                theParty.pcg_TravelTime = theLevel.lv_Distance;
-                theParty.pcg_LevelExploring = levelID;
+                theParty.po_TravelTime = theLevel.lv_Distance;
+                theParty.po_LevelExploring = levelID;
             }
             else
             {
@@ -71,24 +71,24 @@ public class GameControllerScript : MonoBehaviour
     {
         for(int i = 0; i < gc_Parties.Length; ++i)
         {
-            var party = gc_Parties[i].GetComponent<PartyCompanyGroupScript>();
-            if (party.pcg_PartyIsActive)//is on an adventure
+            var party = gc_Parties[i].GetComponent<PartyObj>();
+            if (party.po_PartyIsActive)//is on an adventure
             {
-                party.pcg_TimeGoneFor++;
+                party.po_TimeGoneFor++;
                 //reduce Energy
                 //Check for Wagon
                 //if wagon check if it breaks
                 //if it breaks check for toolkit, fix if there is
-                if (party.pcg_TimeGoneFor >= party.pcg_TravelTime && party.pcg_ExcavationComplete == false)
+                if (party.po_TimeGoneFor >= party.po_TravelTime && party.po_ExcavationComplete == false)
                 {
                     //ExcavateLevel(party);
                     //function is likely stored in LevelObj.cs
                 }
-                else if(party.pcg_TimeGoneFor > party.pcg_TravelTime *2 && party.pcg_ExcavationComplete == true)
+                else if(party.po_TimeGoneFor > party.po_TravelTime *2 && party.po_ExcavationComplete == true)
                 {
                     //reduce extra energy according to loot carried
-                    party.pcg_PartyIsActive = false;
-                    gc_Levels[party.pcg_LevelExploring].GetComponent<LevelObj>().lv_IsActive = false;
+                    party.po_PartyIsActive = false;
+                    gc_Levels[party.po_LevelExploring].GetComponent<LevelObj>().lv_IsActive = false;
                 }
 
 
@@ -102,6 +102,7 @@ public class GameControllerScript : MonoBehaviour
     {
         ItemCatalogueConstantValues.PopulateItemArrays();
         LevelCatalogueConstantValues.PopulateItemArrays();
+        CharacterCatalogueConstantValues.PopulateItemArrays();
 	}
 	
 	// Update is called once per frame
