@@ -30,8 +30,8 @@ public class PartyObj : MonoBehaviour
     public float po_TravelTime;
     public float po_TimeGoneFor;
 
-    int[] po_PartyMembersIndex;
-    string po_PartyName;
+    public GameObject[] po_PartyMembers = new GameObject[4];
+    public string po_PartyName;
 
     public int po_LevelExploring;
 }
