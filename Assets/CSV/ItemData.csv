@@ -1,0 +1,17 @@
+ID,NAME,DESC,ARTIFACT,VALUE,RARITY,MAXQUANTITY,TYPE
+0,Ax,"This is an Ax, it is a very useful tool in many situations.",FALSE,10,100,1,0
+1,Rope,Rope is a tool that will probably be used in caves.,FALSE,20,50,1,0
+2,MatchBook,"Matchbooks are tools that contain matches, a good quick way to make a flame.",FALSE,30,50,1,0
+3,Waterskin,Waterskins are a handy tool for keeping the party hydrated.,FALSE,40,75,1,0
+4,'Rotted' Firearm,"An old gun, one where it looks like something has rotted away most of the metal.",FALSE,50,75,1,1
+5,Piece of Platemail,A piece of a piece of armour. This item is probably drugs.,FALSE,60,50,1,1
+6,Thousand Year Old Coin,Is this gold?,FALSE,70,70,2,1
+7,Bullet Casing,"Today's guns don't use bullets like this, they're mostly just balls of metal. This is different but seems to match those of the rotted and rusted firearms we've found before.",FALSE,80,80,1,1
+8,Scratched Vinyl Disc,This would probably be better used as clothing than whatever it is now.,FALSE,90,90,1,1
+9,Small Gear,These are usually found with other larger pieces of metal that have been rotted away.,FALSE,100,100,2,1
+10,Jeweled Scabbard,Bet this is a turtle engraved on the ruby. There's no ruby? Oh. What is this?,FALSE,110,25,1,1
+11,Rusted Firearm,"This gun looks older than the ones that have been rotted, but it's rusted instead.",FALSE,120,13,1,1
+12,Oil Painting,"No, this is a turtle. Right here in the corner by the frame.",FALSE,130,10,1,1
+13,Silverware,"How about this one, Gold or Turtle? Silver? But it's all black.",FALSE,140,10,1,1
+14,Cask of Ale,If we don't give this to the king he might exile us.,FALSE,150,5,1,1
+15,Sigil Ring of a King's Knight,"This ring was worn by some kind of noble, one of great importance to someone else.",TRUE,160,1,1,2
