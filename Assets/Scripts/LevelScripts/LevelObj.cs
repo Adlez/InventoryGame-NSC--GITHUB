@@ -7,6 +7,7 @@ public class LevelObj : MonoBehaviour
     //add "public" as necessary
     public GameObject lv_GameController;
     public GameObject lv_PartyObject;
+    public GameObject lv_IconObject;
     public string lv_Name;
 
     public int[] lv_ToolRequiredIndex;

@@ -8,6 +8,7 @@ public class PartyObj : MonoBehaviour
     int po_MaxEnergy;
     int po_CurEnergy;
     int po_NumOfExpeditions;
+    public int po_PartyID;
 
     int po_CurBagSize; //possibly not neccessary
 

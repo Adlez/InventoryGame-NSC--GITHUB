@@ -17,6 +17,7 @@ public class PartyCatalogueData : MonoBehaviour
         {
             GameObject newParty = new GameObject("Party");
             newParty.transform.SetParent(_PartyContainer.transform);
+            newParty.GetComponent<PartyObj>().po_PartyID = i;
 
             newParty.AddComponent<PartyObj>();
             pcd_ArrayOfParties[i] = newParty;

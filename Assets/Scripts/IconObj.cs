@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System;
 
-public class IconObj : MonoBehaviour
+public class IconObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public GameObject io_ObjectForThisIcon;
     
@@ -14,21 +16,37 @@ public class IconObj : MonoBehaviour
         icon.AddComponent<IconObj>();
         //icon.AddComponent<SpriteRenderer>();
         icon.AddComponent<Button>(); // make game object into button
+        
         icon.AddComponent<Image>();
 
         icon.GetComponent<IconObj>().io_ObjectForThisIcon = item;
         var ItemIsCharacter = item.GetComponent<CharacterObj>(); //create variable to check if item is a character or an item
+        var ItemIsLevel = item.GetComponent<LevelObj>();
         int thisItemID = 0;
-        if (ItemIsCharacter == null)
+        if (ItemIsCharacter == null)//meaning the item is NOT a character
         {
-            thisItemID = item.GetComponent<ItemObj>().idInArrays;
-            icon.GetComponent<Button>().name = item.GetComponent<ItemObj>().itemName + " Icon";// "Item Name";
-            icon.GetComponent<Image>().sprite = ItemCatalogueConstantValues.ICONOFITEM[thisItemID];
-            icon.GetComponent<Button>().onClick.AddListener(delegate { icon.GetComponent<IconObj>().TestFunction(icon); });
-            Sprite tempSprite = ItemCatalogueConstantValues.ICONOFITEM[thisItemID];
-            icon.transform.localScale = item.transform.localScale;
+            if(ItemIsLevel == null)//meaning the item is NOT a levelObj
+            {
+                thisItemID = item.GetComponent<ItemObj>().idInArrays;
+                icon.GetComponent<Button>().name = item.GetComponent<ItemObj>().itemName + " Icon";// "Item Name";
+                icon.GetComponent<Image>().sprite = ItemCatalogueConstantValues.ICONOFITEM[thisItemID];
+                icon.GetComponent<Button>().onClick.AddListener(delegate { icon.GetComponent<IconObj>().TestFunction(icon); });
+                Sprite tempSprite = ItemCatalogueConstantValues.ICONOFITEM[thisItemID];
+                icon.transform.localScale = item.transform.localScale;
+            }
+            else//this is a Level's icon
+            {
+                //thisItemID = item.GetComponent<ItemObj>().idInArrays; //Not sure this is needed for levels
+                icon.GetComponent<Button>().name = item.GetComponent<LevelObj>().lv_Name + " Icon";// "Item Name";
+                icon.GetComponent<Image>().sprite = LevelCatalogueConstantValues.LEVELICONS[thisItemID];
+                icon.GetComponent<Button>().onClick.AddListener(delegate { icon.GetComponent<IconObj>().TestFunction(icon); });
+                Sprite tempSprite = LevelCatalogueConstantValues.LEVELICONS[thisItemID];
+                icon.transform.localScale = item.transform.localScale;
+                //icon.transform
+            }
+            
         }
-        else
+        else //the item is in fact a Character
         {
             thisItemID = item.GetComponent<CharacterObj>().co_CharacterIDNumber;
             string tempString = item.GetComponent<CharacterObj>().co_Name + " Icon";
@@ -40,6 +58,16 @@ public class IconObj : MonoBehaviour
         }
         
         return icon;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("Mouse Enter");
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Debug.Log("Mouse Exit");
     }
 
     public void TestFunction(GameObject icon)

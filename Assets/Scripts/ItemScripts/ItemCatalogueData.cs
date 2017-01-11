@@ -21,13 +21,6 @@ public class ItemCatalogueData : MonoBehaviour
         GameObject _InventoryContainer = new GameObject("InventoryContainer");
         GameObject _ItemIconContainer = new GameObject("InvenIconContainer");
         _ItemIconContainer.transform.SetParent (icd_InvenScrollViewPanel.transform);
-        //_ItemIconContainer.GetComponentInParent<Transform>().position = new Vector3(0.0f, 0.0f, 0.0f);
-        //_ItemIconContainer.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
-        /*_ItemIconContainer.transform.localPosition = new Vector3(
-            _ItemIconContainer.transform.position.x,
-            _ItemIconContainer.transform.position.y,
-            //2046.0f);
-            _ItemIconContainer.transform.position.z);*/
 
         for (int i = 0; i < icd_ArrayOfItems.Length; ++i)
         {
