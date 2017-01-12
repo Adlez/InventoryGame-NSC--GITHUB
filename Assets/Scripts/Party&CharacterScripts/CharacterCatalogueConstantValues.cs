@@ -19,6 +19,7 @@ public class CharacterCatalogueConstantValues : MonoBehaviour
     public static bool[] CHARACTERISREPAIRKIT = new bool[24];
     public static float[] CHARACTERTRAVELTIMEMODS = new float[24];
     public static Sprite[] CHARACTERICONS = new Sprite[24];
+    public static Sprite[] CHARACTERPORTRAITS = new Sprite[24];
 
     public static void PopulateItemArrays()
     {
@@ -26,7 +27,9 @@ public class CharacterCatalogueConstantValues : MonoBehaviour
         for (int i = 0; i < CHARACTERNAMES.Length; ++i)
         {
             string tempString = "Sprites/TempIconSprite-" + i.ToString() + "-32x32";
+            string tempString2 = "Sprites/TempIconSprite-" + i.ToString() + "-128x128"; //"TempIconSprite-1-128x128"
             CHARACTERICONS[i] = Resources.Load<Sprite>(tempString);
+            CHARACTERPORTRAITS[i] = Resources.Load<Sprite>(tempString2);
         }
 
         //Load Characters from XML

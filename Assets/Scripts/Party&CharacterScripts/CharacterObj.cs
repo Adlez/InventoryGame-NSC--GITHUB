@@ -27,4 +27,15 @@ public class CharacterObj : MonoBehaviour
     {
         Debug.Log("Icon " + co_CharacterIconObject.GetComponent<IconObj>().name + " Clicked.");
     }
+
+    public void FillDetailsPanel()
+    {
+        //MenuNavigaion
+        //MenuNavigaion.menuNavCataloguePointer.mn_DetailsPanelNameString = "The name is being displayed.";// co_Name;
+        string tempNameString = co_Name;
+        string tempDescripString = co_Description;
+        Sprite tempSprite = co_PortraitSprite;
+        MenuNavigaion.UpdateDisplayPanel(tempNameString, tempDescripString, tempSprite);
+        //MenuNavigaion.mn_DetailsPanelObjectStatsText.text = "The stats are being Displayed";
+    }
 }

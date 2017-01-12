@@ -39,7 +39,10 @@ public class CharacterCatalogueData : MonoBehaviour
             newCharacter.GetComponent<CharacterObj>().co_CharacterReplacesTools = CharacterCatalogueConstantValues.CHARACTERCANREPLACETOOLS[i];
             newCharacter.GetComponent<CharacterObj>().co_IsRepairKit = CharacterCatalogueConstantValues.CHARACTERISREPAIRKIT[i];
             newCharacter.GetComponent<CharacterObj>().co_TravelTimeModifier = CharacterCatalogueConstantValues.CHARACTERTRAVELTIMEMODS[i];
-            
+            newCharacter.GetComponent<CharacterObj>().co_PortraitSprite = CharacterCatalogueConstantValues.CHARACTERPORTRAITS[i];
+
+            Sprite tempSprite = newCharacter.GetComponent<CharacterObj>().co_PortraitSprite;
+
             GameObject iconObj = IconObj.MakeIconObject(newCharacter, ccd_CharacterScrollViewPanel);
             newCharacter.GetComponent<CharacterObj>().co_CharacterIconObject = iconObj;
 

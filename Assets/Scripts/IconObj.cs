@@ -63,6 +63,11 @@ public class IconObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         Debug.Log("Mouse Enter");
+        var checkIfCharacter = io_ObjectForThisIcon.GetComponent<CharacterObj>();
+        if(checkIfCharacter != null)
+        {
+            io_ObjectForThisIcon.GetComponent<CharacterObj>().FillDetailsPanel();
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
