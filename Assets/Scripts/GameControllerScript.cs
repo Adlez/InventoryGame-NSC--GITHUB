@@ -90,8 +90,6 @@ public class GameControllerScript : MonoBehaviour
                     party.po_PartyIsActive = false;
                     gc_Levels[party.po_LevelExploring].GetComponent<LevelObj>().lv_IsActive = false;
                 }
-
-
             }
             //if they're not active they're resting, therefore should be regaining energy
         }

@@ -12,6 +12,7 @@ public class MenuNavigaion : MonoBehaviour
     public Text mn_DetailsPanelObjectStatsText;
     public Text mn_DetailsPanelObjectDescriptionText;
     public GameObject mn_DetailsPanelImage;
+    public GameObject mn_PartyRosterPanel;
 
     private void Awake()
     {
@@ -33,7 +34,15 @@ public class MenuNavigaion : MonoBehaviour
         menuNavCataloguePointer.GetComponent<MenuNavigaion>().mn_DetailsPanelNameText.text = objectName;
         menuNavCataloguePointer.GetComponent<MenuNavigaion>().mn_DetailsPanelObjectDescriptionText.text = objectDesc;
         menuNavCataloguePointer.GetComponent<MenuNavigaion>().mn_DetailsPanelImage.GetComponent<Image>().sprite = objectPortrait;
-        //menuNavCataloguePointer.mn_DetailsPanelObjectDescriptionText.text = objectDesc;
-        //menuNavCataloguePointer.mn_DetailsPanelNameText.text = objectName;
+    }
+
+    public void ShowCharactersInParty(GameObject party)
+    {
+        for(int i = 0; i < party.GetComponent<PartyObj>().po_PartyMembers.Length; ++i)
+        {
+            GameObject characterInParty = party.GetComponent<PartyObj>().po_PartyMembers[i];
+            characterInParty.GetComponent<CharacterObj>().co_CharacterIconObject.transform.SetParent(mn_PartyRosterPanel.transform);
+        }
+        
     }
 }

@@ -28,6 +28,11 @@ public class CharacterObj : MonoBehaviour
         Debug.Log("Icon " + co_CharacterIconObject.GetComponent<IconObj>().name + " Clicked.");
     }
 
+    public void AddRemoveFromParty()
+    {
+        //
+    }
+
     public void FillDetailsPanel()
     {
         //MenuNavigaion
