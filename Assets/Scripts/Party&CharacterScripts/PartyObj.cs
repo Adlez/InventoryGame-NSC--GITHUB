@@ -9,6 +9,8 @@ public class PartyObj : MonoBehaviour
     int po_CurEnergy;
     int po_NumOfExpeditions;
     public int po_PartyID;
+    public Sprite po_PartyIconSprite;
+    public GameObject po_PartyIconObject;
 
     int po_CurBagSize; //possibly not neccessary
 

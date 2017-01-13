@@ -5,30 +5,37 @@ using UnityEngine;
 public class PartyCatalogueData : MonoBehaviour
 {
     public GameObject pcd_GameController;
-    public GameObject[] pcd_ArrayOfParties = new GameObject[4];
+    //public static GameObject[] pcd_ArrayOfParties = new GameObject[4];
     public GameObject pcd_PartyScrollViewPanel;
+    public GameObject pcd_PartyIcon;
 
     public void CreateParties()
     {
         GameObject _PartyContainer = new GameObject("PartyContainer");
         GameObject _PartyIconContainer = new GameObject("PartyIconContainer");
 
-        for (int i = 0; i < pcd_ArrayOfParties.Length; ++i)
+        for (int i = 0; i < GameControllerScript.gc_Parties.Length; ++i)
         {
-            GameObject newParty = new GameObject("Party");
+            GameObject newParty = new GameObject("Party"+i.ToString());
+            newParty.AddComponent<PartyObj>();
             newParty.transform.SetParent(_PartyContainer.transform);
             newParty.GetComponent<PartyObj>().po_PartyID = i;
 
-            newParty.AddComponent<PartyObj>();
-            pcd_ArrayOfParties[i] = newParty;
+           
+            IconObj.MakeIconObject(newParty, _PartyIconContainer);
+            GameControllerScript.gc_Parties[i] = newParty;
         }
     }
 
     public void DisplayParties()
     {
-        if(pcd_ArrayOfParties[0] == null)
+        if(GameControllerScript.gc_Parties[0] == null)
         {
             CreateParties();
+        }
+        for(int i = 0; i < GameControllerScript.gc_Parties.Length; ++i)
+        {
+            GameControllerScript.gc_Parties[i].GetComponent<PartyObj>().po_PartyIconObject.transform.SetParent(pcd_PartyScrollViewPanel.transform);
         }
     }
 }

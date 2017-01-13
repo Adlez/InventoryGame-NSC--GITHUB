@@ -7,13 +7,21 @@ public class GameControllerScript : MonoBehaviour
     //add "public" as necessary
     int[] gc_LevelsAvailable = new int[16]; //0 level is unavailable, 1 it is.
     int[] gc_PlayerToolCount = new int[16]; //according to index, count the tools
+
+
     int gc_SelectedLevel;
+    public static int gc_SelectedParty;
     public int[] gc_SelectedLevelToolRequired = new int[16]; //corresponds to gc_PlayerToolCount
     bool gc_GoodToGoOnJourney; //probably not necessary
 
-    GameObject[] gc_Parties = new GameObject[16];
+    public static GameObject[] gc_Parties = new GameObject[4];
     GameObject[] gc_Levels = new GameObject[16]; //Corresponds to gc_LevelsAvailable
-    List<GameObject> PartyLimbo = new List<GameObject>(); //list of characters not assigned to a party
+    public static List<GameObject> PartyLimbo = new List<GameObject>(); //list of characters not assigned to a party
+
+    public void SetSelectedParty(int id)
+    {
+        gc_SelectedParty = id;
+    }
 
     void CheckLoot()
     {

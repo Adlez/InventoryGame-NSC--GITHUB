@@ -51,6 +51,7 @@ public class CharacterCatalogueData : MonoBehaviour
 
             //add to array
             ccd_ArrayOfCharacters[i] = newCharacter;
+            GameControllerScript.PartyLimbo.Add(ccd_ArrayOfCharacters[i]);
         }
     }
 
