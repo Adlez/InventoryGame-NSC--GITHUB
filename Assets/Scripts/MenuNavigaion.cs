@@ -13,10 +13,37 @@ public class MenuNavigaion : MonoBehaviour
     public Text mn_DetailsPanelObjectDescriptionText;
     public GameObject mn_DetailsPanelImage;
     public GameObject mn_PartyRosterPanel;
+    public GameObject mn_Party0DisplayPanel;
+    public GameObject mn_Party1DisplayPanel;
+    public GameObject mn_Party2DisplayPanel;
+    public GameObject mn_Party3DisplayPanel;
+    public GameObject[] mn_PartyPanels = new GameObject[4];
 
     private void Awake()
     {
         menuNavCataloguePointer = this;
+    }
+
+    public void ShowPartyPanelHideOthers()
+    {
+        if(mn_PartyPanels[0] == null)
+        {
+            mn_PartyPanels[0] = mn_Party0DisplayPanel;
+            mn_PartyPanels[1] = mn_Party1DisplayPanel;
+            mn_PartyPanels[2] = mn_Party2DisplayPanel;
+            mn_PartyPanels[3] = mn_Party3DisplayPanel;
+        }
+        for(int i = 0; i < GameControllerScript.gc_PartyPanels.Length; ++i)
+        {
+            if(i == GameControllerScript.gc_SelectedParty)
+            {
+                mn_PartyPanels[i].SetActive(mn_PartyPanels[i]);
+            }
+            else
+            {
+                mn_PartyPanels[i].SetActive(!mn_PartyPanels[i]);
+            }
+        }
     }
 
     public void ShowNewPanel(GameObject newPanel)

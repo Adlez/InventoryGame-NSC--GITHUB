@@ -61,7 +61,8 @@ public class CharacterObj : MonoBehaviour
             bool characterHasBeenRemoved = false; //sanity bool
             for(int i = 0; i < GameControllerScript.gc_Parties[pID].GetComponent<PartyObj>().po_PartyMembers.Length; ++i)
             {
-                if(GameControllerScript.gc_Parties[pID].GetComponent<PartyObj>().po_PartyMembers[i].GetComponent<CharacterObj>().co_CharacterIDNumber == character.GetComponent<CharacterObj>().co_CharacterIDNumber)
+                if(characterHasBeenRemoved != true && GameControllerScript.gc_Parties[pID].GetComponent<PartyObj>().po_PartyMembers[i].GetComponent<CharacterObj>().co_CharacterIDNumber == 
+                    character.GetComponent<CharacterObj>().co_CharacterIDNumber)
                 {
                     GameControllerScript.gc_Parties[pID].GetComponent<PartyObj>().po_PartyMembers[i] = null; //remove character from party
                     character.GetComponent<CharacterObj>().co_CurPartyIndex = 0; //set the party ID of the character to 0
