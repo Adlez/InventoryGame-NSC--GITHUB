@@ -62,6 +62,8 @@ public class IconObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 Sprite tempSprite = ItemCatalogueConstantValues.ICONOFITEM[1];
                 icon.transform.localScale = item.transform.localScale;
                 item.GetComponent<PartyObj>().po_PartyIconObject = icon;
+                icon.transform.SetParent(iconContainer.transform);
+                icon.transform.localPosition = new Vector3(icon.transform.localPosition.x, icon.transform.localPosition.y, 0.0f);
                 //GlobalPositionIconOnScreen(icon);
             }
             else//this is a Level's icon

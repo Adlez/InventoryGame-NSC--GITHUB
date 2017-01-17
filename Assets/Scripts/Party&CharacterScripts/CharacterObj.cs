@@ -16,7 +16,7 @@ public class CharacterObj : MonoBehaviour
     public int co_CarryingCapacityModifier;
     public int co_EnergyModifier;
 
-    public int co_CurPartyIndex;
+    public int co_CurPartyIndex = -1;
     public int[] co_ExpeditionTimeInLevels;
     public int[] co_CharacterReplacesTools;
     
@@ -33,8 +33,9 @@ public class CharacterObj : MonoBehaviour
     {
         //pID might need to be created here, or at gotten from a global variable assigned by pressing the "Party" buttons on the party canvas
         int pID = GameControllerScript.gc_SelectedParty;
+        int oldPID = pID;
 
-        if(co_CurPartyIndex == 0)//Character is in Limbo
+        if(co_CurPartyIndex < 0)//Character is in Limbo
         {
             bool characterHasBeenAdded = false; //sanity bool
             for(int i = 0; i < GameControllerScript.gc_Parties[pID].GetComponent<PartyObj>().po_PartyMembers.Length; ++i)
@@ -65,13 +66,36 @@ public class CharacterObj : MonoBehaviour
                     character.GetComponent<CharacterObj>().co_CharacterIDNumber)
                 {
                     GameControllerScript.gc_Parties[pID].GetComponent<PartyObj>().po_PartyMembers[i] = null; //remove character from party
-                    character.GetComponent<CharacterObj>().co_CurPartyIndex = 0; //set the party ID of the character to 0
+                    character.GetComponent<CharacterObj>().co_CurPartyIndex = -1; //set the party ID of the character to negative
                     GameControllerScript.PartyLimbo.Add(character); //return the character to Limbo
                     characterHasBeenRemoved = true;
+                    //pID = -1;
                 }
             }
-            
+            pID = -1;
         }
+        UpdateCharacterIconPosition(character, pID, oldPID);
+    }
+
+    void UpdateCharacterIconPosition(GameObject character, int pID, int oldPID)
+    {
+        if(pID < 0)
+        {
+            Vector3 oldPos = character.GetComponent<CharacterObj>().co_CharacterIconObject.transform.position;
+
+            Transform chTransform = character.GetComponent<CharacterObj>().co_CharacterIconObject.transform;
+            GameObject chViewObj = CharacterCatalogueData.characterObj.GetComponent<CharacterCatalogueData>().ccd_CharacterScrollViewPanel;
+            chTransform.SetParent(chViewObj.transform);
+
+            character.GetComponent<CharacterObj>().co_CharacterIconObject.transform.SetParent(CharacterCatalogueData.characterObj.GetComponent<CharacterCatalogueData>().ccd_CharacterScrollViewPanel.transform);
+            character.GetComponent<CharacterObj>().co_CharacterIconObject.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+            // MenuNavigaion.menuNavCataloguePointer.mn_PartyPanels[oldPID].transform);
+            Vector3 newPos = character.GetComponent<CharacterObj>().co_CharacterIconObject.transform.position;
+        }
+        character.GetComponent<CharacterObj>().co_CharacterIconObject.transform.SetParent(MenuNavigaion.menuNavCataloguePointer.mn_PartyPanels[oldPID].transform);
+        character.GetComponent<CharacterObj>().co_CharacterIconObject.transform.position = new Vector3(-5.0f, -2.0f, 0.0f);
+        character.GetComponent<CharacterObj>().co_CharacterIconObject.GetComponent<RectTransform>().localPosition = new Vector3(-5.0f, -2.0f, 0.0f);
+        character.GetComponent<CharacterObj>().co_CharacterIconObject.transform.localScale = new Vector3(2, 2, 1);
     }
 
     public void FillDetailsPanel()

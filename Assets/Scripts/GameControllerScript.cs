@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameControllerScript : MonoBehaviour
 {
     //Globals
-    public static int gc_SelectedParty;
+    public static int gc_SelectedParty = 0;
     public static GameObject[] gc_Parties = new GameObject[4];
     public static GameObject[] gc_PartyPanels = new GameObject[4];
     public static List<GameObject> PartyLimbo = new List<GameObject>(); //list of characters not assigned to a party
@@ -16,6 +16,7 @@ public class GameControllerScript : MonoBehaviour
     public int[] gc_SelectedLevelToolRequired = new int[16]; //corresponds to gc_PlayerToolCount
 
     public int gc_SelectedLevel;
+    public GameObject gc_PartyCatalogue;
     bool gc_GoodToGoOnJourney; //probably not necessary
 
     GameObject[] gc_Levels = new GameObject[8]; //Corresponds to gc_LevelsAvailable
@@ -111,7 +112,9 @@ public class GameControllerScript : MonoBehaviour
         ItemCatalogueConstantValues.PopulateItemArrays();
         LevelCatalogueConstantValues.PopulateItemArrays();
         CharacterCatalogueConstantValues.PopulateItemArrays();
-	}
+        gc_PartyCatalogue.GetComponent<PartyCatalogueData>().CreateParties();
+        //PartyCatalogueData.pcd_Pointer.GetComponent<PartyCatalogueData>().CreateParties();
+    }
 	
 	// Update is called once per frame
 	void Update () {

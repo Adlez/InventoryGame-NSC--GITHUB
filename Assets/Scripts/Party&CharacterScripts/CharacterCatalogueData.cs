@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CharacterCatalogueData : MonoBehaviour
 {
-    protected static CharacterCatalogueData characterObj;
+    public static CharacterCatalogueData characterObj;
     public GameObject[] ccd_ArrayOfCharacters = new GameObject[16];
     public GameObject ccd_CharacterScrollViewPanel;
 

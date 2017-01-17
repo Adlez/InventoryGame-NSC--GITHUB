@@ -13,6 +13,9 @@ public class PartyCatalogueData : MonoBehaviour
     {
         GameObject _PartyContainer = new GameObject("PartyContainer");
         GameObject _PartyIconContainer = new GameObject("PartyIconContainer");
+        _PartyIconContainer.transform.SetParent(pcd_PartyScrollViewPanel.transform);
+        _PartyIconContainer.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+        _PartyIconContainer.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
         for (int i = 0; i < GameControllerScript.gc_Parties.Length; ++i)
         {
@@ -21,9 +24,9 @@ public class PartyCatalogueData : MonoBehaviour
             newParty.transform.SetParent(_PartyContainer.transform);
             newParty.GetComponent<PartyObj>().po_PartyID = i;
             
-            IconObj.MakeIconObject(newParty, pcd_PartyScrollViewPanel);
+            IconObj.MakeIconObject(newParty, _PartyIconContainer);
             GameControllerScript.gc_Parties[i] = newParty;
-            IconObj.GlobalPositionIconOnScreen(newParty.GetComponent<PartyObj>().po_PartyIconObject, i);
+            
         }
     }
 
@@ -36,6 +39,7 @@ public class PartyCatalogueData : MonoBehaviour
         for(int i = 0; i < GameControllerScript.gc_Parties.Length; ++i)
         {
             GameControllerScript.gc_Parties[i].GetComponent<PartyObj>().po_PartyIconObject.transform.SetParent(pcd_PartyScrollViewPanel.transform);
+            
             //PositionIconOnScreen();
         }
     }
