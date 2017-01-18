@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CharacterCatalogueData : MonoBehaviour
 {
-    public static CharacterCatalogueData characterObj;
+    public static CharacterCatalogueData characterCataloguePointer;
     public GameObject[] ccd_ArrayOfCharacters = new GameObject[16];
     public GameObject ccd_CharacterScrollViewPanel;
 
@@ -40,6 +40,7 @@ public class CharacterCatalogueData : MonoBehaviour
             newCharacter.GetComponent<CharacterObj>().co_IsRepairKit = CharacterCatalogueConstantValues.CHARACTERISREPAIRKIT[i];
             newCharacter.GetComponent<CharacterObj>().co_TravelTimeModifier = CharacterCatalogueConstantValues.CHARACTERTRAVELTIMEMODS[i];
             newCharacter.GetComponent<CharacterObj>().co_PortraitSprite = CharacterCatalogueConstantValues.CHARACTERPORTRAITS[i];
+            newCharacter.GetComponent<CharacterObj>().co_LimboScrollPanel = ccd_CharacterScrollViewPanel;
 
             Sprite tempSprite = newCharacter.GetComponent<CharacterObj>().co_PortraitSprite;
 

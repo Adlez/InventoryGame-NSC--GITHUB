@@ -8,6 +8,7 @@ public class CharacterObj : MonoBehaviour
     public Sprite co_PortraitSprite;
 
     public GameObject co_CharacterIconObject;
+    public GameObject co_LimboScrollPanel;
 
     public string co_Name;
     public string co_Description;
@@ -81,16 +82,10 @@ public class CharacterObj : MonoBehaviour
     {
         if(pID < 0)
         {
-            Vector3 oldPos = character.GetComponent<CharacterObj>().co_CharacterIconObject.transform.position;
-
-            Transform chTransform = character.GetComponent<CharacterObj>().co_CharacterIconObject.transform;
-            GameObject chViewObj = CharacterCatalogueData.characterObj.GetComponent<CharacterCatalogueData>().ccd_CharacterScrollViewPanel;
-            chTransform.SetParent(chViewObj.transform);
-
-            character.GetComponent<CharacterObj>().co_CharacterIconObject.transform.SetParent(CharacterCatalogueData.characterObj.GetComponent<CharacterCatalogueData>().ccd_CharacterScrollViewPanel.transform);
-            character.GetComponent<CharacterObj>().co_CharacterIconObject.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
-            // MenuNavigaion.menuNavCataloguePointer.mn_PartyPanels[oldPID].transform);
-            Vector3 newPos = character.GetComponent<CharacterObj>().co_CharacterIconObject.transform.position;
+            //character.GetComponent<CharacterObj>().co_CharacterIconObject.transform.SetParent(CharacterCatalogueData.characterCatalogue.ccd_CharacterScrollViewPanel.transform);
+            //character.GetComponent<CharacterObj>().co_CharacterIconObject.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+            //ReturnCharacterIconToLimboPanel(character.GetComponent<CharacterObj>().co_CharacterIconObject);
+            character.GetComponent<CharacterObj>().co_CharacterIconObject.transform.SetParent(character.GetComponent<CharacterObj>().co_LimboScrollPanel.transform);
         }
         character.GetComponent<CharacterObj>().co_CharacterIconObject.transform.SetParent(MenuNavigaion.menuNavCataloguePointer.mn_PartyPanels[oldPID].transform);
         character.GetComponent<CharacterObj>().co_CharacterIconObject.transform.position = new Vector3(-5.0f, -2.0f, 0.0f);
