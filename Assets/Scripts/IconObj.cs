@@ -25,6 +25,12 @@ public class IconObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         objectIcon.GetComponent<Transform>().position = new Vector3(iconPos.x, iconPos.y, 100.0f);
     }
 
+    public void ResetIconSize(GameObject iconObject)
+    {
+        iconObject.GetComponent<IconObj>().transform.localScale = new Vector3(64.0f, 64.0f, 1.0f);
+
+    }
+
     public static GameObject MakeIconObject(GameObject item, GameObject iconContainer)
     {
         GameObject icon = new GameObject("IconObject"); // create the game object
