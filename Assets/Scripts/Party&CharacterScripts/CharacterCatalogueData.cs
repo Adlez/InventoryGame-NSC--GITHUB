@@ -44,7 +44,7 @@ public class CharacterCatalogueData : MonoBehaviour
 
             Sprite tempSprite = newCharacter.GetComponent<CharacterObj>().co_PortraitSprite;
 
-            GameObject iconObj = IconObj.MakeIconObject(newCharacter, ccd_CharacterScrollViewPanel);
+            GameObject iconObj = IconObj.MakeIconObject(newCharacter, ccd_CharacterScrollViewPanel, newCharacter.GetComponent<CharacterObj>().co_ObjectType);
             newCharacter.GetComponent<CharacterObj>().co_CharacterIconObject = iconObj;
 
             newCharacter.name = newCharacter.GetComponent<CharacterObj>().co_Name;
@@ -62,7 +62,13 @@ public class CharacterCatalogueData : MonoBehaviour
         {
             CreateCharacters();
         }
-        PositionIconsOnScreen();
+        for(int i = 0; i < ccd_ArrayOfCharacters.Length; ++i)
+        {
+            if (ccd_ArrayOfCharacters[i].GetComponent<CharacterObj>().co_InRoster)
+            {
+                PositionIconsOnScreen();
+            }
+        }
     }
 
     public void PositionIconsOnScreen()

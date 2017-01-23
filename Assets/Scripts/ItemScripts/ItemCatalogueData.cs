@@ -9,25 +9,24 @@ public class ItemCatalogueData : MonoBehaviour
     protected static ItemCatalogueData itemObj;
     public GameObject[] icd_ArrayOfItems = new GameObject[16];
     public GameObject icd_InvenScrollViewPanel;
+    public GameObject icd_TestShopDisplayPanel;
 
     private float _invenDisplaySlotX = 64.0f; //Hardcoded for now
     private float _invenDisplaySlotY = 64.0f;
     private float _iconWidthOffset = 32.0f;
     private float _iconHeightOffset = 32.0f;
     private int _invenColumns = 4;
+    private bool _ItemsCreated = false;
 
     public void CreateItems()
     {
         GameObject _InventoryContainer = new GameObject("InventoryContainer");
         GameObject _ItemIconContainer = new GameObject("InvenIconContainer");
-        _ItemIconContainer.transform.SetParent (icd_InvenScrollViewPanel.transform);
 
         for (int i = 0; i < icd_ArrayOfItems.Length; ++i)
         {
-            //GameObject newItem = Instantiate(itemObjPrefab) as GameObject;
             GameObject newItem = new GameObject("Item");//Temp name
             newItem.transform.SetParent(_InventoryContainer.transform);
-            //ItemObj item = newItem.GetComponent<ItemObj>();
             newItem.AddComponent<ItemObj>();
             newItem.transform.localScale = newItem.transform.localScale * 64;// * 100;
 
@@ -42,24 +41,46 @@ public class ItemCatalogueData : MonoBehaviour
             newItem.GetComponent<ItemObj>().maxFindAtOnce = ItemCatalogueConstantValues.MAXAMOUNTTOFIND[i];
             newItem.GetComponent<ItemObj>().typeID = ItemCatalogueConstantValues.ITEMTYPEID[i];
 
-            GameObject iconObj = IconObj.MakeIconObject(newItem, icd_InvenScrollViewPanel);
+            GameObject iconObj = IconObj.MakeIconObject(newItem, icd_InvenScrollViewPanel, newItem.GetComponent<ItemObj>().io_ObjectType);
             newItem.GetComponent<ItemObj>().invIconObject = iconObj;
 
             newItem.name = newItem.GetComponent<ItemObj>().itemName;
             newItem.GetComponent<ItemObj>().invIconObject.GetComponent<IconObj>().GetComponent<Image>().sprite = ItemCatalogueConstantValues.ICONOFITEM[i];
 
+            newItem.GetComponent<ItemObj>().invIconObject.SetActive(false);
 
-            //remaining values assigned here
             //add to array
             icd_ArrayOfItems[i] = newItem;
         }
+        _ItemsCreated = true;
+    }
+
+    public void DisplayTestShop()
+    {
+        if (!_ItemsCreated)
+        {
+            CreateItems();
+        }
+        for (int i = 0; i < icd_ArrayOfItems.Length; ++i)
+        {
+            icd_ArrayOfItems[i].GetComponent<ItemObj>().invIconObject.SetActive(true);
+            icd_ArrayOfItems[i].GetComponent<ItemObj>().invIconObject.GetComponent<Transform>().SetParent(icd_TestShopDisplayPanel.transform);
+            icd_ArrayOfItems[i].GetComponent<ItemObj>().invIconObject.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+        PositionIconsOnScreen();
     }
 
     public void DisplayAllItems()
     {
-        if(icd_ArrayOfItems[0] == null)
+        if(!_ItemsCreated)
         {
             CreateItems();
+        }
+        for (int i = 0; i < icd_ArrayOfItems.Length; ++i)
+        {
+            icd_ArrayOfItems[i].GetComponent<ItemObj>().invIconObject.SetActive(true);
+            icd_ArrayOfItems[i].GetComponent<ItemObj>().invIconObject.GetComponent<Transform>().SetParent(icd_InvenScrollViewPanel.transform);
+            icd_ArrayOfItems[i].GetComponent<ItemObj>().invIconObject.GetComponent<Transform>().localScale = new Vector3(64.0f, 64.0f, 1.0f);
         }
         PositionIconsOnScreen();
     }
@@ -71,8 +92,6 @@ public class ItemCatalogueData : MonoBehaviour
             Vector3 iconPos = icd_ArrayOfItems[i].GetComponent<ItemObj>().invIconObject.GetComponent<Transform>().position;
             iconPos.x = _invenDisplaySlotX * (i % _invenColumns) + _iconWidthOffset;
             iconPos.y = (_invenDisplaySlotY * (i / _invenColumns) - _iconHeightOffset) * -1;
-            iconPos.x = 0.0f;
-            iconPos.y = 0.0f;
             icd_ArrayOfItems[i].GetComponent<ItemObj>().invIconObject.GetComponent<Transform>().position = new Vector3(iconPos.x, iconPos.y, 100.0f);
         }
     }

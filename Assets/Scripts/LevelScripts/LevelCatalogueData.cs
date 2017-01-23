@@ -42,13 +42,13 @@ public class LevelCatalogueData : MonoBehaviour
 
 	public void DisplayAllLevels()
     {
-        /*if(lcd_ArrayOfLevels[0] == null)
+        if(lcd_ArrayOfLevels[0] == null)
         {
             CreateLevels();
-        }*/
+        }
         for(int i = 0; i < lcd_LevelDisplayAreas.Length; ++i)
         {
-            GameObject levelIcon = IconObj.MakeIconObject(lcd_ArrayOfLevels[i], lcd_LevelsParent);// lcd_LevelDisplayAreas[i]);
+            GameObject levelIcon = IconObj.MakeIconObject(lcd_ArrayOfLevels[i], lcd_LevelsParent, "Level");
             lcd_ArrayOfLevels[i].GetComponent<LevelObj>().lv_IconObject = levelIcon;
 
             lcd_ArrayOfLevels[i].name = lcd_ArrayOfLevels[i].GetComponent<LevelObj>().lv_Name;

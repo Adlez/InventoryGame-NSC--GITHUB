@@ -9,6 +9,7 @@ public class LevelObj : MonoBehaviour
     public GameObject lv_PartyObject;
     public GameObject lv_IconObject;
     public string lv_Name;
+    public string lv_ObjectType = "Level";
 
     public int[] lv_ToolRequiredIndex;
     public int[] lv_LootIndex; //corresponds to treasure array, used to search for the right item

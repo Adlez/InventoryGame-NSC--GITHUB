@@ -23,10 +23,9 @@ public class PartyCatalogueData : MonoBehaviour
             newParty.AddComponent<PartyObj>();
             newParty.transform.SetParent(_PartyContainer.transform);
             newParty.GetComponent<PartyObj>().po_PartyID = i;
-            
-            IconObj.MakeIconObject(newParty, _PartyIconContainer);
+
+            IconObj.MakeIconObject(newParty, _PartyIconContainer, newParty.GetComponent<PartyObj>().po_ObjectType);
             GameControllerScript.gc_Parties[i] = newParty;
-            
         }
     }
 
