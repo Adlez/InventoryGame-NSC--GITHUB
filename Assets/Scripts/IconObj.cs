@@ -82,8 +82,9 @@ public class IconObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             icon.GetComponent<Button>().name = item.GetComponent<ItemObj>().itemName + " Icon";// "Item Name";
             icon.GetComponent<Image>().sprite = ItemCatalogueConstantValues.ICONOFITEM[thisItemID];
             icon.GetComponent<Button>().onClick.AddListener(delegate { icon.GetComponent<IconObj>().TestFunction(icon); });
-            icon.GetComponent<Button>().onClick.AddListener(delegate { icon.GetComponent<ItemObj>().BuyItem(icon); });
-            icon.GetComponent<Button>().onClick.AddListener(delegate { icon.GetComponent<ItemObj>().SellItem(icon); });
+//            icon.GetComponent<Button>().onClick.AddListener(delegate { icon.GetComponent<IconObj>().IconClicked(icon); });
+            //icon.GetComponent<Button>().onClick.AddListener(delegate { icon.GetComponent<ItemObj>().BuyItem(icon, true); });
+            //icon.GetComponent<Button>().onClick.AddListener(delegate { icon.GetComponent<ItemObj>().SellItem(icon); });
             Sprite tempSprite = ItemCatalogueConstantValues.ICONOFITEM[thisItemID];
             icon.transform.localScale = item.transform.localScale;
         }
@@ -140,5 +141,24 @@ public class IconObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void TestFunction(GameObject icon)
     {
         Debug.Log("Icon " + icon.GetComponent<IconObj>().name + " Clicked.");
+    }
+
+    public void IconClicked(GameObject itemIcon)
+    {
+        GameObject item = itemIcon.GetComponent<IconObj>().io_ObjectForThisIcon;
+        string itemParentName = item.transform.parent.name;
+
+        if (GameControllerScript.gc_CurActiveCanvasPanel.name == "UltraTestShopPanel")
+        { 
+            if (itemParentName == "ShopContentPanel")//Icon is in the shop, probably
+            {
+                item.GetComponent<ItemObj>().BuyItem(item);
+            }
+            else//Icon is in the stash or a party inventory, probably
+            {
+                item.GetComponent<ItemObj>().SellItem(item);
+            }
+           
+        }
     }
 }

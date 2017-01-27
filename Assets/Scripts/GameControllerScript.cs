@@ -1,14 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameControllerScript : MonoBehaviour
 {
     //Globals
     public static int gc_SelectedParty = 0;
+    public static int gc_Munnies;
+    public static int[] gc_StashOfItems = new int[16];
+    public static GameObject gc_CurActiveCanvasPanel;
     public static GameObject[] gc_Parties = new GameObject[4];
     public static GameObject[] gc_PartyPanels = new GameObject[4];
     public static List<GameObject> PartyLimbo = new List<GameObject>(); //list of characters not assigned to a party
+
+    public static Text gc_GlobalMunnieDisplayText;
+    public Text _MunnieDisplayText;
 
     //add "public" as necessary
     int[] gc_LevelsAvailable = new int[16]; //0 level is unavailable, 1 it is.
@@ -110,14 +117,29 @@ public class GameControllerScript : MonoBehaviour
 	void Start ()
     {
         ItemCatalogueConstantValues.PopulateItemArrays();
+        //ItemCatalogueData.itemObj.CreateItems();
         LevelCatalogueConstantValues.PopulateItemArrays();
         CharacterCatalogueConstantValues.PopulateItemArrays();
         gc_PartyCatalogue.GetComponent<PartyCatalogueData>().CreateParties();
+        ShopCatalogueConstantValues.PopulateItemArrays();
+        //ShopDataCatalogue.sdc_ShopCataloguePointer.GetComponent<ShopDataCatalogue>().StockTheShelves();
         //PartyCatalogueData.pcd_Pointer.GetComponent<PartyCatalogueData>().CreateParties();
+
+        //Check if save data exists
+            //If it does load it
+        //Otherwise set starting junk
+        gc_Munnies = 2500; //Temp hardcoded value
+        gc_GlobalMunnieDisplayText = _MunnieDisplayText;
+        gc_GlobalMunnieDisplayText.text = gc_Munnies.ToString();
+    }
+
+    public void UpdateMunnieDisplay()
+    {
+        _MunnieDisplayText.text = gc_Munnies.ToString();
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 }

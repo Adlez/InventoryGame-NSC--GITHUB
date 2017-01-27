@@ -1,0 +1,31 @@
+<ItemInformation>
+	<PhonyInfoChart item00="All the following values are temporary as of 2017/Jan/23 14:15. Though they are temporary, it is important to note that a lot of the strings here will remain
+                  or at least inspire the future greatness they will achieve." />
+	<ShopNames shop00="Crystal Shop" shop01="Tool Shop" shop02="Pawnshop" shop03="GeneralStore"
+				shop04 = "Antiques" ch05="Spice Shop"/>
+	
+	<ShopKeeperNames ch00 ="Klyne" ch01="Gunny Smith" ch02="Pawny Buryerstuff" ch03="Lafftact"
+                  ch04="Ejastilyne" ch05="Bekkit" />
+	
+	<MarkUp shop00="0" shop01="1" shop02="10" shop03="85"
+			shop04="10" shop05="15" />
+			
+	<Shop0Stock shop01= "0" shop02="0" shop03="0" shop04="0" shop05="0" shop06="0" shop07="0" shop08="0" 
+        shop09="0" shop10="1" shop11="1" shop12="1" shop13="1" shop14="0" shop15="0" shop16="0" />
+		
+	<Shop1Stock shop01= "5" shop02="0" shop03="0" shop04="0" shop05="0" shop06="0" shop07="0" shop08="0" 
+    shop09="0" shop10="0" shop11="0" shop12="0" shop13="0" shop14="0" shop15="0" shop16="0" />
+		
+	<Shop2Stock shop01= "0" shop02="0" shop03="0" shop04="0" shop05="0" shop06="0" shop07="0" shop08="0"
+		shop09="0" shop10="0" shop11="0" shop12="0" shop13="0" shop14="0" shop15="0" shop16="0" />
+		
+	<Shop3Stock shop01= "0" shop02="0" shop03="0" shop04="0" shop05="0" shop06="0" shop07="0" shop08="0"
+		shop09="0" shop10="0" shop11="0" shop12="0" shop13="0" shop14="0" shop15="0" shop16="0" />
+		
+	<Shop4Stock shop01= "0" shop02="0" shop03="0" shop04="0" shop05="0" shop06="0" shop07="0" shop08="0"
+		shop09="0" shop10="0" shop11="0" shop12="0" shop13="0" shop14="0" shop15="0" shop16="0" />
+		
+	<Shop5Stock shop01= "0" shop02="0" shop03="0" shop04="0" shop05="0" shop06="0" shop07="0" shop08="0"
+		shop09="0" shop10="0" shop11="0" shop12="0" shop13="0" shop14="0" shop15="0" shop16="0" />
+  
+</ItemInformation>

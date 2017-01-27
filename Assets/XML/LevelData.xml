@@ -7,23 +7,14 @@
 	<LevelName level01="Level 00" level02="Level 01" level03="Level 02(Actually Lv 3)" level04="Level 03" 
 	level05="Level 04" level06="Level 05" level07="7th Level 06" level08="Final Level (8/9)"  />
 	
-	<Level0ToolRequirements tool01= "1" tool02="0" tool03="0" tool04="0" 
-                          tool05="0" tool06="0" tool07="0" tool08="0" 
-                            tool09="0" tool10="0" tool11="0" tool12="0" 
-                            tool13="0" tool14="0" tool15="0" 
-                          tool16="0" />
+	<Level0ToolRequirements tool01= "1" tool02="0" tool03="0" tool04="0" tool05="0" tool06="0" tool07="0" tool08="0" 
+        tool09="0" tool10="0" tool11="0" tool12="0" tool13="0" tool14="0" tool15="0" tool16="0" />
 		
-	<Level0PossibleLoot loot01= "0" loot02="0" loot03="0" loot04="0" 
-                      loot05="0" loot06="0" loot07="0" loot08="0" 
-                        loot09="0" loot10="1" loot11="1" loot12="1" 
-                        loot13="1" loot14="0" loot15="0" 
-                      loot16="0" />
+	<Level0PossibleLoot loot01= "0" loot02="0" loot03="0" loot04="0" loot05="0" loot06="0" loot07="0" loot08="0" 
+        loot09="0" loot10="1" loot11="1" loot12="1" loot13="1" loot14="0" loot15="0" loot16="0" />
 		
-	<Level1ToolRequirements tool01= "5" tool02="0" tool03="0" tool04="4" 
-                          tool05="0" tool06="0" tool07="0" tool08="0" 
-                            tool09="0" tool10="0" tool11="0" tool12="0" 
-                            tool13="0" tool14="0" tool15="0" 
-                          tool16="0" />
+	<Level1ToolRequirements tool01= "5" tool02="0" tool03="0" tool04="4" tool05="0" tool06="0" tool07="0" tool08="0" 
+        tool09="0" tool10="0" tool11="0" tool12="0" tool13="0" tool14="0" tool15="0" tool16="0" />
 		
 	<Level1PossibleLoot loot01= "0" loot02="0" loot03="0" loot04="0" loot05="0" loot06="0" loot07="0" loot08="0"
 		loot09="0" loot10="0" loot11="0" loot12="0" loot13="0" loot14="0" loot15="0" loot16="0" />

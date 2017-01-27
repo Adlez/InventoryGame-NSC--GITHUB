@@ -21,26 +21,26 @@ public class ItemObj : MonoBehaviour
 
     public void BuyItem(GameObject item)
     {
-        if(!item.GetComponent<ItemObj>().io_InInventory)
+        if(item.GetComponent<ItemObj>().cashValue < GameControllerScript.gc_Munnies)
         {
-            //If this has been clicked and it's not in the inventory, the player is in a shop so no need to check active panel
             //Confirm the purchase
             //Add the item to the "Stash", inventory whatever; add by array
+            GameControllerScript.gc_StashOfItems[item.GetComponent<ItemObj>().idInArrays]++;
             //take the player's money
+            GameControllerScript.gc_Munnies -= item.GetComponent<ItemObj>().cashValue;
+            item.GetComponent<ItemObj>().io_InInventory = true;
             //update the inventory display
-            //set io_InInventory to True
         }
     }
 
     public void SellItem(GameObject item)
     {
-        if(item.GetComponent<ItemObj>().io_InInventory)
-        {
-            //Check if a Shop is the current active panel
-            //Confirm player wants to sell the item
-            //remove item from stash, or inventory or whatever; subrtact from array
-            //give money to player
-            //update the inventory display
-        }
+        //Check if a Shop is the current active panel
+        //Confirm player wants to sell the item
+        //remove item from stash, or inventory or whatever; subrtact from array
+        GameControllerScript.gc_StashOfItems[item.GetComponent<ItemObj>().idInArrays]--;
+        //give money to player
+        GameControllerScript.gc_Munnies += item.GetComponent<ItemObj>().cashValue; //Multiplied by a percentage determined in a constants file
+        //update the inventory display
     }
 }

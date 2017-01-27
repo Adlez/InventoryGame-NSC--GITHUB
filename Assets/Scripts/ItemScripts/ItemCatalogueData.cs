@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ItemCatalogueData : MonoBehaviour
 {
-    protected static ItemCatalogueData itemObj;
+    public static ItemCatalogueData itemObj;
     public GameObject[] icd_ArrayOfItems = new GameObject[16];
     public GameObject icd_InvenScrollViewPanel;
     public GameObject icd_TestShopDisplayPanel;
@@ -16,48 +16,51 @@ public class ItemCatalogueData : MonoBehaviour
     private float _iconWidthOffset = 32.0f;
     private float _iconHeightOffset = 32.0f;
     private int _invenColumns = 4;
-    private bool _ItemsCreated = false;
+    public bool icd_ItemsCreated = false;
 
     public void CreateItems()
     {
-        GameObject _InventoryContainer = new GameObject("InventoryContainer");
-        GameObject _ItemIconContainer = new GameObject("InvenIconContainer");
-
-        for (int i = 0; i < icd_ArrayOfItems.Length; ++i)
+        if (!icd_ItemsCreated)
         {
-            GameObject newItem = new GameObject("Item");//Temp name
-            newItem.transform.SetParent(_InventoryContainer.transform);
-            newItem.AddComponent<ItemObj>();
-            newItem.transform.localScale = newItem.transform.localScale * 64;// * 100;
+            GameObject _InventoryContainer = new GameObject("InventoryContainer");
+            GameObject _ItemIconContainer = new GameObject("InvenIconContainer");
 
-            newItem.GetComponent<ItemObj>().isArtefact = ItemCatalogueConstantValues.ARTEFACTYESNO[i];
-            newItem.GetComponent<ItemObj>().cashValue = ItemCatalogueConstantValues.CASHVALUEOFITEM[i];
-            newItem.GetComponent<ItemObj>().itemName = ItemCatalogueConstantValues.NAMEOFITEM[i];
-            newItem.GetComponent<ItemObj>().idInArrays = ItemCatalogueConstantValues.IDOFITEM[i];
-            newItem.GetComponent<ItemObj>().invIcon = ItemCatalogueConstantValues.ICONOFITEM[i]; //Necessary?
-            newItem.GetComponent<ItemObj>().fullImage = ItemCatalogueConstantValues.PORTRAITOFITEM[i];
-            newItem.GetComponent<ItemObj>().description = ItemCatalogueConstantValues.ITEMDESCRIPTION[i];
-            newItem.GetComponent<ItemObj>().oddsOfFinding = ItemCatalogueConstantValues.ODDSOFFINDING[i];
-            newItem.GetComponent<ItemObj>().maxFindAtOnce = ItemCatalogueConstantValues.MAXAMOUNTTOFIND[i];
-            newItem.GetComponent<ItemObj>().typeID = ItemCatalogueConstantValues.ITEMTYPEID[i];
+            for (int i = 0; i < icd_ArrayOfItems.Length; ++i)
+            {
+                GameObject newItem = new GameObject("Item");//Temp name
+                newItem.transform.SetParent(_InventoryContainer.transform);
+                newItem.AddComponent<ItemObj>();
+                newItem.transform.localScale = newItem.transform.localScale * 64;// * 100;
 
-            GameObject iconObj = IconObj.MakeIconObject(newItem, icd_InvenScrollViewPanel, newItem.GetComponent<ItemObj>().io_ObjectType);
-            newItem.GetComponent<ItemObj>().invIconObject = iconObj;
+                newItem.GetComponent<ItemObj>().isArtefact = ItemCatalogueConstantValues.ARTEFACTYESNO[i];
+                newItem.GetComponent<ItemObj>().cashValue = ItemCatalogueConstantValues.CASHVALUEOFITEM[i];
+                newItem.GetComponent<ItemObj>().itemName = ItemCatalogueConstantValues.NAMEOFITEM[i];
+                newItem.GetComponent<ItemObj>().idInArrays = ItemCatalogueConstantValues.IDOFITEM[i];
+                newItem.GetComponent<ItemObj>().invIcon = ItemCatalogueConstantValues.ICONOFITEM[i]; //Necessary?
+                newItem.GetComponent<ItemObj>().fullImage = ItemCatalogueConstantValues.PORTRAITOFITEM[i];
+                newItem.GetComponent<ItemObj>().description = ItemCatalogueConstantValues.ITEMDESCRIPTION[i];
+                newItem.GetComponent<ItemObj>().oddsOfFinding = ItemCatalogueConstantValues.ODDSOFFINDING[i];
+                newItem.GetComponent<ItemObj>().maxFindAtOnce = ItemCatalogueConstantValues.MAXAMOUNTTOFIND[i];
+                newItem.GetComponent<ItemObj>().typeID = ItemCatalogueConstantValues.ITEMTYPEID[i];
 
-            newItem.name = newItem.GetComponent<ItemObj>().itemName;
-            newItem.GetComponent<ItemObj>().invIconObject.GetComponent<IconObj>().GetComponent<Image>().sprite = ItemCatalogueConstantValues.ICONOFITEM[i];
+                GameObject iconObj = IconObj.MakeIconObject(newItem, icd_InvenScrollViewPanel, newItem.GetComponent<ItemObj>().io_ObjectType);
+                newItem.GetComponent<ItemObj>().invIconObject = iconObj;
 
-            newItem.GetComponent<ItemObj>().invIconObject.SetActive(false);
+                newItem.name = newItem.GetComponent<ItemObj>().itemName;
+                newItem.GetComponent<ItemObj>().invIconObject.GetComponent<IconObj>().GetComponent<Image>().sprite = ItemCatalogueConstantValues.ICONOFITEM[i];
 
-            //add to array
-            icd_ArrayOfItems[i] = newItem;
+                newItem.GetComponent<ItemObj>().invIconObject.SetActive(false);
+
+                //add to array
+                icd_ArrayOfItems[i] = newItem;
+            }
+            icd_ItemsCreated = true;
         }
-        _ItemsCreated = true;
     }
 
     public void DisplayTestShop()
     {
-        if (!_ItemsCreated)
+        if (!icd_ItemsCreated)
         {
             CreateItems();
         }
@@ -72,7 +75,7 @@ public class ItemCatalogueData : MonoBehaviour
 
     public void DisplayAllItems()
     {
-        if(!_ItemsCreated)
+        if(!icd_ItemsCreated)
         {
             CreateItems();
         }
