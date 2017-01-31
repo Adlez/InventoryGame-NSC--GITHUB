@@ -11,10 +11,10 @@ public class LevelCatalogueData : MonoBehaviour
     public GameObject[] lcd_ArrayOfLevels = new GameObject[8];//Array of Levels
     public GameObject[] lcd_LevelDisplayAreas = new GameObject[8];//Array of places on the screen to display level icons
 
-    private float _levelDisplaySlotX = 64.0f; //Hardcoded for now
-    private float _levelDisplaySlotY = 64.0f;
-    private float _iconWidthOffset = 32.0f;
-    private float _iconHeightOffset = 32.0f;
+    private float _levelDisplaySlotX = 16.0f; //Hardcoded for now
+    private float _levelDisplaySlotY = 16.0f;
+    private float _iconWidthOffset = 16.0f;
+    private float _iconHeightOffset = 16.0f;
     private int _levelColumns = 4;
 
     public void CreateLevels()
@@ -54,19 +54,15 @@ public class LevelCatalogueData : MonoBehaviour
             lcd_ArrayOfLevels[i].name = lcd_ArrayOfLevels[i].GetComponent<LevelObj>().lv_Name;
             lcd_ArrayOfLevels[i].GetComponent<LevelObj>().lv_IconObject.GetComponent<IconObj>().GetComponent<Image>().sprite = LevelCatalogueConstantValues.LEVELICONS[i];
         }
-        PositionIconsOnScreen();
+        PositionIconsOnScreen(lcd_ArrayOfLevels);
     }
 
-    public void PositionIconsOnScreen()
+    public void PositionIconsOnScreen(GameObject[] arrayOfLevels)
     {
-        for (int i = 0; i < lcd_ArrayOfLevels.Length; ++i)
+        for (int i = 0; i < arrayOfLevels.Length; ++i)
         {
-            Vector3 iconPos = lcd_ArrayOfLevels[i].GetComponent<LevelObj>().lv_IconObject.GetComponent<Transform>().position;
-            iconPos.x = _levelDisplaySlotX * (i % _levelColumns) + _iconWidthOffset;
-            iconPos.y = (_levelDisplaySlotY * (i / _levelColumns) - _iconHeightOffset) * -1;
-            //iconPos.x = 0.0f;
-            //iconPos.y = 0.0f;
-            lcd_ArrayOfLevels[i].GetComponent<LevelObj>().lv_IconObject.GetComponent<Transform>().position = new Vector3(iconPos.x, iconPos.y, 100.0f);
+            arrayOfLevels[i].GetComponent<LevelObj>().lv_IconObject.transform.SetParent(lcd_LevelDisplayAreas[i].transform);
+            arrayOfLevels[i].GetComponent<LevelObj>().lv_IconObject.transform.localPosition = new Vector3( 0.0f, 0.0f, 0.0f);
         }
     }
 }

@@ -14,17 +14,30 @@ public class GameControllerScript : MonoBehaviour
     public static GameObject[] gc_PartyPanels = new GameObject[4];
     public static List<GameObject> PartyLimbo = new List<GameObject>(); //list of characters not assigned to a party
 
+    public static List<GameObject> gc_PlayerStash = new List<GameObject>();
+
     public static Text gc_GlobalMunnieDisplayText;
     public Text _MunnieDisplayText;
+    public GameObject gc_PlayerStashPanel;
+    public GameObject gc_CatalogueObj;
 
     //add "public" as necessary
     int[] gc_LevelsAvailable = new int[16]; //0 level is unavailable, 1 it is.
     int[] gc_PlayerToolCount = new int[16]; //according to index, count the tools
     public int[] gc_SelectedLevelToolRequired = new int[16]; //corresponds to gc_PlayerToolCount
 
+    public int[] inspectorViewOfPlayerStash = new int[16];
+
     public int gc_SelectedLevel;
     public GameObject gc_PartyCatalogue;
     bool gc_GoodToGoOnJourney; //probably not necessary
+    bool StashIconsCreated;
+
+    private float _invenDisplaySlotX = 64.0f; //Hardcoded for now
+    private float _invenDisplaySlotY = 64.0f;
+    private float _iconWidthOffset = 32.0f;
+    private float _iconHeightOffset = 32.0f;
+    private int _invenColumns = 4;
 
     GameObject[] gc_Levels = new GameObject[8]; //Corresponds to gc_LevelsAvailable
 
@@ -133,9 +146,70 @@ public class GameControllerScript : MonoBehaviour
         gc_GlobalMunnieDisplayText.text = gc_Munnies.ToString();
     }
 
+
+    public void DisplayPlayerStash()
+    {
+        if (!StashIconsCreated)
+        {
+            CreateStashIcons();
+        }
+        for (int i = 0; i < gc_PlayerStash.Count; ++i)
+        {
+            Vector3 iconPos = gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position;
+            iconPos.x = _invenDisplaySlotX * (i % _invenColumns) + _iconWidthOffset;
+            iconPos.y = (_invenDisplaySlotY * (i / _invenColumns) - _iconHeightOffset) * -1;
+            iconPos.x = gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position.x;
+            iconPos.y = gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position.y;
+
+            gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
+            gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().SetParent(gc_PlayerStashPanel.transform);
+            gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position = new Vector3(iconPos.x, iconPos.y, 100.0f);
+            gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+    }
+
+    public void CreateStashIcons()
+    {
+        //ItemCatalogueData.itemObj.CreateItems();
+        for (int i = 0; i < gc_StashOfItems.Length; ++i)
+        {
+            if (gc_StashOfItems[i] >= -1)
+            {
+                int numOfItems = gc_StashOfItems[i];
+                GameObject potentialItem = gc_CatalogueObj.GetComponent<ItemCatalogueData>().icd_ArrayOfItems[i];
+
+                for (int j = 0; j < numOfItems; ++j)
+                {
+                    GameObject stashIconObj = IconObj.MakeIconObject(potentialItem, gc_PlayerStashPanel, "Item");
+                    //stashIconObj.GetComponent<Button>().onClick.AddListener(delegate { BuyShopItem(stashIconObj); });
+                    stashIconObj.name = "Shop 1 Item " + i.ToString() + " Icon";
+
+                    potentialItem.GetComponent<ItemObj>().io_invIconObject = stashIconObj;
+
+                    potentialItem.name = potentialItem.GetComponent<ItemObj>().itemName + "Stash Item " + i.ToString() + " Icon";
+                    potentialItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<IconObj>().GetComponent<Image>().sprite = ItemCatalogueConstantValues.ICONOFITEM[i];
+                    potentialItem.AddComponent<LayoutElement>().minHeight = 1.0f;
+                    potentialItem.AddComponent<LayoutElement>().minWidth = 1.0f;
+
+                    potentialItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
+
+                    Vector3 iconPos = potentialItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position;
+                    //iconPos.x = _invenDisplaySlotX * (i % _invenColumns) + _iconWidthOffset;
+                    //iconPos.y = (_invenDisplaySlotY * (i / _invenColumns) - _iconHeightOffset) * -1;
+                    //potentialItem.GetComponent<ItemObj>().invIconObject.GetComponent<Transform>().position = new Vector3(iconPos.x, iconPos.y, 100.0f);
+                    potentialItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position = new Vector3(0.0f, iconPos.y, 10.0f);
+
+                    //stockItem.GetComponent<ItemObj>().invIconObject.SetActive(false);
+                }
+            }
+        }
+        StashIconsCreated = true;
+    }
+
     public void UpdateMunnieDisplay()
     {
         _MunnieDisplayText.text = gc_Munnies.ToString();
+        inspectorViewOfPlayerStash = gc_StashOfItems;
     }
 	
 	// Update is called once per frame

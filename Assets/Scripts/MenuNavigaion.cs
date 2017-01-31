@@ -46,6 +46,11 @@ public class MenuNavigaion : MonoBehaviour
         }
     }
 
+    public void ShowHideStashPanel(GameObject stashPanel)
+    {
+        stashPanel.SetActive(!stashPanel.activeSelf);
+    }
+
     public void ShowNewPanel(GameObject newPanel)
     {
         newPanel.SetActive(!newPanel.activeSelf);

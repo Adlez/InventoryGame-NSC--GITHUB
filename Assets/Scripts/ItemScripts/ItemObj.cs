@@ -7,7 +7,8 @@ public class ItemObj : MonoBehaviour
     public bool isArtefact; //
     public int cashValue; //
     public string itemName; //
-    public GameObject invIconObject; //
+    public GameObject io_invIconObject; //
+    public GameObject io_storeIconObject; //
     public Sprite invIcon; //Necessary?
     public Sprite fullImage; //
     public string description; //
@@ -28,7 +29,7 @@ public class ItemObj : MonoBehaviour
             GameControllerScript.gc_StashOfItems[item.GetComponent<ItemObj>().idInArrays]++;
             //take the player's money
             GameControllerScript.gc_Munnies -= item.GetComponent<ItemObj>().cashValue;
-            item.GetComponent<ItemObj>().io_InInventory = true;
+            //item.GetComponent<ItemObj>().io_InInventory = true;
             //update the inventory display
         }
     }

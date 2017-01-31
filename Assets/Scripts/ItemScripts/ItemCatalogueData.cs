@@ -44,12 +44,12 @@ public class ItemCatalogueData : MonoBehaviour
                 newItem.GetComponent<ItemObj>().typeID = ItemCatalogueConstantValues.ITEMTYPEID[i];
 
                 GameObject iconObj = IconObj.MakeIconObject(newItem, icd_InvenScrollViewPanel, newItem.GetComponent<ItemObj>().io_ObjectType);
-                newItem.GetComponent<ItemObj>().invIconObject = iconObj;
+                newItem.GetComponent<ItemObj>().io_invIconObject = iconObj;
 
                 newItem.name = newItem.GetComponent<ItemObj>().itemName;
-                newItem.GetComponent<ItemObj>().invIconObject.GetComponent<IconObj>().GetComponent<Image>().sprite = ItemCatalogueConstantValues.ICONOFITEM[i];
+                newItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<IconObj>().GetComponent<Image>().sprite = ItemCatalogueConstantValues.ICONOFITEM[i];
 
-                newItem.GetComponent<ItemObj>().invIconObject.SetActive(false);
+                newItem.GetComponent<ItemObj>().io_invIconObject.SetActive(false);
 
                 //add to array
                 icd_ArrayOfItems[i] = newItem;
@@ -66,9 +66,9 @@ public class ItemCatalogueData : MonoBehaviour
         }
         for (int i = 0; i < icd_ArrayOfItems.Length; ++i)
         {
-            icd_ArrayOfItems[i].GetComponent<ItemObj>().invIconObject.SetActive(true);
-            icd_ArrayOfItems[i].GetComponent<ItemObj>().invIconObject.GetComponent<Transform>().SetParent(icd_TestShopDisplayPanel.transform);
-            icd_ArrayOfItems[i].GetComponent<ItemObj>().invIconObject.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            icd_ArrayOfItems[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
+            icd_ArrayOfItems[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().SetParent(icd_TestShopDisplayPanel.transform);
+            icd_ArrayOfItems[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
         PositionIconsOnScreen();
     }
@@ -81,9 +81,9 @@ public class ItemCatalogueData : MonoBehaviour
         }
         for (int i = 0; i < icd_ArrayOfItems.Length; ++i)
         {
-            icd_ArrayOfItems[i].GetComponent<ItemObj>().invIconObject.SetActive(true);
-            icd_ArrayOfItems[i].GetComponent<ItemObj>().invIconObject.GetComponent<Transform>().SetParent(icd_InvenScrollViewPanel.transform);
-            icd_ArrayOfItems[i].GetComponent<ItemObj>().invIconObject.GetComponent<Transform>().localScale = new Vector3(64.0f, 64.0f, 1.0f);
+            icd_ArrayOfItems[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
+            icd_ArrayOfItems[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().SetParent(icd_InvenScrollViewPanel.transform);
+            icd_ArrayOfItems[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().localScale = new Vector3(64.0f, 64.0f, 1.0f);
         }
         PositionIconsOnScreen();
     }
@@ -92,10 +92,10 @@ public class ItemCatalogueData : MonoBehaviour
     {
         for(int i = 0; i < icd_ArrayOfItems.Length; ++i)
         {
-            Vector3 iconPos = icd_ArrayOfItems[i].GetComponent<ItemObj>().invIconObject.GetComponent<Transform>().position;
+            Vector3 iconPos = icd_ArrayOfItems[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position;
             iconPos.x = _invenDisplaySlotX * (i % _invenColumns) + _iconWidthOffset;
             iconPos.y = (_invenDisplaySlotY * (i / _invenColumns) - _iconHeightOffset) * -1;
-            icd_ArrayOfItems[i].GetComponent<ItemObj>().invIconObject.GetComponent<Transform>().position = new Vector3(iconPos.x, iconPos.y, 100.0f);
+            icd_ArrayOfItems[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position = new Vector3(iconPos.x, iconPos.y, 100.0f);
         }
     }
 }
