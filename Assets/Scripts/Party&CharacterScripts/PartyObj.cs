@@ -1,6 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System;
 
 public class PartyObj : MonoBehaviour
 {
@@ -19,6 +25,9 @@ public class PartyObj : MonoBehaviour
 
     public int po_MaxWagonInventorySize; //compared to curWagonInventorySize, this is the total number of items the wagon can hold.
     public int po_CurWagonInventorySize; //actual number of items being stored in the wagon.
+
+    public List<GameObject> po_IconsOfItemsInBagsList;
+    public List<GameObject> po_IconsOfItemsInWagonList;
 
     public int[] po_TotalCarriedItems = new int[16]; //This is the number of each item in the Inventory according to the correct ID's
     public int[] po_TotalWagonItems = new int[16]; //This is the number of each item in the Wagon according to the correct ID's
@@ -40,6 +49,12 @@ public class PartyObj : MonoBehaviour
     public string po_ObjectType = "Party";
 
     public int po_LevelExploring;
+
+    private float _invenDisplaySlotX = 64.0f; //Hardcoded for now
+    private float _invenDisplaySlotY = 64.0f;
+    private float _iconWidthOffset = 32.0f;
+    private float _iconHeightOffset = 32.0f;
+    private int _invenColumns = 4;
 
     public void UpdatePartyToolsAccordingToCharacter(GameObject character, int newpID, int oldpID)
     {

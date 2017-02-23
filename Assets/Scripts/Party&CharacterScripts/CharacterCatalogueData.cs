@@ -46,6 +46,7 @@ public class CharacterCatalogueData : MonoBehaviour
 
             GameObject iconObj = IconObj.MakeIconObject(newCharacter, ccd_CharacterScrollViewPanel, newCharacter.GetComponent<CharacterObj>().co_ObjectType);
             newCharacter.GetComponent<CharacterObj>().co_CharacterIconObject = iconObj;
+            newCharacter.GetComponent<CharacterObj>().coMiniCharacterIconObj = iconObj;
 
             newCharacter.name = newCharacter.GetComponent<CharacterObj>().co_Name;
             newCharacter.GetComponent<CharacterObj>().co_CharacterIconObject.GetComponent<IconObj>().GetComponent<Image>().sprite = CharacterCatalogueConstantValues.CHARACTERICONS[i];

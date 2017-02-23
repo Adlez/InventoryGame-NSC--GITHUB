@@ -88,6 +88,16 @@ public class ItemCatalogueData : MonoBehaviour
         PositionIconsOnScreen();
     }
 
+    public void DisplayPartyBags(GameObject party)
+    {
+        for(int i = 0; i < party.GetComponent<PartyObj>().po_InventoryIndex.Length; ++i)
+        {
+            //GameObject NewItemIcon = 
+            //party.GetComponent<PartyObj>().po_InventoryIndex
+        }
+    }
+
+
     public void PositionIconsOnScreen()
     {
         for(int i = 0; i < icd_ArrayOfItems.Length; ++i)

@@ -8,6 +8,7 @@ public class CharacterObj : MonoBehaviour
     public Sprite co_PortraitSprite;
 
     public GameObject co_CharacterIconObject;
+    public GameObject coMiniCharacterIconObj;
     public GameObject co_LimboScrollPanel;
 
     public string co_Name;
@@ -16,6 +17,7 @@ public class CharacterObj : MonoBehaviour
 
     public int co_CharacterIDNumber;
     public int co_CarryingCapacityModifier;
+    public int co_Energy;
     public int co_EnergyModifier;
 
     public int co_CurPartyIndex = -1;

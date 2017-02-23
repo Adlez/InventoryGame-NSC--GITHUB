@@ -20,6 +20,14 @@ public class GameControllerScript : MonoBehaviour
     public Text _MunnieDisplayText;
     public GameObject gc_PlayerStashPanel;
     public GameObject gc_CatalogueObj;
+    public GameObject gc_MenuNavObj;
+
+    public GameObject gc_ExcavationBtnParty0;
+    public GameObject gc_ExcavationBtnParty1;
+    public GameObject gc_ExcavationBtnParty2;
+    public GameObject gc_ExcavationBtnParty3;
+
+    public GameObject[] gc_ExcavationButtons = new GameObject[4];
 
     //add "public" as necessary
     int[] gc_LevelsAvailable = new int[16]; //0 level is unavailable, 1 it is.
@@ -30,6 +38,7 @@ public class GameControllerScript : MonoBehaviour
 
     public int gc_SelectedLevel;
     public GameObject gc_PartyCatalogue;
+    string textToDisplay = "";
     bool gc_GoodToGoOnJourney; //probably not necessary
     bool StashIconsCreated;
 
@@ -58,68 +67,162 @@ public class GameControllerScript : MonoBehaviour
 
     public void AttemptAnAdventure(int partyID, int levelID)
     {
-        var theLevel = gc_Levels[levelID].GetComponent<LevelObj>();
-        var theParty = gc_Parties[partyID].GetComponent<PartyObj>();
         //function called by a UI button
-        for (int i = 0; i < gc_SelectedLevelToolRequired.Length; ++i)
+        bool partyIsNotEmpty = false;
+        bool partyIsBusy = false;
+        bool hasRequiredTool = true;
+        bool levelIsUnoccupied = true;
+
+        textToDisplay = "";
+        string textNoGo = "Can't Adventure, ";
+        string textMoreTools = "More Tools Required. ";
+        string textLevelInUse = "Level Is In Use. ";
+
+        var theLevel = gc_CatalogueObj.GetComponent<LevelCatalogueData>().lcd_ArrayOfLevels[levelID].GetComponent<LevelObj>();
+        var theParty = gc_Parties[partyID].GetComponent<PartyObj>();
+
+        int LevelTravelCost = (int)theLevel.lv_Distance;
+
+        //reduce Energy
+        for (int j = 0; j < theParty.po_PartyMembers.Length; ++j)
         {
-            if (theLevel.lv_IsActive == false && gc_SelectedLevelToolRequired[i] <= gc_PlayerToolCount[i])
-            {   //if no one else is exploring the level and player has the required tools
-                gc_PlayerToolCount[i] -= gc_SelectedLevelToolRequired[i];
-                //reduce energy?
-                gc_GoodToGoOnJourney = true;
-            }
-            else
-            {   //otherwise the level is occupied or the right tool aren't there
-                if(theLevel.lv_IsActive == false)
+            if(theParty.po_PartyMembers[j] != null)
+            {
+                if (theParty.po_PartyMembers[j].GetComponent<CharacterObj>().co_EnergyModifier >= LevelTravelCost)
                 {
-                    //change text in the dialogue box to: Level in use
+                    theParty.po_PartyMembers[j].GetComponent<CharacterObj>().co_EnergyModifier -= LevelTravelCost;
                 }
                 else
                 {
-                    //change text in the dialogue box to: Need more tools
+                    textToDisplay = theParty.po_PartyMembers[j].GetComponent<CharacterObj>().co_Name + " is too tired to adventure.";
                 }
-                //show dialogue box
-                gc_GoodToGoOnJourney = false;
-                //break out of for loop
             }
+        }
+        for (int p = 0; p < gc_Parties[partyID].GetComponent<PartyObj>().po_PartyMembers.Length; ++p)
+        {
+            if (gc_Parties[partyID].GetComponent<PartyObj>().po_PartyMembers[p] != null)
+            {
+                partyIsNotEmpty = true;
+            }
+        }
+
+        if(theParty.po_PartyIsActive == true)
+        {
+            partyIsBusy = true;
+        }
+
+        if (partyIsNotEmpty && partyIsBusy != true)
+        {
+            for (int i = 0; i < gc_SelectedLevelToolRequired.Length; ++i) //checking if party has tools needed for journey
+            {
+                if (theLevel.lv_IsActive == false && gc_SelectedLevelToolRequired[i] <= gc_PlayerToolCount[i])
+                {
+                    gc_PlayerToolCount[i] -= gc_SelectedLevelToolRequired[i];
+                    //reduce energy?
+                    gc_GoodToGoOnJourney = true;
+                    hasRequiredTool = true;
+                }
+                else
+                {
+                    //otherwise the level is occupied or the right tool aren't there
+                    gc_GoodToGoOnJourney = false;
+                    hasRequiredTool = false;
+                    textToDisplay += textNoGo;
+                    textToDisplay += textMoreTools;
+                    //break out of for loop
+                }
+            }
+            if (theLevel.lv_IsActive == true)//check if level is occupied
+            {
+                gc_GoodToGoOnJourney = false;
+                levelIsUnoccupied = false;
+                textToDisplay += textNoGo;
+                textToDisplay += textLevelInUse;
+            }
+
             if (gc_GoodToGoOnJourney != false)
             {
                 theParty.po_PartyIsActive = true; //set bool so party doesn't go on multi adventures
                 theLevel.GetComponent<LevelObj>().lv_IsActive = true;//set bool so level only has one party at a time
+                theLevel.GetComponent<LevelObj>().lv_PartyObject = theParty.po_PartyIconObject.GetComponent<IconObj>().io_ObjectForThisIcon;
                 theParty.po_TravelTime = theLevel.lv_Distance;
                 theParty.po_LevelExploring = levelID;
+                textToDisplay = "Adventure Ho!";
             }
             else
             {
-                //show dialogue box
-                //change the dialogue text
+                textToDisplay = "Made it through all checks, but something is wrong.";
             }
         }
+        else
+        {
+            if(partyIsBusy)
+            {
+                textToDisplay = "This party is already exploring.";
+            }
+            else
+            {
+                textToDisplay = "You must select a party first.";
+            }
+        }
+        gc_MenuNavObj.GetComponent<MenuNavigaion>().mn_MessageToPlayerText.text = textToDisplay;
+        gc_MenuNavObj.GetComponent<MenuNavigaion>().mn_MessageToPlayerPanel.SetActive(true);
     }
 
     void UpdateExplorers()
     {
-        for(int i = 0; i < gc_Parties.Length; ++i)
+        textToDisplay = "";
+        GameObject[] LevelArray = gc_CatalogueObj.GetComponent<LevelCatalogueData>().lcd_ArrayOfLevels;
+        for (int i = 0; i < gc_Parties.Length; ++i)
         {
-            var party = gc_Parties[i].GetComponent<PartyObj>();
-            if (party.po_PartyIsActive)//is on an adventure
+            var partyObjComp = gc_Parties[i].GetComponent<PartyObj>();
+            GameObject party = gc_Parties[i];
+
+            if (partyObjComp.po_PartyIsActive)//is on an adventure
             {
-                party.po_TimeGoneFor++;
-                //reduce Energy
+                partyObjComp.po_TimeGoneFor++;
+                float timer = partyObjComp.po_TimeGoneFor;
+
+                float microsecondsGoneFor = Mathf.RoundToInt(timer % 60);
+                float secondsGoneFor = Mathf.Floor(timer / 60);
+                float minutesGoneFor = Mathf.Floor(secondsGoneFor / 60);
+                float displaySecondsGoneFor = Mathf.Floor(secondsGoneFor % 60);
+                float hoursGoneFor = minutesGoneFor / 60;
+                gc_MenuNavObj.GetComponent<MenuNavigaion>().mn_PartyAdventureTimerArray[i].text = minutesGoneFor.ToString("00") + ":" + displaySecondsGoneFor.ToString("00") + ":" + microsecondsGoneFor.ToString("00");
+
                 //Check for Wagon
-                //if wagon check if it breaks
-                //if it breaks check for toolkit, fix if there is
-                if (party.po_TimeGoneFor >= party.po_TravelTime && party.po_ExcavationComplete == false)
+                if (partyObjComp.po_HasWagon)
+                {
+                    float d1000 = Mathf.RoundToInt(Random.Range(0.0f, 1000.0f));
+                    if (d1000 >= 999)//if wagon check if it breaks
+                    {
+                        if (!partyObjComp.po_HasRepairKit)//if it breaks check for toolkit
+                        {
+                            //Wagon Breaks
+                            partyObjComp.po_HasWagon = false;
+                            textToDisplay = "Your wagon is broken.";
+                        }
+                        else // fix if there is
+                        {
+                            partyObjComp.po_HasRepairKit = false;
+                            textToDisplay = "Your Wagon has Broken, but also has been repaired.";
+                        }
+                    }
+                }
+
+                if (partyObjComp.po_TimeGoneFor >= partyObjComp.po_TravelTime && partyObjComp.po_ExcavationComplete == false)
                 {
                     //ExcavateLevel(party);
-                    //function is likely stored in LevelObj.cs
+                    LevelArray[partyObjComp.po_LevelExploring].GetComponent<LevelObj>().ExcavateLevel(party);
+                    //Poorly named function determines the items in the loot pile
+                    gc_ExcavationButtons[party.GetComponent<PartyObj>().po_PartyID].SetActive(true);
+                    partyObjComp.po_ExcavationComplete = true;
                 }
-                else if(party.po_TimeGoneFor > party.po_TravelTime *2 && party.po_ExcavationComplete == true)
+                else if(partyObjComp.po_TimeGoneFor > partyObjComp.po_TravelTime *2 && partyObjComp.po_ExcavationComplete == true)
                 {
                     //reduce extra energy according to loot carried
-                    party.po_PartyIsActive = false;
-                    gc_Levels[party.po_LevelExploring].GetComponent<LevelObj>().lv_IsActive = false;
+                    partyObjComp.po_PartyIsActive = false;
+                    LevelArray[partyObjComp.po_LevelExploring].GetComponent<LevelObj>().lv_IsActive = false;
                 }
             }
             //if they're not active they're resting, therefore should be regaining energy
@@ -130,16 +233,24 @@ public class GameControllerScript : MonoBehaviour
 	void Start ()
     {
         ItemCatalogueConstantValues.PopulateItemArrays();
-        //ItemCatalogueData.itemObj.CreateItems();
         LevelCatalogueConstantValues.PopulateItemArrays();
         CharacterCatalogueConstantValues.PopulateItemArrays();
+        gc_CatalogueObj.GetComponent<ItemCatalogueData>().CreateItems();
         gc_PartyCatalogue.GetComponent<PartyCatalogueData>().CreateParties();
         ShopCatalogueConstantValues.PopulateItemArrays();
-        //ShopDataCatalogue.sdc_ShopCataloguePointer.GetComponent<ShopDataCatalogue>().StockTheShelves();
-        //PartyCatalogueData.pcd_Pointer.GetComponent<PartyCatalogueData>().CreateParties();
+
+        gc_ExcavationButtons[0] = gc_ExcavationBtnParty0;
+        gc_ExcavationButtons[1] = gc_ExcavationBtnParty1;
+        gc_ExcavationButtons[2] = gc_ExcavationBtnParty2;
+        gc_ExcavationButtons[3] = gc_ExcavationBtnParty3;
+
+        for(int i = 0; i < gc_ExcavationButtons.Length; ++i)
+        {
+            gc_ExcavationButtons[i].SetActive(false);
+        }
 
         //Check if save data exists
-            //If it does load it
+        //If it does load it
         //Otherwise set starting junk
         gc_Munnies = 2500; //Temp hardcoded value
         gc_GlobalMunnieDisplayText = _MunnieDisplayText;
@@ -170,7 +281,6 @@ public class GameControllerScript : MonoBehaviour
 
     public void CreateStashIcons()
     {
-        //ItemCatalogueData.itemObj.CreateItems();
         for (int i = 0; i < gc_StashOfItems.Length; ++i)
         {
             if (gc_StashOfItems[i] >= -1)
@@ -181,7 +291,6 @@ public class GameControllerScript : MonoBehaviour
                 for (int j = 0; j < numOfItems; ++j)
                 {
                     GameObject stashIconObj = IconObj.MakeIconObject(potentialItem, gc_PlayerStashPanel, "Item");
-                    //stashIconObj.GetComponent<Button>().onClick.AddListener(delegate { BuyShopItem(stashIconObj); });
                     stashIconObj.name = "Shop 1 Item " + i.ToString() + " Icon";
 
                     potentialItem.GetComponent<ItemObj>().io_invIconObject = stashIconObj;
@@ -194,12 +303,7 @@ public class GameControllerScript : MonoBehaviour
                     potentialItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
                     Vector3 iconPos = potentialItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position;
-                    //iconPos.x = _invenDisplaySlotX * (i % _invenColumns) + _iconWidthOffset;
-                    //iconPos.y = (_invenDisplaySlotY * (i / _invenColumns) - _iconHeightOffset) * -1;
-                    //potentialItem.GetComponent<ItemObj>().invIconObject.GetComponent<Transform>().position = new Vector3(iconPos.x, iconPos.y, 100.0f);
                     potentialItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position = new Vector3(0.0f, iconPos.y, 10.0f);
-
-                    //stockItem.GetComponent<ItemObj>().invIconObject.SetActive(false);
                 }
             }
         }
@@ -213,7 +317,8 @@ public class GameControllerScript : MonoBehaviour
     }
 	
 	// Update is called once per frame
-	void Update () {
-
+	void Update ()
+    {
+        UpdateExplorers();
 	}
 }

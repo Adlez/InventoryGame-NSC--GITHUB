@@ -9,6 +9,9 @@ public class PartyCatalogueData : MonoBehaviour
     public GameObject pcd_PartyScrollViewPanel;
     public GameObject pcd_PartyIcon;
 
+    public GameObject[] pcd_PartyWagonDisplayIcons;
+    public GameObject[] pcd_PartyBagsDisplayIcons;
+
     public void CreateParties()
     {
         GameObject _PartyContainer = new GameObject("PartyContainer");

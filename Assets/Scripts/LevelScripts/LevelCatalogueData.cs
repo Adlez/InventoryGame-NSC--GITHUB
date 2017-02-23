@@ -35,9 +35,15 @@ public class LevelCatalogueData : MonoBehaviour
             newLevel.name = newLevel.GetComponent<LevelObj>().lv_Name;
             newLevel.GetComponent<LevelObj>().lv_ToolRequiredIndex = LevelCatalogueConstantValues.LEVELREQUIREDTOOLS[i];
             newLevel.GetComponent<LevelObj>().lv_LootIndex = LevelCatalogueConstantValues.LEVELLOOTINDEX[i];
+            newLevel.GetComponent<LevelObj>().lv_ID = i;
             newLevel.transform.SetParent(_LevelContainer.transform);
             lcd_ArrayOfLevels[i] = newLevel;
         }
+    }
+
+    public void Bilbo(GameObject LevelIconClicked)
+    {
+        lcd_GameController.GetComponent<GameControllerScript>().AttemptAnAdventure(GameControllerScript.gc_SelectedParty, LevelIconClicked.GetComponent<IconObj>().io_ObjectForThisIcon.GetComponent<LevelObj>().lv_ID);
     }
 
 	public void DisplayAllLevels()
@@ -53,6 +59,10 @@ public class LevelCatalogueData : MonoBehaviour
 
             lcd_ArrayOfLevels[i].name = lcd_ArrayOfLevels[i].GetComponent<LevelObj>().lv_Name;
             lcd_ArrayOfLevels[i].GetComponent<LevelObj>().lv_IconObject.GetComponent<IconObj>().GetComponent<Image>().sprite = LevelCatalogueConstantValues.LEVELICONS[i];
+            lcd_ArrayOfLevels[i].GetComponent<LevelObj>().lv_IconObject.AddComponent<Button>();
+            //GameObject Level = lcd_ArrayOfLevels[i];
+            lcd_ArrayOfLevels[i].GetComponent<LevelObj>().lv_IconObject.GetComponent<Button>().onClick.AddListener(delegate { Bilbo(levelIcon); });
+            //Delegate
         }
         PositionIconsOnScreen(lcd_ArrayOfLevels);
     }

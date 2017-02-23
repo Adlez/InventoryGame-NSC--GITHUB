@@ -11,55 +11,55 @@
         tool09="0" tool10="0" tool11="0" tool12="0" tool13="0" tool14="0" tool15="0" tool16="0" />
 		
 	<Level0PossibleLoot loot01= "0" loot02="0" loot03="0" loot04="0" loot05="0" loot06="0" loot07="0" loot08="0" 
-        loot09="0" loot10="1" loot11="1" loot12="1" loot13="1" loot14="0" loot15="0" loot16="0" />
+        loot09="0" loot10="1" loot11="1" loot12="1" loot13="1" loot14="0" loot15="0" loot16="2" />
 		
 	<Level1ToolRequirements tool01= "5" tool02="0" tool03="0" tool04="4" tool05="0" tool06="0" tool07="0" tool08="0" 
         tool09="0" tool10="0" tool11="0" tool12="0" tool13="0" tool14="0" tool15="0" tool16="0" />
 		
 	<Level1PossibleLoot loot01= "0" loot02="0" loot03="0" loot04="0" loot05="0" loot06="0" loot07="0" loot08="0"
-		loot09="0" loot10="0" loot11="0" loot12="0" loot13="0" loot14="0" loot15="0" loot16="0" />
+		loot09="0" loot10="0" loot11="0" loot12="0" loot13="0" loot14="0" loot15="0" loot16="3" />
 		
 	<Level2ToolRequirements tool01= "0" tool02="0" tool03="0" tool04="4" tool05="0" tool06="0" tool07="0" tool08="0"
 		tool09="0" tool10="0" tool11="25" tool12="0" tool13="0" tool14="0" tool15="0" tool16="0" />
 		
 	<Level2PossibleLoot loot01= "0" loot02="0" loot03="0" loot04="4" loot05="0" loot06="0" loot07="0" loot08="0"
-		loot09="0" loot10="0" loot11="0" loot12="0" loot13="0" loot14="0" loot15="0" loot16="0" />
+		loot09="0" loot10="0" loot11="0" loot12="0" loot13="0" loot14="0" loot15="0" loot16="4" />
 		
 	<Level3ToolRequirements tool01= "0" tool02="0" tool03="0" tool04="0" tool05="0" tool06="0" tool07="0" tool08="0"
 		tool09="0" tool10="0" tool11="86" tool12="0" tool13="0" tool14="0" tool15="0" tool16="0" />
 		
 	<Level3PossibleLoot loot01= "0" loot02="0" loot03="0" loot04="0" loot05="0" loot06="0" loot07="0" loot08="0"
-		loot09="0" loot10="0" loot11="0" loot12="0" loot13="0" loot14="0" loot15="0" loot16="0" />
+		loot09="0" loot10="0" loot11="0" loot12="0" loot13="0" loot14="0" loot15="0" loot16="5" />
 		
 	<Level4ToolRequirements tool01= "0" tool02="0" tool03="0" tool04="0" tool05="0" tool06="0" tool07="0" tool08="0"
 		tool09="0" tool10="0" tool11="0" tool12="0" tool13="0" tool14="0" tool15="0" tool16="0" />
 		
 	<Level4PossibleLoot loot01= "0" loot02="0" loot03="0" loot04="0" loot05="0" loot06="0" loot07="0" loot08="0"
-		loot09="0" loot10="0" loot11="0" loot12="0" loot13="0" loot14="0" loot15="0" loot16="0" />
+		loot09="0" loot10="0" loot11="0" loot12="0" loot13="0" loot14="0" loot15="0" loot16="6" />
 		
 	<Level5ToolRequirements tool01= "0" tool02="0" tool03="0" tool04="0" tool05="0" tool06="0" tool07="0" tool08="0"
 		tool09="0" tool10="0" tool11="0" tool12="0" tool13="0" tool14="0" tool15="0" tool16="0" />
 		
 	<Level5PossibleLoot loot01= "0" loot02="0" loot03="0" loot04="0" loot05="0" loot06="0" loot07="0" loot08="0"
-		loot09="0" loot10="0" loot11="0" loot12="0" loot13="0" loot14="0" loot15="0" loot16="0" />
+		loot09="0" loot10="0" loot11="0" loot12="0" loot13="0" loot14="0" loot15="0" loot16="7" />
 		
 	<Level6ToolRequirements tool01= "0" tool02="0" tool03="0" tool04="0" tool05="0" tool06="0" tool07="0" tool08="0"
 		tool09="0" tool10="0" tool11="0" tool12="0" tool13="0" tool14="0" tool15="0" tool16="0" />
 		
 	<Level6PossibleLoot loot01= "0" loot02="0" loot03="0" loot04="0" loot05="0" loot06="0" loot07="0" loot08="0"
-		loot09="0" loot10="0" loot11="0" loot12="0" loot13="0" loot14="0" loot15="0" loot16="0" />
+		loot09="0" loot10="0" loot11="0" loot12="0" loot13="0" loot14="0" loot15="0" loot16="8" />
 		
 	<Level7ToolRequirements tool01= "0" tool02="0" tool03="0" tool04="0" tool05="0" tool06="0" tool07="0" tool08="0"
 		tool09="0" tool10="0" tool11="0" tool12="0" tool13="0" tool14="0" tool15="0" tool16="0" />
 		
 	<Level7PossibleLoot loot01= "0" loot02="0" loot03="0" loot04="0" loot05="0" loot06="0" loot07="0" loot08="0"
-		loot09="0" loot10="0" loot11="0" loot12="0" loot13="0" loot14="0" loot15="0" loot16="0" />
+		loot09="0" loot10="0" loot11="0" loot12="0" loot13="0" loot14="0" loot15="0" loot16="9" />
 		
 	<Level8ToolRequirements tool01= "0" tool02="0" tool03="0" tool04="0" tool05="0" tool06="0" tool07="0" tool08="0"
 		tool09="0" tool10="0" tool11="0" tool12="0" tool13="0" tool14="0" tool15="0" tool16="0" />
 		
 	<Level8PossibleLoot loot01= "0" loot02="0" loot03="0" loot04="0" loot05="0" loot06="0" loot07="0" loot08="0"
-		loot09="0" loot10="0" loot11="0" loot12="0" loot13="0" loot14="0" loot15="0" loot16="0" />
+		loot09="0" loot10="0" loot11="0" loot12="0" loot13="0" loot14="0" loot15="0" loot16="10" />
 		
 	<LevelDistances level01="10" level02="35" level03="20" level04="45" 
 		level05="40" level06="60" level07="80" level08="120"  />
