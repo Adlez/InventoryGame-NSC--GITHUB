@@ -178,9 +178,9 @@ public class ExcavationFunctions : MonoBehaviour
         }
 
         thisItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().SetParent(MenuNavigaion.menuNavCataloguePointer.mn_ExcavatedLootPanel.transform);
-        
+
         //REMOVE BUTTON FUNCTION
-        thisItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.RemoveListener(delegate { AddToLootPile(thisItem); });
+        thisItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.RemoveAllListeners();//.RemoveListener(delegate { AddToLootPile(thisItem); });
         //ADD BUTTON FUNCTION
         thisItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate { RemoveFromLootPile(thisItem); });
 
@@ -202,7 +202,7 @@ public class ExcavationFunctions : MonoBehaviour
         thisItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().SetParent(MenuNavigaion.menuNavCataloguePointer.mn_PartyInvenAndWagoDisplay.transform);
 
         //REMOVE BUTTON FUNCTION
-        thisItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.RemoveListener(delegate { RemoveFromLootPile(thisItem); });
+        thisItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.RemoveAllListeners();//.RemoveListener(delegate { RemoveFromLootPile(thisItem); });
         //ADD BUTTON FUNCTION
         thisItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate { AddToLootPile(thisItem); });
 
