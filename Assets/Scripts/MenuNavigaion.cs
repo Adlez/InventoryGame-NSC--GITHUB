@@ -121,7 +121,8 @@ public class MenuNavigaion : MonoBehaviour
 
     public void ShowNewPanel(GameObject newPanel)
     {
-        newPanel.SetActive(!newPanel.activeSelf);
+        //newPanel.SetActive(!newPanel.activeSelf);
+        newPanel.SetActive(true);
         GameControllerScript.gc_CurActiveCanvasPanel = newPanel;
     }
 

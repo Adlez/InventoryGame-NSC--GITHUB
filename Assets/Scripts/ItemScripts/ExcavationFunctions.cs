@@ -33,6 +33,8 @@ public class ExcavationFunctions : MonoBehaviour
     //Create Icon Object to clone later and display on screen with functions
     private GameObject _ExcavationIcon;
     private List<GameObject> listOfIconsForLootPile = new List<GameObject>();
+    private List<GameObject> listOfIconsForBags = new List<GameObject>();
+    private List<GameObject> listOfIconsForWagon = new List<GameObject>();
 
     public void BagsOrWagoView(GameObject thisButton) //a.
     {
@@ -50,6 +52,8 @@ public class ExcavationFunctions : MonoBehaviour
     public void ReadyExcavationPileBagsAndWagon(int partyIndex) //UI Button Calls this function (b.)
     {
         listOfIconsForLootPile.Clear();
+        listOfIconsForBags.Clear();
+        listOfIconsForWagon.Clear();
         
         MenuNavigaion.menuNavCataloguePointer.mn_PartyInvenAndWagoDisplay.SetActive(true); //Display the panel of loot
         GameObject party = GameControllerScript.gc_Parties[partyIndex];
@@ -71,7 +75,7 @@ public class ExcavationFunctions : MonoBehaviour
             //REMOVE BUTTON FUNCTION
             //_ExcavationIcon.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.RemoveListener(delegate { AddToLootPile(_ExcavationIcon); });
             //ADD BUTTON FUNCTION
-            excavatedItemIcon.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate { RemoveFromLootPile(excavatedItemIcon); }); //Add Function to add to bags and wagon
+            excavatedItemIcon.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate { RemoveFromLootPile(excavatedItemIcon, party); }); //Add Function to add to bags and wagon
             listOfIconsForLootPile.Add(excavatedItemIcon); //Add Item to Loot Pile
         }
         UpdateWagoBagsPileDisplay(partyIndex);
@@ -165,7 +169,7 @@ public class ExcavationFunctions : MonoBehaviour
         }
     }
 
-    public void AddToLootPile(GameObject thisItem)
+    public void AddToLootPile(GameObject thisItem, GameObject thisParty)
     {
         //Remove from Bags/Wago
         if (ef_btnText.text == "Wagon") //We're lookin' at bags (d.)
@@ -182,32 +186,68 @@ public class ExcavationFunctions : MonoBehaviour
         //REMOVE BUTTON FUNCTION
         thisItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.RemoveAllListeners();//.RemoveListener(delegate { AddToLootPile(thisItem); });
         //ADD BUTTON FUNCTION
-        thisItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate { RemoveFromLootPile(thisItem); });
+        thisItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate { RemoveFromLootPile(thisItem, thisParty); });
 
         listOfItemsInPile.Add(thisItem);
         UpdateWagoBagsPileDisplay(-1);
     }
 
-    public void RemoveFromLootPile(GameObject thisItem)
+    public void RemoveFromLootPile(GameObject thisItem, GameObject thisParty)
     {
+        bool bagIsFull = false;
+        bool wagonIsFull = false;
+        bool bagsAreOpen = true;
+        bool itemIsBeingAdded = false;
+        MenuNavigaion.menuNavCataloguePointer.mn_MessageToPlayerText.text = "";
+
+        if (ef_btnText.text == "Wagon") //We're lookin' at bags
+        { bagsAreOpen = true; }
+        else //Looking at the wagon
+        { bagsAreOpen = false; }
+
+        if (listOfItemsInBags.Count >= thisParty.GetComponent<PartyObj>().po_MaxInventorySize)//Make sure the party has room in their bags
+        {  bagIsFull = true;  }
+
+        if (listOfItemsInBags.Count >= thisParty.GetComponent<PartyObj>().po_MaxWagonInventorySize)//Make sure the party has room in their bags
+        {  wagonIsFull = true;  }
+
         //Add to Bag/Wago
-        if(ef_btnText.text == "Wagon") //We're lookin' at bags
+        if(!bagIsFull || !wagonIsFull) //if just one of them isn't full
         {
-            listOfItemsInBags.Add(thisItem);
+            if (bagsAreOpen && !bagIsFull)
+            {
+                listOfItemsInBags.Add(thisItem);
+                thisParty.GetComponent<PartyObj>().po_CurInventorySize++;
+                itemIsBeingAdded = true;
+            }
+            else if(!bagsAreOpen && !wagonIsFull)
+            {
+                listOfItemsInWagon.Add(thisItem);
+                thisParty.GetComponent<PartyObj>().po_CurWagonInventorySize++;
+                itemIsBeingAdded = true;
+            }
         }
-        else //Else we're lookin' at the wagon
+        if(itemIsBeingAdded)
         {
-            listOfItemsInWagon.Add(thisItem);
+
+            //REMOVE BUTTON FUNCTION
+            thisItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.RemoveAllListeners();
+            //ADD BUTTON FUNCTION
+            thisItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate { AddToLootPile(thisItem, thisParty); });
+
+            listOfItemsInPile.Remove(thisItem);
+            UpdateWagoBagsPileDisplay(-1);
         }
-        thisItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().SetParent(MenuNavigaion.menuNavCataloguePointer.mn_PartyInvenAndWagoDisplay.transform);
-
-        //REMOVE BUTTON FUNCTION
-        thisItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.RemoveAllListeners();//.RemoveListener(delegate { RemoveFromLootPile(thisItem); });
-        //ADD BUTTON FUNCTION
-        thisItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate { AddToLootPile(thisItem); });
-
-        listOfItemsInPile.Remove(thisItem);
-        UpdateWagoBagsPileDisplay(-1);
+        if(bagIsFull)
+        {
+            MenuNavigaion.menuNavCataloguePointer.mn_MessageToPlayerPanel.SetActive(true);
+            MenuNavigaion.menuNavCataloguePointer.mn_MessageToPlayerText.text += "The bags are full. ";
+        }
+        if (wagonIsFull)
+        {
+            MenuNavigaion.menuNavCataloguePointer.mn_MessageToPlayerPanel.SetActive(true);
+            MenuNavigaion.menuNavCataloguePointer.mn_MessageToPlayerText.text += "The wagon is fully loaded. ";
+        }
     }
 
     public void PopulateBagWagonAndPileLists(GameObject party)

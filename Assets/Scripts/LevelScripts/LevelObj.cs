@@ -21,20 +21,28 @@ public class LevelObj : MonoBehaviour
 
     private GameObject _potentialLootItem;
 
-    public void ExcavateLevel(GameObject theParty) 
+    public void ExcavateLevel(GameObject theParty) //poor name, should be: FillLevelLootList
+    {
+        while (lv_PotentialLootList.Count < 4) // lv_PotentialLootList.Count <= 4)//if there's less than 5 items, keep going
+        { 
+            FillLevelLootList();
+        }
+    }
+
+    public void FillLevelLootList()
     {
         //decide which loot can be gotten
-        for(int i = 0; i < lv_LootIndex.Length; ++i)
+        for (int i = 0; i < lv_LootIndex.Length; ++i)
         {
-            if(lv_LootIndex[i] > 0)
+            if (lv_LootIndex[i] > 0)
             {
                 int numFound = 0;
                 //var referenceToItemCatalogue = ItemCatalogueData.itemObj;
                 GameObject Item = lv_GameController.GetComponent<GameControllerScript>().gc_CatalogueObj.GetComponent<ItemCatalogueData>().icd_ArrayOfItems[i];
                 int numCanFindAtOnce = Item.GetComponent<ItemObj>().maxFindAtOnce;
-                    //ItemCatalogueData.itemObj.icd_ArrayOfItems[i].GetComponent<ItemObj>().maxFindAtOnce;
+                //ItemCatalogueData.itemObj.icd_ArrayOfItems[i].GetComponent<ItemObj>().maxFindAtOnce;
 
-                if (numCanFindAtOnce > numFound)
+                if (numCanFindAtOnce >= numFound)
                 {
                     RollForItem(i);
                     numFound++;
@@ -47,7 +55,7 @@ public class LevelObj : MonoBehaviour
     {
         int odds = (int)Random.Range(0, 100);
 
-        if (odds >= lv_GameController.GetComponent<GameControllerScript>().gc_CatalogueObj.GetComponent<ItemCatalogueData>().icd_ArrayOfItems[index].GetComponent<ItemObj>().oddsOfFinding)
+        if (odds <= lv_GameController.GetComponent<GameControllerScript>().gc_CatalogueObj.GetComponent<ItemCatalogueData>().icd_ArrayOfItems[index].GetComponent<ItemObj>().oddsOfFinding)
         {
             _potentialLootItem = new GameObject(); //Create new object
             _potentialLootItem = lv_GameController.GetComponent<GameControllerScript>().gc_CatalogueObj.GetComponent<ItemCatalogueData>().icd_ArrayOfItems[index]; //Assign the new object the attributes of the correct item

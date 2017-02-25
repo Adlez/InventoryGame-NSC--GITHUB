@@ -81,7 +81,7 @@ public class GameControllerScript : MonoBehaviour
         var theLevel = gc_CatalogueObj.GetComponent<LevelCatalogueData>().lcd_ArrayOfLevels[levelID].GetComponent<LevelObj>();
         var theParty = gc_Parties[partyID].GetComponent<PartyObj>();
 
-        int LevelTravelCost = (int)theLevel.lv_Distance;
+        int LevelTravelCost = (int)Mathf.Floor(theLevel.lv_Distance);
 
         //reduce Energy
         for (int j = 0; j < theParty.po_PartyMembers.Length; ++j)
@@ -210,7 +210,10 @@ public class GameControllerScript : MonoBehaviour
                     }
                 }
 
-                if (partyObjComp.po_TimeGoneFor >= partyObjComp.po_TravelTime && partyObjComp.po_ExcavationComplete == false)
+                //float temp = partyObjComp.po_TravelTime * 2;
+                //Debug.Log("The has been gone for: " + secondsGoneFor + " && the party will reach the area in: " + partyObjComp.po_TravelTime.ToString());
+
+                if (secondsGoneFor >= partyObjComp.po_TravelTime && partyObjComp.po_ExcavationComplete == false) //Area reached
                 {
                     //ExcavateLevel(party);
                     LevelArray[partyObjComp.po_LevelExploring].GetComponent<LevelObj>().ExcavateLevel(party);
@@ -218,11 +221,11 @@ public class GameControllerScript : MonoBehaviour
                     gc_ExcavationButtons[party.GetComponent<PartyObj>().po_PartyID].SetActive(true);
                     partyObjComp.po_ExcavationComplete = true;
                 }
-                else if(partyObjComp.po_TimeGoneFor > partyObjComp.po_TravelTime *2 && partyObjComp.po_ExcavationComplete == true)
+                else if(secondsGoneFor >= partyObjComp.po_TravelTime *2 && partyObjComp.po_ExcavationComplete == true)
                 {
                     //reduce extra energy according to loot carried
-                    partyObjComp.po_PartyIsActive = false;
-                    LevelArray[partyObjComp.po_LevelExploring].GetComponent<LevelObj>().lv_IsActive = false;
+                    //partyObjComp.po_PartyIsActive = false;
+                    //LevelArray[partyObjComp.po_LevelExploring].GetComponent<LevelObj>().lv_IsActive = false;
                 }
             }
             //if they're not active they're resting, therefore should be regaining energy

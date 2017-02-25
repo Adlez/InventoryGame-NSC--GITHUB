@@ -9,6 +9,7 @@ public class ItemCatalogueData : MonoBehaviour
     public static ItemCatalogueData itemObj;
     public GameObject[] icd_ArrayOfItems = new GameObject[16];
     public GameObject icd_InvenScrollViewPanel;
+    public GameObject icd_TempItemDisplay;
     public GameObject icd_TestShopDisplayPanel;
 
     private float _invenDisplaySlotX = 64.0f; //Hardcoded for now
@@ -43,7 +44,7 @@ public class ItemCatalogueData : MonoBehaviour
                 newItem.GetComponent<ItemObj>().maxFindAtOnce = ItemCatalogueConstantValues.MAXAMOUNTTOFIND[i];
                 newItem.GetComponent<ItemObj>().typeID = ItemCatalogueConstantValues.ITEMTYPEID[i];
 
-                GameObject iconObj = IconObj.MakeIconObject(newItem, icd_InvenScrollViewPanel, newItem.GetComponent<ItemObj>().io_ObjectType);
+                GameObject iconObj = IconObj.MakeIconObject(newItem, icd_TempItemDisplay, newItem.GetComponent<ItemObj>().io_ObjectType);
                 newItem.GetComponent<ItemObj>().io_invIconObject = iconObj;
 
                 newItem.name = newItem.GetComponent<ItemObj>().itemName;
@@ -82,7 +83,7 @@ public class ItemCatalogueData : MonoBehaviour
         for (int i = 0; i < icd_ArrayOfItems.Length; ++i)
         {
             icd_ArrayOfItems[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
-            icd_ArrayOfItems[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().SetParent(icd_InvenScrollViewPanel.transform);
+            icd_ArrayOfItems[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().SetParent(icd_TempItemDisplay.transform);
             icd_ArrayOfItems[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().localScale = new Vector3(64.0f, 64.0f, 1.0f);
         }
         PositionIconsOnScreen();
