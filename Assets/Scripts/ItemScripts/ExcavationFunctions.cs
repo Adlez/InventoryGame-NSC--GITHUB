@@ -66,16 +66,44 @@ public class ExcavationFunctions : MonoBehaviour
         }
         for(int i = 0; i < listOfItemsInPile.Count; ++i)
         {
-            GameObject excavatedItemIcon = new GameObject("LootIcon");
-            //_ExcavationIcon = new GameObject("ExcaLottIcon"); //Create now Icon Object
-            excavatedItemIcon = listOfItemsInPile[i]; //Give attributes of Object in the Loot Pile
-            excavatedItemIcon.GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().SetParent(MenuNavigaion.menuNavCataloguePointer.mn_ExcavatedLootPanel.transform); //Set the parent
-            excavatedItemIcon.SetActive(true); //Show the ITem Object
-            excavatedItemIcon.GetComponent<ItemObj>().io_invIconObject.SetActive(true); //Show the Icon
+            GameObject excavatedItem = new GameObject("LootItem");
+            GameObject excavatedItemIcon = new GameObject("LootItemIcon");
+
+            excavatedItem.AddComponent<ItemObj>();
+            excavatedItemIcon.AddComponent<IconObj>();
+            excavatedItemIcon.AddComponent<Button>();
+
+            var excavatedItemScript = excavatedItem.GetComponent<ItemObj>();
+            var itemInPileScript = listOfItemsInPile[i].GetComponent<ItemObj>();
+            var iconObjScript = excavatedItemIcon.GetComponent<IconObj>();
+
+            excavatedItemScript.cashValue = itemInPileScript.cashValue;
+            excavatedItemScript.description = itemInPileScript.description;
+            excavatedItemScript.fullImage = itemInPileScript.fullImage;
+            excavatedItemScript.idInArrays = itemInPileScript.idInArrays;
+            excavatedItemScript.invIcon = itemInPileScript.invIcon;
+            excavatedItemScript.io_invIconObject = excavatedItemIcon;
+            excavatedItemScript.io_ObjectType = itemInPileScript.io_ObjectType;
+            excavatedItemScript.isArtefact = itemInPileScript.isArtefact;
+            excavatedItemScript.itemName = "LootItem " + itemInPileScript.itemName;
+            excavatedItemScript.maxFindAtOnce = itemInPileScript.maxFindAtOnce;
+            excavatedItemScript.oddsOfFinding = itemInPileScript.oddsOfFinding;
+            excavatedItemScript.typeID = itemInPileScript.typeID;
+
+            iconObjScript.io_ObjectForThisIcon = excavatedItem;
+            excavatedItemIcon.AddComponent<Image>();
+            excavatedItemIcon.name = "Loot Icon " + itemInPileScript.itemName;
+            excavatedItemIcon.GetComponent<Image>().sprite = ItemCatalogueConstantValues.ICONOFITEM[excavatedItemScript.idInArrays];
+
+            excavatedItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().SetParent(MenuNavigaion.menuNavCataloguePointer.mn_ExcavatedLootPanel.transform); //Set the parent
+            excavatedItem.SetActive(true); //Show the Item Object
+            excavatedItem.GetComponent<ItemObj>().io_invIconObject.SetActive(true); //Show the Icon
+            excavatedItemIcon = excavatedItem.GetComponent<ItemObj>().io_invIconObject;
+            excavatedItemIcon.name += " " + i.ToString() + " ItemInPile ";
             //REMOVE BUTTON FUNCTION
             //_ExcavationIcon.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.RemoveListener(delegate { AddToLootPile(_ExcavationIcon); });
             //ADD BUTTON FUNCTION
-            excavatedItemIcon.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate { RemoveFromLootPile(excavatedItemIcon, party); }); //Add Function to add to bags and wagon
+            excavatedItemIcon.GetComponent<Button>().onClick.AddListener(delegate { RemoveFromLootPile(excavatedItem, party); }); //Add Function to add to bags and wagon
             listOfIconsForLootPile.Add(excavatedItemIcon); //Add Item to Loot Pile
         }
         UpdateWagoBagsPileDisplay(partyIndex);
@@ -106,15 +134,15 @@ public class ExcavationFunctions : MonoBehaviour
         for (int p = 0; p < listOfIconsForLootPile.Count; ++p)//c.
         {
             //Assign the Parent of the Icon to the Loot Panel and make it visible
-            listOfIconsForLootPile[p].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().SetParent(MenuNavigaion.menuNavCataloguePointer.mn_ExcavatedLootPanel.transform);
+            listOfIconsForLootPile[p].GetComponent<Transform>().SetParent(MenuNavigaion.menuNavCataloguePointer.mn_ExcavatedLootPanel.transform);
             listOfIconsForLootPile[p].SetActive(true);
 
-            listOfIconsForLootPile[p].GetComponent<ItemObj>().io_invIconObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            Vector3 curIconPos = listOfIconsForLootPile[p].GetComponent<ItemObj>().io_invIconObject.transform.localPosition;
-            listOfIconsForLootPile[p].GetComponent<ItemObj>().io_invIconObject.GetComponent<RectTransform>().transform.localPosition = new Vector3(curIconPos.x, curIconPos.y, 1.0f);
-            listOfIconsForLootPile[p].GetComponent<ItemObj>().io_invIconObject.transform.localPosition = new Vector3(curIconPos.x, curIconPos.y, 1.0f);
+            listOfIconsForLootPile[p].transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            Vector3 curIconPos = listOfIconsForLootPile[p].transform.localPosition;
+            //listOfIconsForLootPile[p].GetComponent<RectTransform>().transform.localPosition = new Vector3(curIconPos.x, curIconPos.y, 1.0f);
+            listOfIconsForLootPile[p].transform.localPosition = new Vector3(curIconPos.x, curIconPos.y, 1.0f);
 
-            listOfIconsForLootPile[p].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
+            listOfIconsForLootPile[p].SetActive(true);
         }
         if (ef_btnText.text == "Wagon") //We're lookin' at bags (d.)
         {
@@ -205,10 +233,10 @@ public class ExcavationFunctions : MonoBehaviour
         else //Looking at the wagon
         { bagsAreOpen = false; }
 
-        if (listOfItemsInBags.Count >= thisParty.GetComponent<PartyObj>().po_MaxInventorySize)//Make sure the party has room in their bags
+        if (listOfItemsInBags.Count >= thisParty.GetComponent<PartyObj>().po_MaxInventorySize && bagsAreOpen == true)//Make sure the party has room in their bags
         {  bagIsFull = true;  }
 
-        if (listOfItemsInBags.Count >= thisParty.GetComponent<PartyObj>().po_MaxWagonInventorySize)//Make sure the party has room in their bags
+        if (listOfItemsInBags.Count >= thisParty.GetComponent<PartyObj>().po_MaxWagonInventorySize && bagsAreOpen == false)//Make sure the party has room in their bags
         {  wagonIsFull = true;  }
 
         //Add to Bag/Wago
@@ -229,6 +257,7 @@ public class ExcavationFunctions : MonoBehaviour
         }
         if(itemIsBeingAdded)
         {
+            thisItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().SetParent(MenuNavigaion.menuNavCataloguePointer.mn_PartyInvenAndWagoDisplay.transform);
 
             //REMOVE BUTTON FUNCTION
             thisItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.RemoveAllListeners();

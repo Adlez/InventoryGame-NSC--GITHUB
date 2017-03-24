@@ -21,6 +21,7 @@ public class GameControllerScript : MonoBehaviour
     public GameObject gc_PlayerStashPanel;
     public GameObject gc_CatalogueObj;
     public GameObject gc_MenuNavObj;
+    public GameObject gc_LevelIconClicked;
 
     public GameObject gc_ExcavationBtnParty0;
     public GameObject gc_ExcavationBtnParty1;
@@ -52,7 +53,17 @@ public class GameControllerScript : MonoBehaviour
 
     public void SetSelectedParty(int id)
     {
-        gc_SelectedParty = id;
+        if (gc_SelectedParty + id != -1 && gc_SelectedParty + id != 4)
+        {
+            gc_SelectedParty += id;
+        }
+        else
+        {
+            textToDisplay = "Nothing more that way.";
+            gc_MenuNavObj.GetComponent<MenuNavigaion>().mn_MessageToPlayerText.text = textToDisplay;
+            gc_MenuNavObj.GetComponent<MenuNavigaion>().mn_MessageToPlayerPanel.SetActive(true);
+        }
+        
     }
 
     void CheckLoot()

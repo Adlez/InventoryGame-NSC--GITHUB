@@ -21,6 +21,7 @@ public class MenuNavigaion : MonoBehaviour
     public Text mn_PartyAdventureTimer4;
 
     public GameObject mn_DetailsPanelImage;
+    public GameObject mn_LevelConfirmPanel;
     public GameObject mn_MessageToPlayerPanel;
     public GameObject mn_PartiesOnAdventurePanel;
     public GameObject mn_PartyRosterPanel;

@@ -24,7 +24,7 @@ public class ItemCatalogueData : MonoBehaviour
         if (!icd_ItemsCreated)
         {
             GameObject _InventoryContainer = new GameObject("InventoryContainer");
-            GameObject _ItemIconContainer = new GameObject("InvenIconContainer");
+            //GameObject _ItemIconContainer = new GameObject("InvenIconContainer");
 
             for (int i = 0; i < icd_ArrayOfItems.Length; ++i)
             {

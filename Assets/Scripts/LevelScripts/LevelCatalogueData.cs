@@ -43,10 +43,20 @@ public class LevelCatalogueData : MonoBehaviour
 
     public void Bilbo(GameObject LevelIconClicked)
     {
+        lcd_GameController.GetComponent<GameControllerScript>().gc_LevelIconClicked = LevelIconClicked;
+        GameObject panel = MenuNavigaion.menuNavCataloguePointer.GetComponent<MenuNavigaion>().mn_LevelConfirmPanel;
+        MenuNavigaion.menuNavCataloguePointer.GetComponent<MenuNavigaion>().ShowNewPanel(panel);
+        //lcd_GameController.GetComponent<GameControllerScript>().ca
+    }
+
+    public void AttemptAdventureApproval()
+    {
+        GameObject LevelIconClicked = lcd_GameController.GetComponent<GameControllerScript>().gc_LevelIconClicked;
         lcd_GameController.GetComponent<GameControllerScript>().AttemptAnAdventure(GameControllerScript.gc_SelectedParty, LevelIconClicked.GetComponent<IconObj>().io_ObjectForThisIcon.GetComponent<LevelObj>().lv_ID);
     }
 
-	public void DisplayAllLevels()
+
+    public void DisplayAllLevels()
     {
         if(lcd_ArrayOfLevels[0] == null)
         {
