@@ -20,7 +20,7 @@ public class IconObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         Vector3 iconPos = objectIcon.GetComponent<Transform>().position;
         iconPos.x = 64.0f + i * 32.0f;
         iconPos.y = 0.0f;
-        objectIcon.GetComponent<Transform>().position = new Vector3(iconPos.x, iconPos.y, 100.0f);
+        objectIcon.GetComponent<Transform>().position = new Vector3(iconPos.x, iconPos.y, 1.0f);
     }
 
     public void ResetIconSize(GameObject iconObject)
@@ -98,7 +98,7 @@ public class IconObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             icon.transform.localScale = item.transform.localScale;
             item.GetComponent<PartyObj>().po_PartyIconObject = icon;
             icon.transform.SetParent(iconContainer.transform);
-            icon.transform.localPosition = new Vector3(icon.transform.localPosition.x, icon.transform.localPosition.y, 0.0f);
+            icon.transform.localPosition = new Vector3(icon.transform.localPosition.x, icon.transform.localPosition.y, 1.0f);
         }
         else if (isLevel)//this is a Level's icon
         {

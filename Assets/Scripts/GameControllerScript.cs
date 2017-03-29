@@ -36,6 +36,7 @@ public class GameControllerScript : MonoBehaviour
     public int[] gc_SelectedLevelToolRequired = new int[16]; //corresponds to gc_PlayerToolCount
 
     public int[] inspectorViewOfPlayerStash = new int[16];
+    public int inspectorViewOfSelectedParty;
 
     public int gc_SelectedLevel;
     public GameObject gc_PartyCatalogue;
@@ -56,6 +57,15 @@ public class GameControllerScript : MonoBehaviour
         if (gc_SelectedParty + id != -1 && gc_SelectedParty + id != 4)
         {
             gc_SelectedParty += id;
+            for (int j = 0; j < MenuNavigaion.menuNavCataloguePointer.mn_SelectedPartiesTextFields.Count; ++j)
+            {
+                //int partyIndexDisplay = gc_SelectedLevel + 1;
+                int tempInt = gc_SelectedParty;
+                tempInt += 1;
+                string tempString = tempInt.ToString();
+
+                MenuNavigaion.menuNavCataloguePointer.mn_SelectedPartiesTextFields[j].text = tempString;
+            }
         }
         else
         {
@@ -78,6 +88,15 @@ public class GameControllerScript : MonoBehaviour
 
     public void AttemptAnAdventure(int partyID, int levelID)
     {
+        if(partyID <= 0 || partyID >= 3)
+        {
+            textToDisplay = "Something went screwy, party is being set to 1.";
+            gc_MenuNavObj.GetComponent<MenuNavigaion>().mn_MessageToPlayerText.text = textToDisplay;
+            gc_MenuNavObj.GetComponent<MenuNavigaion>().mn_MessageToPlayerPanel.SetActive(true);
+
+            partyID = 0;
+        }
+
         //function called by a UI button
         bool partyIsNotEmpty = false;
         bool partyIsBusy = false;
@@ -280,16 +299,26 @@ public class GameControllerScript : MonoBehaviour
         }
         for (int i = 0; i < gc_PlayerStash.Count; ++i)
         {
-            Vector3 iconPos = gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position;
-            iconPos.x = _invenDisplaySlotX * (i % _invenColumns) + _iconWidthOffset;
-            iconPos.y = (_invenDisplaySlotY * (i / _invenColumns) - _iconHeightOffset) * -1;
-            iconPos.x = gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position.x;
-            iconPos.y = gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position.y;
+            //Vector3 iconPos = gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position;
+            //iconPos.x = _invenDisplaySlotX * (i % _invenColumns) + _iconWidthOffset;
+            //iconPos.y = (_invenDisplaySlotY * (i / _invenColumns) - _iconHeightOffset) * -1;
+            //iconPos.x = gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position.x;
+            //iconPos.y = gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position.y;
 
             gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
             gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().SetParent(gc_PlayerStashPanel.transform);
-            gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position = new Vector3(iconPos.x, iconPos.y, 100.0f);
+            //gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position = new Vector3(iconPos.x, iconPos.y, 1.0f);
+            //gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<RectTransform>().position = new Vector3(iconPos.x, iconPos.y, 1.0f);
             gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            float tempX = gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.transform.localPosition.x;
+            float tempY = gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.transform.localPosition.y;
+
+            gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.transform.localPosition = new Vector3(tempX, tempY, 1.0f);
+            gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.transform.position = new Vector3(tempX, tempY, 1.0f);
+            gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<RectTransform>().position = new Vector3(tempX, tempY, 1.0f);
+            gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<RectTransform>().localPosition = new Vector3(tempX, tempY, 1.0f);
+
+
         }
     }
 
@@ -316,8 +345,9 @@ public class GameControllerScript : MonoBehaviour
 
                     potentialItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
-                    Vector3 iconPos = potentialItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position;
-                    potentialItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position = new Vector3(0.0f, iconPos.y, 10.0f);
+                    //Vector3 iconPos = potentialItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position;
+                    //potentialItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position = new Vector3(0.0f, iconPos.y, 1.0f);
+                    //potentialItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<RectTransform>().position = new Vector3(0.0f, iconPos.y, 1.0f);
                 }
             }
         }
@@ -334,5 +364,7 @@ public class GameControllerScript : MonoBehaviour
 	void Update ()
     {
         UpdateExplorers();
-	}
+        inspectorViewOfSelectedParty = gc_SelectedParty;
+
+    }
 }

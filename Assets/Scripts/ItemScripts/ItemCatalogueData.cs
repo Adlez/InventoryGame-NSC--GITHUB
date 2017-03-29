@@ -106,7 +106,7 @@ public class ItemCatalogueData : MonoBehaviour
             Vector3 iconPos = icd_ArrayOfItems[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position;
             iconPos.x = _invenDisplaySlotX * (i % _invenColumns) + _iconWidthOffset;
             iconPos.y = (_invenDisplaySlotY * (i / _invenColumns) - _iconHeightOffset) * -1;
-            icd_ArrayOfItems[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position = new Vector3(iconPos.x, iconPos.y, 100.0f);
+            icd_ArrayOfItems[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position = new Vector3(iconPos.x, iconPos.y, 1.0f);
         }
     }
 }

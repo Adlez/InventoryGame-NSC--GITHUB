@@ -13,6 +13,7 @@ public class MenuNavigaion : MonoBehaviour
     public Text mn_DetailsPanelObjectDescriptionText;
     public Text mn_SelectedPartyText;
     public Text mn_MessageToPlayerText;
+    public List<Text> mn_SelectedPartiesTextFields;
 
     public Text[] mn_PartyAdventureTimerArray = new Text[4];
     public Text mn_PartyAdventureTimer1;
@@ -76,6 +77,15 @@ public class MenuNavigaion : MonoBehaviour
                     }
                 }
                 mn_SelectedPartyText.text = GameControllerScript.gc_SelectedParty.ToString();
+                for(int j = 0; j < mn_SelectedPartiesTextFields.Count; ++j)
+                {
+                    //int partyIndexDisplay = GameControllerScript.gc_SelectedParty + 1;
+                    int tempInt = GameControllerScript.gc_SelectedParty;
+                    tempInt += 1;
+                    string tempString = tempInt.ToString();
+
+                    mn_SelectedPartiesTextFields[j].text = tempString;  
+                }
             }
             else
             {
