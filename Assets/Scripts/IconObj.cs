@@ -87,6 +87,7 @@ public class IconObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             //icon.GetComponent<Button>().onClick.AddListener(delegate { icon.GetComponent<ItemObj>().SellItem(icon); });
             Sprite tempSprite = ItemCatalogueConstantValues.ICONOFITEM[thisItemID];
             icon.transform.localScale = item.transform.localScale;
+            icon.transform.localPosition = new Vector3(icon.transform.localPosition.x, icon.transform.localPosition.y, 1.0f);
         }
         else if (isParty)//item is a party
         {

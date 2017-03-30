@@ -12,6 +12,7 @@ public class GameControllerScript : MonoBehaviour
     public static GameObject gc_CurActiveCanvasPanel;
     public static GameObject[] gc_Parties = new GameObject[4];
     public static GameObject[] gc_PartyPanels = new GameObject[4];
+    public static GameObject[] gc_PartyInventoryPanels = new GameObject[4];
     public static List<GameObject> PartyLimbo = new List<GameObject>(); //list of characters not assigned to a party
 
     public static List<GameObject> gc_PlayerStash = new List<GameObject>();
@@ -19,6 +20,8 @@ public class GameControllerScript : MonoBehaviour
     public static Text gc_GlobalMunnieDisplayText;
     public Text _MunnieDisplayText;
     public GameObject gc_PlayerStashPanel;
+
+    public GameObject gc_PartyCatalogue;
     public GameObject gc_CatalogueObj;
     public GameObject gc_MenuNavObj;
     public GameObject gc_LevelIconClicked;
@@ -39,7 +42,6 @@ public class GameControllerScript : MonoBehaviour
     public int inspectorViewOfSelectedParty;
 
     public int gc_SelectedLevel;
-    public GameObject gc_PartyCatalogue;
     string textToDisplay = "";
     bool gc_GoodToGoOnJourney; //probably not necessary
     bool StashIconsCreated;
@@ -51,6 +53,11 @@ public class GameControllerScript : MonoBehaviour
     private int _invenColumns = 4;
 
     GameObject[] gc_Levels = new GameObject[8]; //Corresponds to gc_LevelsAvailable
+
+    public static int GetSelectedPartyIndex()
+    {
+        return gc_SelectedParty;
+    }
 
     public void SetSelectedParty(int id)
     {
@@ -73,8 +80,9 @@ public class GameControllerScript : MonoBehaviour
             gc_MenuNavObj.GetComponent<MenuNavigaion>().mn_MessageToPlayerText.text = textToDisplay;
             gc_MenuNavObj.GetComponent<MenuNavigaion>().mn_MessageToPlayerPanel.SetActive(true);
         }
-        
     }
+
+   
 
     void CheckLoot()
     {
@@ -289,71 +297,7 @@ public class GameControllerScript : MonoBehaviour
         gc_GlobalMunnieDisplayText = _MunnieDisplayText;
         gc_GlobalMunnieDisplayText.text = gc_Munnies.ToString();
     }
-
-
-    public void DisplayPlayerStash()
-    {
-        if (!StashIconsCreated)
-        {
-            CreateStashIcons();
-        }
-        for (int i = 0; i < gc_PlayerStash.Count; ++i)
-        {
-            //Vector3 iconPos = gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position;
-            //iconPos.x = _invenDisplaySlotX * (i % _invenColumns) + _iconWidthOffset;
-            //iconPos.y = (_invenDisplaySlotY * (i / _invenColumns) - _iconHeightOffset) * -1;
-            //iconPos.x = gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position.x;
-            //iconPos.y = gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position.y;
-
-            gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
-            gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().SetParent(gc_PlayerStashPanel.transform);
-            //gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position = new Vector3(iconPos.x, iconPos.y, 1.0f);
-            //gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<RectTransform>().position = new Vector3(iconPos.x, iconPos.y, 1.0f);
-            gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            float tempX = gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.transform.localPosition.x;
-            float tempY = gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.transform.localPosition.y;
-
-            gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.transform.localPosition = new Vector3(tempX, tempY, 1.0f);
-            gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.transform.position = new Vector3(tempX, tempY, 1.0f);
-            gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<RectTransform>().position = new Vector3(tempX, tempY, 1.0f);
-            gc_PlayerStash[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<RectTransform>().localPosition = new Vector3(tempX, tempY, 1.0f);
-
-
-        }
-    }
-
-    public void CreateStashIcons()
-    {
-        for (int i = 0; i < gc_StashOfItems.Length; ++i)
-        {
-            if (gc_StashOfItems[i] >= -1)
-            {
-                int numOfItems = gc_StashOfItems[i];
-                GameObject potentialItem = gc_CatalogueObj.GetComponent<ItemCatalogueData>().icd_ArrayOfItems[i];
-
-                for (int j = 0; j < numOfItems; ++j)
-                {
-                    GameObject stashIconObj = IconObj.MakeIconObject(potentialItem, gc_PlayerStashPanel, "Item");
-                    stashIconObj.name = "Shop 1 Item " + i.ToString() + " Icon";
-
-                    potentialItem.GetComponent<ItemObj>().io_invIconObject = stashIconObj;
-
-                    potentialItem.name = potentialItem.GetComponent<ItemObj>().itemName + "Stash Item " + i.ToString() + " Icon";
-                    potentialItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<IconObj>().GetComponent<Image>().sprite = ItemCatalogueConstantValues.ICONOFITEM[i];
-                    potentialItem.AddComponent<LayoutElement>().minHeight = 1.0f;
-                    potentialItem.AddComponent<LayoutElement>().minWidth = 1.0f;
-
-                    potentialItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
-
-                    //Vector3 iconPos = potentialItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position;
-                    //potentialItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position = new Vector3(0.0f, iconPos.y, 1.0f);
-                    //potentialItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<RectTransform>().position = new Vector3(0.0f, iconPos.y, 1.0f);
-                }
-            }
-        }
-        StashIconsCreated = true;
-    }
-
+    
     public void UpdateMunnieDisplay()
     {
         _MunnieDisplayText.text = gc_Munnies.ToString();

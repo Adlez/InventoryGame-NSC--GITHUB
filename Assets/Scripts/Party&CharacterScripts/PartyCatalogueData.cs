@@ -16,6 +16,8 @@ public class PartyCatalogueData : MonoBehaviour
     {
         GameObject _PartyContainer = new GameObject("PartyContainer");
         GameObject _PartyIconContainer = new GameObject("PartyIconContainer");
+        _PartyContainer.name = "PartyContainer";
+        _PartyIconContainer.name = "Party ICON Container";
         _PartyIconContainer.transform.SetParent(pcd_PartyScrollViewPanel.transform);
         _PartyIconContainer.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
         _PartyIconContainer.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);

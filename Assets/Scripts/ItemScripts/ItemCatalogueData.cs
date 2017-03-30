@@ -24,6 +24,7 @@ public class ItemCatalogueData : MonoBehaviour
         if (!icd_ItemsCreated)
         {
             GameObject _InventoryContainer = new GameObject("InventoryContainer");
+            _InventoryContainer.name = "InventoryContainer";
             //GameObject _ItemIconContainer = new GameObject("InvenIconContainer");
 
             for (int i = 0; i < icd_ArrayOfItems.Length; ++i)
@@ -45,12 +46,21 @@ public class ItemCatalogueData : MonoBehaviour
                 newItem.GetComponent<ItemObj>().typeID = ItemCatalogueConstantValues.ITEMTYPEID[i];
 
                 GameObject iconObj = IconObj.MakeIconObject(newItem, icd_TempItemDisplay, newItem.GetComponent<ItemObj>().io_ObjectType);
+                GameObject iconObjS = IconObj.MakeIconObject(newItem, icd_TempItemDisplay, newItem.GetComponent<ItemObj>().io_ObjectType);
+                iconObj.transform.SetParent(icd_TempItemDisplay.transform);
+                iconObjS.transform.SetParent(icd_TempItemDisplay.transform);
                 newItem.GetComponent<ItemObj>().io_invIconObject = iconObj;
+                newItem.GetComponent<ItemObj>().io_storeIconObject = iconObjS;
 
                 newItem.name = newItem.GetComponent<ItemObj>().itemName;
                 newItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<IconObj>().GetComponent<Image>().sprite = ItemCatalogueConstantValues.ICONOFITEM[i];
+                newItem.GetComponent<ItemObj>().io_storeIconObject.GetComponent<IconObj>().GetComponent<Image>().sprite = ItemCatalogueConstantValues.ICONOFITEM[i];
 
                 newItem.GetComponent<ItemObj>().io_invIconObject.SetActive(false);
+                newItem.GetComponent<ItemObj>().io_storeIconObject.SetActive(false);
+
+                newItem.GetComponent<ItemObj>().io_invIconObject.name += " Inventory";
+                newItem.GetComponent<ItemObj>().io_storeIconObject.name = newItem.name + " Icon InStore";
 
                 //add to array
                 icd_ArrayOfItems[i] = newItem;

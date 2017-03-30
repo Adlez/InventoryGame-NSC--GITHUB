@@ -26,8 +26,8 @@ public class PartyObj : MonoBehaviour
     public int po_MaxWagonInventorySize; //compared to curWagonInventorySize, this is the total number of items the wagon can hold.
     public int po_CurWagonInventorySize; //actual number of items being stored in the wagon.
 
-    public List<GameObject> po_IconsOfItemsInBagsList;
-    public List<GameObject> po_IconsOfItemsInWagonList;
+    public List<GameObject> po_IconsOfItemsInBagsList = new List<GameObject>();
+    public List<GameObject> po_IconsOfItemsInWagonList = new List<GameObject>();
 
     public int[] po_TotalCarriedItems = new int[16]; //This is the number of each item in the Inventory according to the correct ID's
     public int[] po_TotalWagonItems = new int[16]; //This is the number of each item in the Wagon according to the correct ID's

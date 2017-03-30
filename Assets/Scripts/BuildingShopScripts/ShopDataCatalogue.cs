@@ -82,7 +82,7 @@ public class ShopDataCatalogue : MonoBehaviour
                 GameObject stockItem = sds_Shop1ArrayOfStock[i];
                 if (stockItem != null)
                 {
-                    stockItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate { BuyShopItem(stockItem); });
+                    stockItem.GetComponent<ItemObj>().io_storeIconObject.GetComponent<Button>().onClick.AddListener(delegate { BuyShopItem(stockItem); });
                 }
                 #region Old maybe useful
                 //sds_Shop1ArrayOfStock[i] = sdc_ItemCatalogue.GetComponent<ItemCatalogueData>().icd_ArrayOfItems[i];//.itemObj.icd_ArrayOfItems[i];
@@ -111,7 +111,7 @@ public class ShopDataCatalogue : MonoBehaviour
                 GameObject stockItem = sds_Shop2ArrayOfStock[i];
                 if (stockItem != null)
                 {
-                    stockItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate { BuyShopItem(stockItem); });
+                    stockItem.GetComponent<ItemObj>().io_storeIconObject.GetComponent<Button>().onClick.AddListener(delegate { BuyShopItem(stockItem); });
                 }
             }
             for (int i = 0; i < sds_Shop3ArrayOfStock.Length; ++i)
@@ -119,7 +119,7 @@ public class ShopDataCatalogue : MonoBehaviour
                 GameObject stockItem = sds_Shop3ArrayOfStock[i];
                 if (stockItem != null)
                 {
-                    stockItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate { BuyShopItem(stockItem); });
+                    stockItem.GetComponent<ItemObj>().io_storeIconObject.GetComponent<Button>().onClick.AddListener(delegate { BuyShopItem(stockItem); });
                 }
             }
             for (int i = 0; i < sds_Shop4ArrayOfStock.Length; ++i)
@@ -127,7 +127,7 @@ public class ShopDataCatalogue : MonoBehaviour
                 GameObject stockItem = sds_Shop4ArrayOfStock[i];
                 if (stockItem != null)
                 {
-                    stockItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate { BuyShopItem(stockItem); });
+                    stockItem.GetComponent<ItemObj>().io_storeIconObject.GetComponent<Button>().onClick.AddListener(delegate { BuyShopItem(stockItem); });
                 }
                 
             }
@@ -136,7 +136,7 @@ public class ShopDataCatalogue : MonoBehaviour
                 GameObject stockItem = sds_Shop5ArrayOfStock[i];
                 if (stockItem != null)
                 {
-                    stockItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate { BuyShopItem(stockItem); });
+                    stockItem.GetComponent<ItemObj>().io_storeIconObject.GetComponent<Button>().onClick.AddListener(delegate { BuyShopItem(stockItem); });
                 }
             }
             for (int i = 0; i < sds_Shop6ArrayOfStock.Length; ++i)
@@ -144,7 +144,7 @@ public class ShopDataCatalogue : MonoBehaviour
                 GameObject stockItem = sds_Shop6ArrayOfStock[i];
                 if (stockItem != null)
                 {
-                    stockItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate { BuyShopItem(stockItem); });
+                    stockItem.GetComponent<ItemObj>().io_storeIconObject.GetComponent<Button>().onClick.AddListener(delegate { BuyShopItem(stockItem); });
                 }
             }
         }
@@ -168,9 +168,9 @@ public class ShopDataCatalogue : MonoBehaviour
         {
             if (sds_Shop1ArrayOfStock[i] != null)
             {
-                shopStock[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
-                shopStock[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().SetParent(sds_ShopScrollViewPanel.transform);
-                shopStock[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().localScale = new Vector3(64.0f, 64.0f, 1.0f);
+                shopStock[i].GetComponent<ItemObj>().io_storeIconObject.SetActive(true);
+                shopStock[i].GetComponent<ItemObj>().io_storeIconObject.GetComponent<Transform>().SetParent(sds_ShopScrollViewPanel.transform);
+                shopStock[i].GetComponent<ItemObj>().io_storeIconObject.GetComponent<Transform>().localScale = new Vector3(64.0f, 64.0f, 1.0f);
             }
         }
         PositionIconsOnScreen(sds_Shop1ArrayOfStock);
@@ -182,10 +182,10 @@ public class ShopDataCatalogue : MonoBehaviour
         {
             if (iconsToPosition[i] != null)
             { 
-                Vector3 iconPos = iconsToPosition[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position;
+                Vector3 iconPos = iconsToPosition[i].GetComponent<ItemObj>().io_storeIconObject.GetComponent<Transform>().position;
                 iconPos.x = _invenDisplaySlotX * (i % _invenColumns) + _iconWidthOffset;
                 iconPos.y = (_invenDisplaySlotY * (i / _invenColumns) - _iconHeightOffset) * -1;
-                iconsToPosition[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().position = new Vector3(iconPos.x, iconPos.y, 100.0f);
+                iconsToPosition[i].GetComponent<ItemObj>().io_storeIconObject.GetComponent<Transform>().position = new Vector3(iconPos.x, iconPos.y, 100.0f);
             }
         }
     }
