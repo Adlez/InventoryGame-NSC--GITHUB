@@ -16,6 +16,8 @@ public class ItemObj : MonoBehaviour
     public float oddsOfFinding;//
     public int maxFindAtOnce;
     public int typeID;
+    public bool io_IsLoot;
+    public int io_ExcavatedPartyID;
 
     public string io_ObjectType = "Item";
     public bool io_InInventory = true; //default to True

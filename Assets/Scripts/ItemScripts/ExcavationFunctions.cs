@@ -22,9 +22,9 @@ public class ExcavationFunctions : MonoBehaviour
     public Text ef_btnText;
 
     //temp public
-    public List<GameObject> listOfItemsInBags = new List<GameObject>();// party.GetComponent<PartyObj>().po_IconsOfItemsInBagsList;
+    /*public List<GameObject> listOfItemsInBags = new List<GameObject>();*/// party.GetComponent<PartyObj>().po_IconsOfItemsInBagsList;
     public List<GameObject> listOfItemsInWagon = new List<GameObject>();// party.GetComponent<PartyObj>().po_IconsOfItemsInWagonList;
-    public List<GameObject> listOfItemsInPile = new List<GameObject>();
+    //public List<GameObject> listOfItemsInPile = new List<GameObject>();
 
     public int _LastPartyLookedAt = 1;//Default to 1
 
@@ -49,6 +49,52 @@ public class ExcavationFunctions : MonoBehaviour
         UpdateWagoBagsPileDisplay(-1);
     }
 
+    public void DisplayExcavatedItems(int partyIndex)
+    {
+        MenuNavigaion.menuNavCataloguePointer.mn_PartyInvenAndWagoDisplay.SetActive(true); //Display the panel of loot
+        GameObject party = GameControllerScript.gc_Parties[partyIndex];
+        GameObject displayPanel = ef_GameController.GetComponent<GameControllerScript>().gc_MenuNavObj.GetComponent<MenuNavigaion>().mn_PartyDisplayLoot;
+        //Make the Loot all invisible
+        for(int i =0; i < GameControllerScript.gc_Parties.Length; ++i)
+        {
+            //Add this if we want to ignore the selected party's loot
+            //if(GameControllerScript.gc_Parties[i].GetComponent<PartyObj>().po_PartyID != partyIndex)
+            //{
+                for(int j = 0; j < GameControllerScript.gc_Parties[i].GetComponent<PartyObj>().po_IconsOfItemsInExcavatedPile.Count; ++j)
+                {
+                    GameControllerScript.gc_Parties[i].GetComponent<PartyObj>().po_IconsOfItemsInExcavatedPile[j].SetActive(false);
+                }
+            //}
+        }
+        //Make the selected Party's loot visible
+        for(int i = 0; i < party.GetComponent<PartyObj>().po_ItemsInExcavationPile.Count; ++i)
+        {
+            party.GetComponent<PartyObj>().po_IconsOfItemsInExcavatedPile[i].SetActive(true);
+        }
+        displayPanel.SetActive(true);
+    }
+
+    public void DisplayPartyBags(int partyIndex)
+    {
+        GameControllerScript.gc_Parties[partyIndex].GetComponent<PartyObj>().DisplayPartyInventory();
+        //for(int i = 0; i < GameControllerScript.gc_Parties[partyIndex].GetComponent<PartyObj>().po_IconsOfItemsInBagsList.Count; ++i)
+        //{
+        //    GameControllerScript.gc_Parties[partyIndex].GetComponent<PartyObj>().po_IconsOfItemsInBagsList[0].SetActive(true);
+        //}
+
+    }
+
+    public void DisplayPartyWagon(int partyIndex)
+    {
+
+    }
+
+    public void DigOutTheLoot(int partyIndex)
+    {
+        GameObject party = GameControllerScript.gc_Parties[partyIndex];
+
+    }
+
     public void ReadyExcavationPileBagsAndWagon(int partyIndex) //UI Button Calls this function (b.)
     {
         listOfIconsForLootPile.Clear();
@@ -58,13 +104,14 @@ public class ExcavationFunctions : MonoBehaviour
         MenuNavigaion.menuNavCataloguePointer.mn_PartyInvenAndWagoDisplay.SetActive(true); //Display the panel of loot
         GameObject party = GameControllerScript.gc_Parties[partyIndex];
         GameObject displayPanel = ef_GameController.GetComponent<GameControllerScript>().gc_MenuNavObj.GetComponent<MenuNavigaion>().mn_PartyDisplayLoot;
-        displayPanel.SetActive(true);
+        //displayPanel.SetActive(true);
         
-        if (listOfItemsInPile.Count == 0) //If there isn't anything in the pile, nothing has been initialized. Have to do that.
+        //Alter the following to populate the parties loot piles instead of the "universal" pile
+        if (party.GetComponent<PartyObj>().po_ItemsInExcavationPile.Count == 0)//listOfItemsInPile.Count == 0) //If there isn't anything in the pile, nothing has been initialized. Have to do that.
         {
             PopulateBagWagonAndPileLists(party); //fill up the Pile, Bags and the wagon
         }
-        for(int i = 0; i < listOfItemsInPile.Count; ++i)
+        for(int i = 0; i < party.GetComponent<PartyObj>().po_ItemsInExcavationPile.Count; ++i)// listOfItemsInPile.Count; ++i)
         {
             GameObject excavatedItem = new GameObject("LootItem");
             GameObject excavatedItemIcon = new GameObject("LootItemIcon");
@@ -74,7 +121,8 @@ public class ExcavationFunctions : MonoBehaviour
             excavatedItemIcon.AddComponent<Button>();
 
             var excavatedItemScript = excavatedItem.GetComponent<ItemObj>();
-            var itemInPileScript = listOfItemsInPile[i].GetComponent<ItemObj>();
+            //var itemInPileScript = listOfItemsInPile[i].GetComponent<ItemObj>();
+            var itemInPileScript = party.GetComponent<PartyObj>().po_ItemsInExcavationPile[i].GetComponent<ItemObj>();
             var iconObjScript = excavatedItemIcon.GetComponent<IconObj>();
 
             excavatedItemScript.cashValue = itemInPileScript.cashValue;
@@ -89,6 +137,7 @@ public class ExcavationFunctions : MonoBehaviour
             excavatedItemScript.maxFindAtOnce = itemInPileScript.maxFindAtOnce;
             excavatedItemScript.oddsOfFinding = itemInPileScript.oddsOfFinding;
             excavatedItemScript.typeID = itemInPileScript.typeID;
+            excavatedItemScript.io_ExcavatedPartyID = party.GetComponent<PartyObj>().po_PartyID;
 
             iconObjScript.io_ObjectForThisIcon = excavatedItem;
             excavatedItemIcon.AddComponent<Image>();
@@ -100,18 +149,25 @@ public class ExcavationFunctions : MonoBehaviour
             excavatedItem.GetComponent<ItemObj>().io_invIconObject.SetActive(true); //Show the Icon
             excavatedItemIcon = excavatedItem.GetComponent<ItemObj>().io_invIconObject;
             excavatedItemIcon.name += " " + i.ToString() + " ItemInPile ";
+            excavatedItemIcon.transform.position = new Vector3(excavatedItemIcon.transform.position.x, excavatedItemIcon.transform.position.y, 1.0f);
+            excavatedItemIcon.GetComponent<RectTransform>().localPosition = new Vector3(excavatedItemIcon.transform.position.x, excavatedItemIcon.transform.position.y, 1.0f);
+            excavatedItemIcon.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             //REMOVE BUTTON FUNCTION
             //_ExcavationIcon.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.RemoveListener(delegate { AddToLootPile(_ExcavationIcon); });
             //ADD BUTTON FUNCTION
             excavatedItemIcon.GetComponent<Button>().onClick.AddListener(delegate { RemoveFromLootPile(excavatedItem, party); }); //Add Function to add to bags and wagon
-            listOfIconsForLootPile.Add(excavatedItemIcon); //Add Item to Loot Pile
+            party.GetComponent<PartyObj>().po_IconsOfItemsInExcavatedPile.Add(excavatedItemIcon);
+            //listOfIconsForLootPile.Add(excavatedItemIcon); //Add Item to Loot Pile
         }
-        UpdateWagoBagsPileDisplay(partyIndex);
+        //UpdateWagoBagsPileDisplay(partyIndex);
     }
 
     public void UpdateWagoBagsPileDisplay(int partyIndex) //c. d.
     {
-        if(partyIndex < 0) //Checking for when the WagoBag button is pressed
+        List<GameObject> listOfItemsInBags = new List<GameObject>();
+        listOfItemsInBags = GameControllerScript.gc_Parties[partyIndex].GetComponent<PartyObj>().po_IconsOfItemsInBagsList;
+
+        if (partyIndex < 0) //Checking for when the WagoBag button is pressed
         {
             partyIndex = _LastPartyLookedAt;
         }
@@ -149,7 +205,7 @@ public class ExcavationFunctions : MonoBehaviour
             if(listOfItemsInBags.Count > 0)
             {
                 for (int i = 0; i < listOfItemsInBags.Count; ++i)
-                {
+               {
                     //Make the Parent of the icon the Bag/Wagon Display, then make it visible
                     listOfItemsInBags[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<Transform>().SetParent(MenuNavigaion.menuNavCataloguePointer.mn_PartyInvenAndWagoDisplay.transform);
 
@@ -157,8 +213,7 @@ public class ExcavationFunctions : MonoBehaviour
                     Vector3 curIconPos = listOfItemsInBags[i].GetComponent<ItemObj>().io_invIconObject.transform.position;
                     listOfItemsInBags[i].GetComponent<ItemObj>().io_invIconObject.GetComponent<RectTransform>().transform.localPosition = new Vector3(curIconPos.x, curIconPos.y, 1.0f);
                     listOfItemsInBags[i].GetComponent<ItemObj>().io_invIconObject.transform.localPosition = new Vector3(curIconPos.x, curIconPos.y, 1.0f);
-
-                    listOfItemsInBags[i].SetActive(true);
+                              listOfItemsInBags[i].SetActive(true);
                     listOfItemsInBags[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
                 }
                 for (int i = 0; i < listOfItemsInWagon.Count; ++i)
@@ -197,8 +252,13 @@ public class ExcavationFunctions : MonoBehaviour
         }
     }
 
+    // *FIX* This funciton here is adding the item to the excavtion panel, but doesn't care which party it's for. It should, fix it.
     public void AddToLootPile(GameObject thisItem, GameObject thisParty)
     {
+        int partyIndex = thisParty.GetComponent<PartyObj>().po_PartyID;
+
+        List<GameObject> listOfItemsInBags = new List<GameObject>();
+        listOfItemsInBags = GameControllerScript.gc_Parties[partyIndex].GetComponent<PartyObj>().po_IconsOfItemsInBagsList;
         //Remove from Bags/Wago
         if (ef_btnText.text == "Wagon") //We're lookin' at bags (d.)
         {
@@ -216,12 +276,18 @@ public class ExcavationFunctions : MonoBehaviour
         //ADD BUTTON FUNCTION
         thisItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate { RemoveFromLootPile(thisItem, thisParty); });
 
-        listOfItemsInPile.Add(thisItem);
+        thisParty.GetComponent<PartyObj>().po_ItemsInExcavationPile.Add(thisItem);
+        //listOfItemsInPile.Add(thisItem);
         UpdateWagoBagsPileDisplay(-1);
     }
 
     public void RemoveFromLootPile(GameObject thisItem, GameObject thisParty)
     {
+        int partyIndex = thisParty.GetComponent<PartyObj>().po_PartyID;
+
+        List<GameObject> listOfItemsInBags = new List<GameObject>();
+        listOfItemsInBags = GameControllerScript.gc_Parties[partyIndex].GetComponent<PartyObj>().po_IconsOfItemsInBagsList;
+
         bool bagIsFull = false;
         bool wagonIsFull = false;
         bool bagsAreOpen = true;
@@ -264,7 +330,8 @@ public class ExcavationFunctions : MonoBehaviour
             //ADD BUTTON FUNCTION
             thisItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate { AddToLootPile(thisItem, thisParty); });
 
-            listOfItemsInPile.Remove(thisItem);
+            //listOfItemsInPile.Remove(thisItem);
+            thisParty.GetComponent<PartyObj>().po_ItemsInExcavationPile.Remove(thisItem);
             UpdateWagoBagsPileDisplay(-1);
         }
         if(bagIsFull)
@@ -279,12 +346,30 @@ public class ExcavationFunctions : MonoBehaviour
         }
     }
 
+    public void PopulateLootPiles(GameObject party)
+    {
+        party.GetComponent<PartyObj>().po_ItemsInExcavationPile.Clear();
+
+        //When Item is rolled for (in ItemObj) each Item is added in multiples already if needed
+        GameObject thisLevel = ef_CatalogueObject.GetComponent<LevelCatalogueData>().lcd_ArrayOfLevels[party.GetComponent<PartyObj>().po_LevelExploring];
+        for (int i = 0; i < thisLevel.GetComponent<LevelObj>().lv_PotentialLootList.Count; ++i)
+        {
+            GameObject tmpObj = thisLevel.GetComponent<LevelObj>().lv_PotentialLootList[i];
+            party.GetComponent<PartyObj>().po_ItemsInExcavationPile.Add(thisLevel.GetComponent<LevelObj>().lv_PotentialLootList[i]);
+        }
+    }
+
     public void PopulateBagWagonAndPileLists(GameObject party)
     {
+        int partyIndex = party.GetComponent<PartyObj>().po_PartyID;
+
+        List<GameObject> listOfItemsInBags = new List<GameObject>();
+        listOfItemsInBags = GameControllerScript.gc_Parties[partyIndex].GetComponent<PartyObj>().po_IconsOfItemsInBagsList;
+
         //Clear lists before populating them
-        listOfItemsInBags.Clear();
+        //listOfItemsInBags.Clear();
         listOfItemsInWagon.Clear();
-        listOfItemsInPile.Clear();
+        //listOfItemsInPile.Clear();
 
         if(party.GetComponent<PartyObj>().po_CurInventorySize > 0)
         {
@@ -318,13 +403,6 @@ public class ExcavationFunctions : MonoBehaviour
                 }
             }
         }
-
-        //When Item is rolled for (in ItemObj) each Item is added in multiples already if needed
-        GameObject thisLevel = ef_CatalogueObject.GetComponent<LevelCatalogueData>().lcd_ArrayOfLevels[party.GetComponent<PartyObj>().po_LevelExploring];
-        for(int i = 0; i < thisLevel.GetComponent<LevelObj>().lv_PotentialLootList.Count; ++i)
-        {
-            GameObject tmpObj = thisLevel.GetComponent<LevelObj>().lv_PotentialLootList[i];
-            listOfItemsInPile.Add(thisLevel.GetComponent<LevelObj>().lv_PotentialLootList[i]);
-        }
+        PopulateLootPiles(party);
     }
 }

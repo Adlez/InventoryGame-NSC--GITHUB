@@ -28,6 +28,8 @@ public class PartyObj : MonoBehaviour
 
     public List<GameObject> po_IconsOfItemsInBagsList = new List<GameObject>();
     public List<GameObject> po_IconsOfItemsInWagonList = new List<GameObject>();
+    public List<GameObject> po_IconsOfItemsInExcavatedPile = new List<GameObject>();
+    public List<GameObject> po_ItemsInExcavationPile = new List<GameObject>();
 
     public int[] po_TotalCarriedItems = new int[16]; //This is the number of each item in the Inventory according to the correct ID's
     public int[] po_TotalWagonItems = new int[16]; //This is the number of each item in the Wagon according to the correct ID's
@@ -55,6 +57,31 @@ public class PartyObj : MonoBehaviour
     private float _iconWidthOffset = 32.0f;
     private float _iconHeightOffset = 32.0f;
     private int _invenColumns = 4;
+
+    public void DisplayPartyInventory()
+    {
+        int thisPartyID = po_PartyID;
+        HideOtherPartyBags(thisPartyID);
+
+        for(int i = 0; i < po_IconsOfItemsInBagsList.Count; ++i)
+        {
+            po_IconsOfItemsInBagsList[i].SetActive(true);
+        }
+    }
+
+    public void HideOtherPartyBags(int partyID)
+    {
+        for(int i = 0; i < GameControllerScript.gc_Parties.Length; ++i)
+        {
+            if(GameControllerScript.gc_Parties[i].GetComponent<PartyObj>().po_PartyID != partyID)
+            {
+                for(int j = 0; j < GameControllerScript.gc_Parties[i].GetComponent<PartyObj>().po_IconsOfItemsInBagsList.Count; ++j)
+                {
+                    GameControllerScript.gc_Parties[i].GetComponent<PartyObj>().po_IconsOfItemsInBagsList[i].SetActive(false);
+                }
+            }
+        }
+    }
 
     public void UpdatePartyToolsAccordingToCharacter(GameObject character, int newpID, int oldpID)
     {

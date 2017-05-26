@@ -32,6 +32,7 @@ public class GameControllerScript : MonoBehaviour
     public GameObject gc_ExcavationBtnParty3;
 
     public GameObject[] gc_ExcavationButtons = new GameObject[4];
+    public GameObject gc_LootDisplayPanel4ExcavationFuncitons;
 
     //add "public" as necessary
     int[] gc_LevelsAvailable = new int[16]; //0 level is unavailable, 1 it is.
@@ -59,7 +60,7 @@ public class GameControllerScript : MonoBehaviour
         return gc_SelectedParty;
     }
 
-    public void SetSelectedParty(int id)
+    public void AdjustSelectedParty(int id)
     {
         if (gc_SelectedParty + id != -1 && gc_SelectedParty + id != 4)
         {
@@ -82,6 +83,10 @@ public class GameControllerScript : MonoBehaviour
         }
     }
 
+    public void SetSelectedParty(int id)
+    {
+        gc_SelectedParty = id;
+    }
    
 
     void CheckLoot()
@@ -144,10 +149,11 @@ public class GameControllerScript : MonoBehaviour
             }
         }
 
-        if(theParty.po_PartyIsActive == true)
+        if (theParty.po_PartyIsActive == true)
         {
             partyIsBusy = true;
         }
+        else { partyIsBusy = false; }
 
         if (partyIsNotEmpty && partyIsBusy != true)
         {
@@ -178,7 +184,7 @@ public class GameControllerScript : MonoBehaviour
                 textToDisplay += textLevelInUse;
             }
 
-            if (gc_GoodToGoOnJourney != false)
+            if (gc_GoodToGoOnJourney != false && levelIsUnoccupied != false)
             {
                 theParty.po_PartyIsActive = true; //set bool so party doesn't go on multi adventures
                 theLevel.GetComponent<LevelObj>().lv_IsActive = true;//set bool so level only has one party at a time
@@ -189,7 +195,10 @@ public class GameControllerScript : MonoBehaviour
             }
             else
             {
-                textToDisplay = "Made it through all checks, but something is wrong.";
+                if(levelIsUnoccupied != false)
+                {
+                    textToDisplay = "Made it through all checks, but something is wrong.";
+                }                
             }
         }
         else
@@ -258,6 +267,7 @@ public class GameControllerScript : MonoBehaviour
                     //Poorly named function determines the items in the loot pile
                     gc_ExcavationButtons[party.GetComponent<PartyObj>().po_PartyID].SetActive(true);
                     partyObjComp.po_ExcavationComplete = true;
+                    gc_LootDisplayPanel4ExcavationFuncitons.GetComponent<ExcavationFunctions>().ReadyExcavationPileBagsAndWagon(party.GetComponent<PartyObj>().po_PartyID);
                 }
                 else if(secondsGoneFor >= partyObjComp.po_TravelTime *2 && partyObjComp.po_ExcavationComplete == true)
                 {
@@ -301,6 +311,7 @@ public class GameControllerScript : MonoBehaviour
     public void UpdateMunnieDisplay()
     {
         _MunnieDisplayText.text = gc_Munnies.ToString();
+        gc_GlobalMunnieDisplayText.text = gc_Munnies.ToString();
         inspectorViewOfPlayerStash = gc_StashOfItems;
     }
 	

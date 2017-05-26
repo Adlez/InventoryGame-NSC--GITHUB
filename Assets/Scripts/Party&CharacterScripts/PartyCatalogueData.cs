@@ -11,6 +11,7 @@ public class PartyCatalogueData : MonoBehaviour
 
     public GameObject[] pcd_PartyWagonDisplayIcons;
     public GameObject[] pcd_PartyBagsDisplayIcons;
+    public GameObject[] pcd_PartyExcavatedItemsIcons;
 
     public void CreateParties()
     {
