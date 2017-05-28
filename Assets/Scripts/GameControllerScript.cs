@@ -24,6 +24,7 @@ public class GameControllerScript : MonoBehaviour
     public GameObject gc_PartyCatalogue;
     public GameObject gc_CatalogueObj;
     public GameObject gc_MenuNavObj;
+    public GameObject gc_ContainerChangeObject;
     public GameObject gc_LevelIconClicked;
 
     public GameObject gc_ExcavationBtnParty0;
@@ -267,7 +268,6 @@ public class GameControllerScript : MonoBehaviour
                     //Poorly named function determines the items in the loot pile
                     gc_ExcavationButtons[party.GetComponent<PartyObj>().po_PartyID].SetActive(true);
                     partyObjComp.po_ExcavationComplete = true;
-                    gc_LootDisplayPanel4ExcavationFuncitons.GetComponent<ExcavationFunctions>().ReadyExcavationPileBagsAndWagon(party.GetComponent<PartyObj>().po_PartyID);
                 }
                 else if(secondsGoneFor >= partyObjComp.po_TravelTime *2 && partyObjComp.po_ExcavationComplete == true)
                 {

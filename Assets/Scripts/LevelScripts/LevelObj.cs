@@ -27,6 +27,7 @@ public class LevelObj : MonoBehaviour
         { 
             FillLevelLootList();
         }
+        theParty.GetComponent<PartyObj>().po_ItemsInExcavationPile = lv_PotentialLootList;
     }
 
     public void FillLevelLootList()

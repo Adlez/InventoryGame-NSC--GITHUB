@@ -25,7 +25,7 @@ public class IconObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void ResetIconSize(GameObject iconObject)
     {
-        iconObject.GetComponent<IconObj>().transform.localScale = new Vector3(64.0f, 64.0f, 1.0f);
+        iconObject.GetComponent<IconObj>().transform.localScale = new Vector3(32.0f, 32.0f, 1.0f);
 
     }
 

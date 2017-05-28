@@ -101,7 +101,7 @@ public class ItemCatalogueData : MonoBehaviour
 
     public void DisplayPartyBags(GameObject party)
     {
-        for(int i = 0; i < party.GetComponent<PartyObj>().po_InventoryIndex.Length; ++i)
+        //for(int i = 0; i < party.GetComponent<PartyObj>().po_InventoryIndex.Length; ++i)
         {
             //GameObject NewItemIcon = 
             //party.GetComponent<PartyObj>().po_InventoryIndex

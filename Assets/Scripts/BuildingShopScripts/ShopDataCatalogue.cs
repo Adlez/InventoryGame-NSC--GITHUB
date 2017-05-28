@@ -63,7 +63,13 @@ public class ShopDataCatalogue : MonoBehaviour
             //Confirm the purchase
             //Add the item to the "Stash", inventory whatever; add by array
             GameControllerScript.gc_StashOfItems[item.GetComponent<ItemObj>().idInArrays] += 1;
-
+            item.GetComponent<ItemObj>().io_CurrentContainer = -3; //Set container to Stash
+            //Remove any button Functionality that may be present
+            item.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.RemoveAllListeners();
+            //Add Function to button
+            item.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate 
+                { sdc_GameControllerObj.GetComponent<GameControllerScript>().gc_ContainerChangeObject.GetComponent<ChangingContainerScript>().ChangeContainer(item); });
+            GameControllerScript.gc_PlayerStash.Add(item);
             //take the player's money
             GameControllerScript.gc_Munnies -= item.GetComponent<ItemObj>().cashValue;
             item.GetComponent<ItemObj>().io_InInventory = true;
@@ -82,6 +88,7 @@ public class ShopDataCatalogue : MonoBehaviour
                 GameObject stockItem = sds_Shop1ArrayOfStock[i];
                 if (stockItem != null)
                 {
+                    stockItem.GetComponent<ItemObj>().io_CurrentContainer = -2;//Set Container to Shop
                     stockItem.GetComponent<ItemObj>().io_storeIconObject.GetComponent<Button>().onClick.AddListener(delegate { BuyShopItem(stockItem); });
                 }
                 #region Old maybe useful
@@ -111,6 +118,7 @@ public class ShopDataCatalogue : MonoBehaviour
                 GameObject stockItem = sds_Shop2ArrayOfStock[i];
                 if (stockItem != null)
                 {
+                    stockItem.GetComponent<ItemObj>().io_CurrentContainer = -2;//Set Container to Shop
                     stockItem.GetComponent<ItemObj>().io_storeIconObject.GetComponent<Button>().onClick.AddListener(delegate { BuyShopItem(stockItem); });
                 }
             }
@@ -119,6 +127,7 @@ public class ShopDataCatalogue : MonoBehaviour
                 GameObject stockItem = sds_Shop3ArrayOfStock[i];
                 if (stockItem != null)
                 {
+                    stockItem.GetComponent<ItemObj>().io_CurrentContainer = -2;//Set Container to Shop
                     stockItem.GetComponent<ItemObj>().io_storeIconObject.GetComponent<Button>().onClick.AddListener(delegate { BuyShopItem(stockItem); });
                 }
             }
@@ -127,6 +136,7 @@ public class ShopDataCatalogue : MonoBehaviour
                 GameObject stockItem = sds_Shop4ArrayOfStock[i];
                 if (stockItem != null)
                 {
+                    stockItem.GetComponent<ItemObj>().io_CurrentContainer = -2;//Set Container to Shop
                     stockItem.GetComponent<ItemObj>().io_storeIconObject.GetComponent<Button>().onClick.AddListener(delegate { BuyShopItem(stockItem); });
                 }
                 
@@ -136,6 +146,7 @@ public class ShopDataCatalogue : MonoBehaviour
                 GameObject stockItem = sds_Shop5ArrayOfStock[i];
                 if (stockItem != null)
                 {
+                    stockItem.GetComponent<ItemObj>().io_CurrentContainer = -2;//Set Container to Shop
                     stockItem.GetComponent<ItemObj>().io_storeIconObject.GetComponent<Button>().onClick.AddListener(delegate { BuyShopItem(stockItem); });
                 }
             }
@@ -144,6 +155,7 @@ public class ShopDataCatalogue : MonoBehaviour
                 GameObject stockItem = sds_Shop6ArrayOfStock[i];
                 if (stockItem != null)
                 {
+                    stockItem.GetComponent<ItemObj>().io_CurrentContainer = -2;//Set Container to Shop
                     stockItem.GetComponent<ItemObj>().io_storeIconObject.GetComponent<Button>().onClick.AddListener(delegate { BuyShopItem(stockItem); });
                 }
             }

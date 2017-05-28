@@ -26,6 +26,9 @@ public class PartyObj : MonoBehaviour
     public int po_MaxWagonInventorySize; //compared to curWagonInventorySize, this is the total number of items the wagon can hold.
     public int po_CurWagonInventorySize; //actual number of items being stored in the wagon.
 
+    public List<GameObject> po_ItemsInBagsList = new List<GameObject>();
+    public List<GameObject> po_ItemsInWagonList = new List<GameObject>();
+
     public List<GameObject> po_IconsOfItemsInBagsList = new List<GameObject>();
     public List<GameObject> po_IconsOfItemsInWagonList = new List<GameObject>();
     public List<GameObject> po_IconsOfItemsInExcavatedPile = new List<GameObject>();
@@ -35,8 +38,8 @@ public class PartyObj : MonoBehaviour
     public int[] po_TotalWagonItems = new int[16]; //This is the number of each item in the Wagon according to the correct ID's
     //Not actually sure what exactly the above to variable are for when two variables below seem to be the things too... Are the
     //Ones below supposed to be gameobjects?
-    public int[] po_InventoryIndex = new int[16]; //Actual items in inventory according to ID
-    public int[] po_WagonIndex; //Actual items in wagon according to ID
+    //public int[] po_InventoryIndex = new int[16]; //Actual items in inventory according to ID
+    //public int[] po_WagonIndex; //Actual items in wagon according to ID
 
     public bool po_HasWagon;
     public bool po_HasRepairKit;
@@ -98,7 +101,9 @@ public class PartyObj : MonoBehaviour
             {
                 if (tempCharStuff.co_CharacterReplacesTools[i] != 0)
                 {
-                    GameControllerScript.gc_Parties[newpID].GetComponent<PartyObj>().po_InventoryIndex[i] += tempCharStuff.co_CharacterReplacesTools[i];
+                    //GameControllerScript.gc_Parties[newpID].GetComponent<PartyObj>().po_InventoryIndex[i] += tempCharStuff.co_CharacterReplacesTools[i];
+                    //GameControllerScript.gc_Parties[newpID].GetComponent<PartyObj>().po_ItemsInBagsList.Add(GameControllerScript.gc_StashOfItems[tempCharStuff.co_CharacterReplacesTools[i]]);
+                    // *FIX* make sure that the tool is being added to the party's inventory (free)
                     GameControllerScript.gc_Parties[newpID].GetComponent<PartyObj>().po_TotalCarriedItems[i] += tempCharStuff.co_CharacterReplacesTools[i];
                     GameControllerScript.gc_Parties[newpID].GetComponent<PartyObj>().po_CurInventorySize += tempCharStuff.co_CharacterReplacesTools[i];
                 }
@@ -126,7 +131,7 @@ public class PartyObj : MonoBehaviour
             {
                 if (tempCharStuff.co_CharacterReplacesTools[i] != 0)
                 {
-                    GameControllerScript.gc_Parties[oldpID].GetComponent<PartyObj>().po_InventoryIndex[i] -= tempCharStuff.co_CharacterReplacesTools[i];
+                    //GameControllerScript.gc_Parties[oldpID].GetComponent<PartyObj>().po_InventoryIndex[i] -= tempCharStuff.co_CharacterReplacesTools[i];
                     GameControllerScript.gc_Parties[oldpID].GetComponent<PartyObj>().po_TotalCarriedItems[i] -= tempCharStuff.co_CharacterReplacesTools[i];
                     GameControllerScript.gc_Parties[oldpID].GetComponent<PartyObj>().po_CurInventorySize -= tempCharStuff.co_CharacterReplacesTools[i];
                 }
