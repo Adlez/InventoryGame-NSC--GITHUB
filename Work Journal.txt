@@ -1,0 +1,37 @@
+Treasure Scavenge TO-DO List
+
+-May 28th 2017
+----------------
+Short Term / High Priority goals:
+a. Find the issue causing icons to be invisible but also funcitonal
+b. Fix issue a.
+c. excavated items are only showing the one icon again, find the problem
+d. fix c.
+e. make sure c. isn't also an issue elsewhere, I have a feeling we're only making
+	one item and icon and just shimmying it around
+
+
+
+----------------
+
+*******************
+Long Term Goals
+i. 		smooth out the UI 
+ii. 	make neat transitions when panels are activated and deactivated
+iii.	add the icons for the rest of the items
+iv. 	add UI control for handheld device
+v. 		add UI control for gamecontroller
+vi. 	have timer STOP when excavation is ready
+vii.	have visible timers count DOWN instead of up
+viii. 	apply proper item, level, and character values
+ix. 	create a universal "CreateItem" function, I had one but I ended up losing it in
+			making the new ChangeContainer functions
+x. 		create a script containing every function for every UI button and have the buttons
+			use that
+xi. 	create a CONSTANTVALUES.cs script and remove all hard-coded values (trading them out
+			for the values in CONSTANTVALUES.cs)
+********************
+
+	*Misc Notes
+	
+Funk Game Loop (Kevin Macleod)
