@@ -1,4 +1,14 @@
 Treasure Scavenge TO-DO List
+-May 29th 2017 (13:37)
+----------------
+Short Term / High Priority goals:
+a. excavated items are only showing the one icon again, find the problem
+b. fix a.
+c. make sure a. isn't also an issue elsewhere, I have a feeling we're only making
+	one item and/or icon and just shimmying it around
+
+Icons were "invisible" because they had no Z scale. Problem solved.
+----------------
 
 -May 28th 2017
 ----------------

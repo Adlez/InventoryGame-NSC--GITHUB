@@ -98,41 +98,59 @@ public class ChangingContainerScript : MonoBehaviour
 
     void DisplayItems()
     {
-        for(int i = 0; i < ccs_CurPartyBagsContents.Count; ++i)
-        {
-            ccs_CurPartyBagsContents[i].GetComponent<ItemObj>().io_invIconObject.transform.SetParent(ccs_PartyInvenPanel.transform);
-            ccs_CurPartyBagsContents[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
-            ccs_CurPartyBagsContents[i].GetComponent<ItemObj>().io_invIconObject.transform.localScale = new Vector2(1.0f, 1.0f);
-        }
-        for (int i = 0; i < ccs_CurPartyWagonContents.Count; ++i)
-        {
-            ccs_CurPartyWagonContents[i].GetComponent<ItemObj>().io_invIconObject.transform.SetParent(ccs_PartyInvenPanel.transform);
-            ccs_CurPartyWagonContents[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
-            ccs_CurPartyWagonContents[i].GetComponent<ItemObj>().io_invIconObject.transform.localScale = new Vector2(1.0f, 1.0f);
-        }
+        //for(int i = 0; i < ccs_CurPartyBagsContents.Count; ++i)
+        //{
+        //    ccs_CurPartyBagsContents[i].GetComponent<ItemObj>().io_invIconObject.transform.SetParent(ccs_PartyInvenPanel.transform);
+        //    ccs_CurPartyBagsContents[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
+        //    ccs_CurPartyBagsContents[i].GetComponent<ItemObj>().io_invIconObject.transform.localScale = new Vector2(1.0f, 1.0f);
+        //}
+        //for (int i = 0; i < ccs_CurPartyWagonContents.Count; ++i)
+        //{
+        //    ccs_CurPartyWagonContents[i].GetComponent<ItemObj>().io_invIconObject.transform.SetParent(ccs_PartyInvenPanel.transform);
+        //    ccs_CurPartyWagonContents[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
+        //    ccs_CurPartyWagonContents[i].GetComponent<ItemObj>().io_invIconObject.transform.localScale = new Vector2(1.0f, 1.0f);
+        //}
         for (int i = 0; i < ccs_CurPartyPileOfLoot.Count; ++i)
         {
             ccs_CurPartyPileOfLoot[i].GetComponent<ItemObj>().io_invIconObject.transform.SetParent(ccs_PartyPilePanel.transform);
             ccs_CurPartyPileOfLoot[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
-            ccs_CurPartyPileOfLoot[i].GetComponent<ItemObj>().io_invIconObject.transform.localScale = new Vector2(1.0f, 1.0f);
-        }
-        for (int i = 0; i < ccs_CurPartyBagsContents.Count; ++i)
-        {
-            ccs_CurPartyBagsContents[i].GetComponent<ItemObj>().io_invIconObject.transform.SetParent(ccs_PartyInvenPanel.transform);
-            ccs_CurPartyBagsContents[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
-            ccs_CurPartyBagsContents[i].GetComponent<ItemObj>().io_invIconObject.transform.localScale = new Vector2(1.0f, 1.0f);
-        }
-        for (int i = 0; i < ccs_CurPartyWagonContents.Count; ++i)
-        {
-            ccs_CurPartyWagonContents[i].GetComponent<ItemObj>().io_invIconObject.transform.SetParent(ccs_PartyInvenPanel.transform);
-            ccs_CurPartyWagonContents[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
-            ccs_CurPartyWagonContents[i].GetComponent<ItemObj>().io_invIconObject.transform.localScale = new Vector2(1.0f, 1.0f);
+            ccs_CurPartyPileOfLoot[i].GetComponent<ItemObj>().io_invIconObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
         for (int i = 0; i < ccs_StashOfItems.Count; ++i)
         {
             ccs_StashOfItems[i].GetComponent<ItemObj>().io_invIconObject.transform.SetParent(ccs_StashPanel.transform);
             ccs_StashOfItems[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
-            ccs_StashOfItems[i].GetComponent<ItemObj>().io_invIconObject.transform.localScale = new Vector2(1.0f, 1.0f);
+            ccs_StashOfItems[i].GetComponent<ItemObj>().io_invIconObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+        if (ccs_WagonOpen)//Only show the wagon contents
+        {
+            for (int i = 0; i < ccs_CurPartyBagsContents.Count; ++i)
+            {
+                ccs_CurPartyBagsContents[i].GetComponent<ItemObj>().io_invIconObject.transform.SetParent(ccs_PartyInvenPanel.transform);
+                ccs_CurPartyBagsContents[i].GetComponent<ItemObj>().io_invIconObject.SetActive(false);
+                ccs_CurPartyBagsContents[i].GetComponent<ItemObj>().io_invIconObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            }
+            for (int i = 0; i < ccs_CurPartyWagonContents.Count; ++i)
+            {
+                ccs_CurPartyWagonContents[i].GetComponent<ItemObj>().io_invIconObject.transform.SetParent(ccs_PartyInvenPanel.transform);
+                ccs_CurPartyWagonContents[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
+                ccs_CurPartyWagonContents[i].GetComponent<ItemObj>().io_invIconObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            }
+        }
+        else //else we're looking at the bags and shouldn't show what's in the wagon
+        {
+            for (int i = 0; i < ccs_CurPartyBagsContents.Count; ++i)
+            {
+                ccs_CurPartyBagsContents[i].GetComponent<ItemObj>().io_invIconObject.transform.SetParent(ccs_PartyInvenPanel.transform);
+                ccs_CurPartyBagsContents[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
+                ccs_CurPartyBagsContents[i].GetComponent<ItemObj>().io_invIconObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            }
+            for (int i = 0; i < ccs_CurPartyWagonContents.Count; ++i)
+            {
+                ccs_CurPartyWagonContents[i].GetComponent<ItemObj>().io_invIconObject.transform.SetParent(ccs_PartyInvenPanel.transform);
+                ccs_CurPartyWagonContents[i].GetComponent<ItemObj>().io_invIconObject.SetActive(false);
+                ccs_CurPartyWagonContents[i].GetComponent<ItemObj>().io_invIconObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            }
         }
     }
 
