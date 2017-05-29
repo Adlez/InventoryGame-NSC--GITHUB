@@ -17,6 +17,7 @@ public class ChangingContainerScript : MonoBehaviour
     //Bag Items will go into Stash or Pile
 
     public GameObject ccs_CurParty;
+    public GameObject ccs_GameControllerObj;
     public List<GameObject> ccs_CurPartyPileOfLoot = new List<GameObject>();
     public List<GameObject> ccs_CurPartyBagsContents = new List<GameObject>();
     public List<GameObject> ccs_CurPartyWagonContents = new List<GameObject>();
@@ -49,11 +50,7 @@ public class ChangingContainerScript : MonoBehaviour
         ccs_PartyPilePanel.SetActive(true);
 
         ccs_CurParty = GameControllerScript.gc_Parties[curPartyID];
-        ccs_CurPartyBagsContents = ccs_CurParty.GetComponent<PartyObj>().po_ItemsInBagsList;
-        ccs_CurPartyPileOfLoot = ccs_CurParty.GetComponent<PartyObj>().po_ItemsInExcavationPile;
-        ccs_CurPartyWagonContents = ccs_CurParty.GetComponent<PartyObj>().po_ItemsInWagonList;
-        ccs_StashOfItems = GameControllerScript.gc_PlayerStash;
-
+        GetCurPartyInventory();
         DisplayItems();
     }
 
@@ -66,11 +63,7 @@ public class ChangingContainerScript : MonoBehaviour
         ccs_PartyPilePanel.SetActive(true);
 
         ccs_CurParty = GameControllerScript.gc_Parties[curPartyID];
-        ccs_CurPartyBagsContents = ccs_CurParty.GetComponent<PartyObj>().po_ItemsInBagsList;
-        ccs_CurPartyPileOfLoot = ccs_CurParty.GetComponent<PartyObj>().po_ItemsInExcavationPile;
-        ccs_CurPartyWagonContents = ccs_CurParty.GetComponent<PartyObj>().po_ItemsInWagonList;
-        ccs_StashOfItems = GameControllerScript.gc_PlayerStash;
-
+        GetCurPartyInventory();
         DisplayItems();
     }
 
@@ -88,28 +81,32 @@ public class ChangingContainerScript : MonoBehaviour
         ccs_PartyInvenPanel.SetActive(true);
 
         ccs_CurParty = GameControllerScript.gc_Parties[curPartyID];
+        GetCurPartyInventory();
+
+        //DisplayItems();
+        ccs_GameControllerObj.GetComponent<DisplayInventory>().DisplayPlayerStash(1);
+        ccs_GameControllerObj.GetComponent<DisplayInventory>().DisplayPartyBags();
+    }
+
+    void GetCurPartyInventory()
+    {
         ccs_CurPartyBagsContents = ccs_CurParty.GetComponent<PartyObj>().po_ItemsInBagsList;
         ccs_CurPartyPileOfLoot = ccs_CurParty.GetComponent<PartyObj>().po_ItemsInExcavationPile;
         ccs_CurPartyWagonContents = ccs_CurParty.GetComponent<PartyObj>().po_ItemsInWagonList;
         ccs_StashOfItems = GameControllerScript.gc_PlayerStash;
+    }
 
-        DisplayItems();
+    void SetCurPartyInventory()
+    {
+        ccs_CurParty.GetComponent<PartyObj>().po_ItemsInBagsList = ccs_CurPartyBagsContents;
+        ccs_CurParty.GetComponent<PartyObj>().po_ItemsInExcavationPile = ccs_CurPartyPileOfLoot;
+        ccs_CurParty.GetComponent<PartyObj>().po_ItemsInWagonList = ccs_CurPartyWagonContents;
+        GameControllerScript.gc_PlayerStash = ccs_StashOfItems;
     }
 
     void DisplayItems()
     {
-        //for(int i = 0; i < ccs_CurPartyBagsContents.Count; ++i)
-        //{
-        //    ccs_CurPartyBagsContents[i].GetComponent<ItemObj>().io_invIconObject.transform.SetParent(ccs_PartyInvenPanel.transform);
-        //    ccs_CurPartyBagsContents[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
-        //    ccs_CurPartyBagsContents[i].GetComponent<ItemObj>().io_invIconObject.transform.localScale = new Vector2(1.0f, 1.0f);
-        //}
-        //for (int i = 0; i < ccs_CurPartyWagonContents.Count; ++i)
-        //{
-        //    ccs_CurPartyWagonContents[i].GetComponent<ItemObj>().io_invIconObject.transform.SetParent(ccs_PartyInvenPanel.transform);
-        //    ccs_CurPartyWagonContents[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
-        //    ccs_CurPartyWagonContents[i].GetComponent<ItemObj>().io_invIconObject.transform.localScale = new Vector2(1.0f, 1.0f);
-        //}
+        GetCurPartyInventory();
         for (int i = 0; i < ccs_CurPartyPileOfLoot.Count; ++i)
         {
             ccs_CurPartyPileOfLoot[i].GetComponent<ItemObj>().io_invIconObject.transform.SetParent(ccs_PartyPilePanel.transform);
@@ -158,11 +155,13 @@ public class ChangingContainerScript : MonoBehaviour
     {
         css_Location = location;
     }
+
     public void OpenWagon()
     {
         ccs_WagonOpen = !ccs_WagonOpen;
     }
 
+    //When buying an item there might be mutliple things made because there's two different methods doing it
     public void ChangeContainer(GameObject item)
     {
         //Select Wagon or Bags
@@ -170,6 +169,8 @@ public class ChangingContainerScript : MonoBehaviour
         //-10 Unassigned,-3 Stash -2 Shop, -1 Loot Pile,
         //0 Party 1 Bags, 1 Party 2 Bags, 2 Party 3 Bags, 3 Party 4 Bags, 
         //10 Party 1 Wagon, 11 Party 2 Wagon, 12 Party 3 Wagon, 13 Party 4 Wagon
+        ccs_CurParty = GameControllerScript.gc_Parties[GameControllerScript.GetSelectedPartyIndex()];
+        GetCurPartyInventory();
         int curContainer = item.GetComponent<ItemObj>().io_CurrentContainer;
         bool hasWagon = ccs_CurParty.GetComponent<PartyObj>().po_HasWagon;
         if(item.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>() == null)
@@ -204,7 +205,7 @@ public class ChangingContainerScript : MonoBehaviour
             ccs_StashOfItems.Add(item);
             item.GetComponent<ItemObj>().io_invIconObject.transform.SetParent(ccs_StashPanel.transform);
         }
-        else if (curContainer == 0 && css_Location == "Pile" || curContainer == 1 && css_Location == "Pile" || curContainer == 2 && css_Location == "Pile" || curContainer == 3 && css_Location == "Pile")//In a wagon put it in the pile
+        else if (curContainer == 0 && css_Location == "Pile" || curContainer == 1 && css_Location == "Pile" || curContainer == 2 && css_Location == "Pile" || curContainer == 3 && css_Location == "Pile")//In a bags put it in the pile
         {
             item.GetComponent<ItemObj>().io_CurrentContainer = -1;
             ccs_CurPartyBagsContents.Remove(item);
@@ -240,9 +241,6 @@ public class ChangingContainerScript : MonoBehaviour
             Debug.Log("The Item is not currently in a container, find where it came from and remedy this issue. " + curContainer.ToString());
         }
         //Now we put our modified lists back into the Party's list
-        ccs_CurParty.GetComponent<PartyObj>().po_ItemsInBagsList = ccs_CurPartyBagsContents;
-        ccs_CurParty.GetComponent<PartyObj>().po_ItemsInExcavationPile = ccs_CurPartyPileOfLoot;
-        ccs_CurParty.GetComponent<PartyObj>().po_ItemsInWagonList = ccs_CurPartyWagonContents;
-        GameControllerScript.gc_PlayerStash = ccs_StashOfItems;
+        SetCurPartyInventory();
     }
 }

@@ -36,11 +36,19 @@ public class DisplayInventory : MonoBehaviour
         }
     }
 
-    public void DisplayPartyBags(int activePartyID)
+    public void DisplayPartyBags()
     {
-        for(int i = 0; i < GameControllerScript.gc_Parties[activePartyID].GetComponent<PartyObj>().po_IconsOfItemsInBagsList.Count; ++i)
+        int activePartyID = GameControllerScript.GetSelectedPartyIndex();
+        for (int a = 0; a < GameControllerScript.gc_Parties.Length; ++a)
         {
-            GameControllerScript.gc_Parties[activePartyID].GetComponent<PartyObj>().po_IconsOfItemsInBagsList[i].SetActive(true);
+            for (int i = 0; i < GameControllerScript.gc_Parties[a].GetComponent<PartyObj>().po_ItemsInBagsList.Count; ++i)
+            {
+                GameControllerScript.gc_Parties[a].GetComponent<PartyObj>().po_ItemsInBagsList[i].GetComponent<ItemObj>().io_invIconObject.SetActive(false);
+            }
+        }
+        for(int i = 0; i < GameControllerScript.gc_Parties[activePartyID].GetComponent<PartyObj>().po_ItemsInBagsList.Count; ++i)
+        {
+            GameControllerScript.gc_Parties[activePartyID].GetComponent<PartyObj>().po_ItemsInBagsList[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
         }
         //DestroyPartyBagIcons(activePartyID);
         //CreatePartyBagIcons(activePartyID);
@@ -125,9 +133,13 @@ public class DisplayInventory : MonoBehaviour
                     stashItemObj.GetComponent<ItemObj>().oddsOfFinding = originalItem.GetComponent<ItemObj>().oddsOfFinding;
                     stashItemObj.GetComponent<ItemObj>().maxFindAtOnce = originalItem.GetComponent<ItemObj>().maxFindAtOnce;
                     stashItemObj.GetComponent<ItemObj>().typeID = originalItem.GetComponent<ItemObj>().typeID;
+                    stashItemObj.GetComponent<ItemObj>().io_CurrentContainer = -3; //Stash
 
                     GameObject newIcon = IconObj.MakeIconObject(stashItemObj, gcScript.gc_PlayerStashPanel, "Item");
-                    newIcon.GetComponent<Button>().onClick.AddListener(delegate { RemoveFromStash(stashItemObj, GameControllerScript.GetSelectedPartyIndex()); });
+
+                    newIcon.GetComponent<Button>().onClick.AddListener(delegate {di_GameController.GetComponent<GameControllerScript>().gc_ContainerChangeObject.GetComponent<ChangingContainerScript>().ChangeContainer(stashItemObj); });
+
+                    //newIcon.GetComponent<Button>().onClick.AddListener(delegate { RemoveFromStash(stashItemObj, GameControllerScript.GetSelectedPartyIndex()); });
                     stashItemObj.GetComponent<ItemObj>().io_invIconObject = newIcon;
                     di_PlayerStashIconList.Add(newIcon);
                 }
@@ -189,7 +201,7 @@ public class DisplayInventory : MonoBehaviour
         {
             //Add to the party's inventory
             activeParty.po_CurInventorySize++;
-            activeParty.po_ItemsInBagsList.Add(item);
+//            activeParty.po_ItemsInBagsList.Add(item);
             //activeParty.po_InventoryIndex[item.GetComponent<ItemObj>().idInArrays]++;
 
             //Remove from the Stash
@@ -218,7 +230,7 @@ public class DisplayInventory : MonoBehaviour
         var theParty = GameControllerScript.gc_Parties[partyIndex].GetComponent<PartyObj>();
         var gcScript = di_GameController.GetComponent<GameControllerScript>();
 
-        DisplayPartyBags(partyIndex);
+        DisplayPartyBags();
 
         //theParty.po_IconsOfItemsInBagsList.Clear();
 

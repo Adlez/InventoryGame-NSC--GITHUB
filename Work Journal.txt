@@ -1,4 +1,30 @@
 Treasure Scavenge TO-DO List
+-May 29th 2017
+----------------
+Fixes:
+	c. is fixed, ironically a. and b. are still issues.
+		The Fix: the issue was two scripts were creating the items, and that there was a 
+		function call that added items to the "inventory", using items that didn't have
+		the correct function delegation
+	There was another issue with the items not being added to inventories correctly.
+		The issue was that when an item was added to an inventory it was added to all party's 
+		inventories. 
+		This was fixed by getting and then setting the inventories in script (ChangeContainer),
+			since only most places in the script were "getting" the inventories, but the one place
+			that needed it most (the funciton that set the items properly at the end), did not.
+			Two new functions were made for clarity and the "Get" is called in nearly every other
+			function of the script.
+
+		
+Short Term issues:
+	a. Excavated Items are only being created once, or just the icons are created once
+		something like that. Find the cause of the issue.
+	b. Fix a. 
+
+ChangingContainerScript.cs, just io_CurrentContainer in general, might/should use
+	party ID *-2 to identify being in a particular party's stash
+----------------
+
 -May 29th 2017 (13:37)
 ----------------
 Short Term / High Priority goals:
