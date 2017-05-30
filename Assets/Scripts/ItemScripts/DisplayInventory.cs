@@ -21,6 +21,8 @@ public class DisplayInventory : MonoBehaviour
     public int[] di_StashArray;
     public int[] di_PartyBagsArray;
 
+    public List<GameObject> di_TempPileList = new List<GameObject>();
+
     //public DisplayItemIcon[] di_ItemIconList;
 
     public bool di_DisplayListIsCreated;
@@ -33,6 +35,26 @@ public class DisplayInventory : MonoBehaviour
         if(di_BinaryLookAtStash == 1) // we're about to look at the stash
         {
             CreateStashItems();
+        }
+    }
+
+    public void DisplayLootPile(int partyInLevel)
+    {
+        //int activePartyID = GameControllerScript.GetSelectedPartyIndex();
+        int activePartyID = partyInLevel;
+
+        for (int a = 0; a < GameControllerScript.gc_Parties.Length; ++a)
+        {
+            for (int i = 0; i < GameControllerScript.gc_Parties[a].GetComponent<PartyObj>().po_ItemsInExcavationPile.Count; ++i)
+            {
+                GameControllerScript.gc_Parties[a].GetComponent<PartyObj>().po_ItemsInExcavationPile[i].GetComponent<ItemObj>().io_invIconObject.SetActive(false);
+            }
+        }
+        for (int i = 0; i < GameControllerScript.gc_Parties[activePartyID].GetComponent<PartyObj>().po_ItemsInExcavationPile.Count; ++i)
+        {
+            GameControllerScript.gc_Parties[activePartyID].GetComponent<PartyObj>().po_ItemsInExcavationPile[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
+            // **FIX** UHHHHHHHH, late at night, not thinking much. This is probably an issue with the transform of the icons not being set at the right time, probably somewhere
+            // when the loot items are initially created. Fix it after some rest
         }
     }
 
@@ -50,8 +72,6 @@ public class DisplayInventory : MonoBehaviour
         {
             GameControllerScript.gc_Parties[activePartyID].GetComponent<PartyObj>().po_ItemsInBagsList[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
         }
-        //DestroyPartyBagIcons(activePartyID);
-        //CreatePartyBagIcons(activePartyID);
     }
 
 /*    public void DestroyPartyBagIcons(int activePartyID)
@@ -235,8 +255,6 @@ public class DisplayInventory : MonoBehaviour
         //theParty.po_IconsOfItemsInBagsList.Clear();
 
         List<GameObject> tempInvenList = new List<GameObject>();
-        
-        
     }
 
 

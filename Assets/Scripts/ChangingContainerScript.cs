@@ -34,7 +34,7 @@ public class ChangingContainerScript : MonoBehaviour
     public string css_Location = "Null";
     public bool ccs_WagonOpen = false;
 
-
+    /*
     public void UIButtonClicked(int curPartyID)
     {
         if(curPartyID < 0)
@@ -52,7 +52,7 @@ public class ChangingContainerScript : MonoBehaviour
         ccs_CurParty = GameControllerScript.gc_Parties[curPartyID];
         GetCurPartyInventory();
         DisplayItems();
-    }
+    }*/
 
     public void UIExcavationButtonClicked(int curPartyID)
     {
@@ -64,7 +64,9 @@ public class ChangingContainerScript : MonoBehaviour
 
         ccs_CurParty = GameControllerScript.gc_Parties[curPartyID];
         GetCurPartyInventory();
-        DisplayItems();
+        ccs_GameControllerObj.GetComponent<DisplayInventory>().DisplayPlayerStash(1);
+        ccs_GameControllerObj.GetComponent<DisplayInventory>().DisplayLootPile(curPartyID);
+        //DisplayItems();
     }
 
     public void UIStashButtonClicked(int curPartyID)

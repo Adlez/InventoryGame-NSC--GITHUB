@@ -20,6 +20,7 @@ Short Term issues:
 	a. Excavated Items are only being created once, or just the icons are created once
 		something like that. Find the cause of the issue.
 	b. Fix a. 
+Note: you can find known problems in code by searching for " **FIX** " in the scripts
 
 ChangingContainerScript.cs, just io_CurrentContainer in general, might/should use
 	party ID *-2 to identify being in a particular party's stash
