@@ -69,6 +69,45 @@ public class ItemCatalogueData : MonoBehaviour
         }
     }
 
+    public GameObject CreateAnItemAndIcon(int itemID, int firstContainer, GameObject parentObj, GameObject iconDisplayObj)
+    {
+        GameObject newItem = new GameObject("Item");//Temp name
+        newItem.transform.SetParent(parentObj.transform);
+        newItem.AddComponent<ItemObj>();
+        newItem.transform.localScale = newItem.transform.localScale * 1;// * 100;
+        
+        newItem.GetComponent<ItemObj>().isArtefact = ItemCatalogueConstantValues.ARTEFACTYESNO[itemID];
+        newItem.GetComponent<ItemObj>().cashValue = ItemCatalogueConstantValues.CASHVALUEOFITEM[itemID];
+        newItem.GetComponent<ItemObj>().itemName = ItemCatalogueConstantValues.NAMEOFITEM[itemID];
+        newItem.GetComponent<ItemObj>().idInArrays = ItemCatalogueConstantValues.IDOFITEM[itemID];
+        newItem.GetComponent<ItemObj>().invIcon = ItemCatalogueConstantValues.ICONOFITEM[itemID]; //Necessary?
+        newItem.GetComponent<ItemObj>().fullImage = ItemCatalogueConstantValues.PORTRAITOFITEM[itemID];
+        newItem.GetComponent<ItemObj>().description = ItemCatalogueConstantValues.ITEMDESCRIPTION[itemID];
+        newItem.GetComponent<ItemObj>().oddsOfFinding = ItemCatalogueConstantValues.ODDSOFFINDING[itemID];
+        newItem.GetComponent<ItemObj>().maxFindAtOnce = ItemCatalogueConstantValues.MAXAMOUNTTOFIND[itemID];
+        newItem.GetComponent<ItemObj>().typeID = ItemCatalogueConstantValues.ITEMTYPEID[itemID];
+        newItem.GetComponent<ItemObj>().io_CurrentContainer = firstContainer;
+
+        GameObject iconObj = IconObj.MakeIconObject(newItem, iconDisplayObj, newItem.GetComponent<ItemObj>().io_ObjectType);
+        GameObject iconObjS = IconObj.MakeIconObject(newItem, iconDisplayObj, newItem.GetComponent<ItemObj>().io_ObjectType);
+        iconObj.transform.SetParent(iconDisplayObj.transform);
+        iconObjS.transform.SetParent(iconDisplayObj.transform);
+        iconObj.GetComponent<RectTransform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
+
+        newItem.GetComponent<ItemObj>().io_invIconObject = iconObj;
+        newItem.GetComponent<ItemObj>().io_storeIconObject = iconObjS;
+        newItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<IconObj>().GetComponent<Image>().sprite = ItemCatalogueConstantValues.ICONOFITEM[itemID];
+        newItem.GetComponent<ItemObj>().io_storeIconObject.GetComponent<IconObj>().GetComponent<Image>().sprite = ItemCatalogueConstantValues.ICONOFITEM[itemID];
+
+        newItem.GetComponent<ItemObj>().io_invIconObject.SetActive(false);
+        newItem.GetComponent<ItemObj>().io_storeIconObject.SetActive(false);
+
+        newItem.GetComponent<ItemObj>().io_invIconObject.name += " New Item Icon";
+        newItem.GetComponent<ItemObj>().io_storeIconObject.name = newItem.name + " Icon InStore";
+
+        return newItem;
+    }
+
     public void DisplayTestShop()
     {
         if (!icd_ItemsCreated)

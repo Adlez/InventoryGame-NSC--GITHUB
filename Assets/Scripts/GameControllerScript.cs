@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class GameControllerScript : MonoBehaviour
 {
     //Globals
+    public static GameControllerScript gc_Script;
+
     public static int gc_SelectedParty = 0;
     public static int gc_Munnies;
     public static int[] gc_StashOfItems = new int[16];
@@ -152,7 +154,7 @@ public class GameControllerScript : MonoBehaviour
 
         if (theParty.po_PartyIsActive == true)
         {
-            partyIsBusy = true;
+            partyIsBusy = true; //party 0 and 3 seem to be using each other's value here
         }
         else { partyIsBusy = false; }
 
@@ -160,7 +162,7 @@ public class GameControllerScript : MonoBehaviour
         {
             for (int i = 0; i < gc_SelectedLevelToolRequired.Length; ++i) //checking if party has tools needed for journey
             {
-                if (theLevel.lv_IsActive == false && gc_SelectedLevelToolRequired[i] <= gc_PlayerToolCount[i])
+                if (theLevel.lv_IsActive == false && gc_SelectedLevelToolRequired[i] <= gc_PlayerToolCount[i]) //It looks like this will only search for the first correct tool
                 {
                     gc_PlayerToolCount[i] -= gc_SelectedLevelToolRequired[i];
                     //reduce energy?
@@ -169,7 +171,7 @@ public class GameControllerScript : MonoBehaviour
                 }
                 else
                 {
-                    //otherwise the level is occupied or the right tool aren't there
+                    //otherwise the level is occupied or the right tool(s) aren't there
                     gc_GoodToGoOnJourney = false;
                     hasRequiredTool = false;
                     textToDisplay += textNoGo;
@@ -237,6 +239,7 @@ public class GameControllerScript : MonoBehaviour
                 float displaySecondsGoneFor = Mathf.Floor(secondsGoneFor % 60);
                 float hoursGoneFor = minutesGoneFor / 60;
                 gc_MenuNavObj.GetComponent<MenuNavigaion>().mn_PartyAdventureTimerArray[i].text = minutesGoneFor.ToString("00") + ":" + displaySecondsGoneFor.ToString("00") + ":" + microsecondsGoneFor.ToString("00");
+                // **FIX** Change this to display a count down timer
 
                 //Check for Wagon
                 if (partyObjComp.po_HasWagon)

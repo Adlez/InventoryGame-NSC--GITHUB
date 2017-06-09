@@ -1,4 +1,37 @@
 Treasure Scavenge TO-DO List
+
+Note: you can find known problems in code by searching for " **FIX** " in the scripts
+
+-June 9th 2017 (14:10)
+----------------
+	Previous bug a. was caused because no new items were created, merely referenced by the "new item"
+	Applied fix by creating a new function in ItemCatalogue.cs that creates a new item by taking in an ID
+		a container, and two objects. One object for the parent of the item, and the second a parent for
+		the icon of that item.
+	Therefore all previous short term bugs have been dealt with.
+	
+	New issues:
+		a. when the stash panel is closed (and maybe in other cases) all icons (and maybe items) are destroyed
+			originally this was intentional and they would be re-created when needed. However, there are instances
+			where items/icons should exist but have been destroyed and aren't recreated. Find where items are being 
+			destroyed and where they are being told to be made again
+		b. find a better method, for example: move the icons around instead of destroying them
+		c. party 0 and party 3 seem to be sharing their "PartyIsActive" bool, or something like this.
+			When party 0 is sent on an expedition: if 3 is out the message indicating party 0 is busy will display
+			and party 0's timer is displaying.
+			It looks as though party 3 is getting party 1's values somehow
+			This is odd and needs to be fixed soon, so find the cause.
+		d. fix c.
+		e. the excavation buttons are displaying the "active" party's inventory, which ends up being the same party
+			no matter which button is clicked. For now the arrows can still be used to select the correct party to 
+			send the loot too, but this can't stay that way, those arrows are going to be disabled eventually on the 
+			loot screen. Find the cause for the same party being displayed when the excavation buttons are clicked.
+		f. fix e.
+		g. Can't remember right now, but there's another pressing issue in the code. Will update when I remember.
+			
+		
+----------------
+
 -May 29th 2017
 ----------------
 Fixes:

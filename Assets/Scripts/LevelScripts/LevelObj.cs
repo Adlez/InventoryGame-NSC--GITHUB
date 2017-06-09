@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System;
 
 public class LevelObj : MonoBehaviour
 {
@@ -8,6 +11,7 @@ public class LevelObj : MonoBehaviour
     public GameObject lv_GameController;
     public GameObject lv_PartyObject;
     public GameObject lv_IconObject;
+    public GameObject lv_LootDisplayPanel;
     public string lv_Name;
     public string lv_ObjectType = "Level";
     public int lv_ID;
@@ -39,8 +43,8 @@ public class LevelObj : MonoBehaviour
             {
                 int numFound = 0;
                 //var referenceToItemCatalogue = ItemCatalogueData.itemObj;
-                GameObject Item = lv_GameController.GetComponent<GameControllerScript>().gc_CatalogueObj.GetComponent<ItemCatalogueData>().icd_ArrayOfItems[i];
-                int numCanFindAtOnce = Item.GetComponent<ItemObj>().maxFindAtOnce;
+                GameObject LootItem = lv_GameController.GetComponent<GameControllerScript>().gc_CatalogueObj.GetComponent<ItemCatalogueData>().icd_ArrayOfItems[i];
+                int numCanFindAtOnce = LootItem.GetComponent<ItemObj>().maxFindAtOnce;
                 //ItemCatalogueData.itemObj.icd_ArrayOfItems[i].GetComponent<ItemObj>().maxFindAtOnce;
 
                 if (numCanFindAtOnce >= numFound)
@@ -54,13 +58,20 @@ public class LevelObj : MonoBehaviour
 
     private void RollForItem(int index)
     {
-        int odds = (int)Random.Range(0, 100);
+        lv_LootDisplayPanel = lv_GameController.GetComponent<GameControllerScript>().gc_LootDisplayPanel4ExcavationFuncitons;
+        int odds = (int)UnityEngine.Random.Range(0, 100);
 
         if (odds <= lv_GameController.GetComponent<GameControllerScript>().gc_CatalogueObj.GetComponent<ItemCatalogueData>().icd_ArrayOfItems[index].GetComponent<ItemObj>().oddsOfFinding)
         {
             _potentialLootItem = new GameObject(); //Create new object
             _potentialLootItem = lv_GameController.GetComponent<GameControllerScript>().gc_CatalogueObj.GetComponent<ItemCatalogueData>().icd_ArrayOfItems[index]; //Assign the new object the attributes of the correct item
-            lv_PotentialLootList.Add(_potentialLootItem); //Add the new object to the list
+            GameObject lootItem = lv_GameController.GetComponent<GameControllerScript>().gc_CatalogueObj.GetComponent<ItemCatalogueData>().CreateAnItemAndIcon(_potentialLootItem.GetComponent<ItemObj>().idInArrays, -1, lv_LootDisplayPanel, lv_LootDisplayPanel);//shouldn't be the same when done
+            lootItem.GetComponent<ItemObj>().io_invIconObject.AddComponent<Button>();
+            lootItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate { lv_GameController.GetComponent<GameControllerScript>().gc_ContainerChangeObject.GetComponent<ChangingContainerScript>().ChangeContainer(lootItem); });
+
+            Destroy(_potentialLootItem);
+
+            lv_PotentialLootList.Add(lootItem); //Add the new object to the list
         }
     }
 

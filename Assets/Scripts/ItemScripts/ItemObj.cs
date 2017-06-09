@@ -32,11 +32,11 @@ public class ItemObj : MonoBehaviour
         {
             //Confirm the purchase
             //Add the item to the "Stash", inventory whatever; add by array
-            GameControllerScript.gc_StashOfItems[item.GetComponent<ItemObj>().idInArrays]++;
-            item.GetComponent<ItemObj>().io_CurrentContainer = -3;
+//            GameControllerScript.gc_StashOfItems[item.GetComponent<ItemObj>().idInArrays]++;
+//           item.GetComponent<ItemObj>().io_CurrentContainer = -3;
             GameControllerScript.gc_PlayerStash.Add(item);
             //take the player's money
-            GameControllerScript.gc_Munnies -= item.GetComponent<ItemObj>().cashValue;
+//            GameControllerScript.gc_Munnies -= item.GetComponent<ItemObj>().cashValue;
             //item.GetComponent<ItemObj>().io_InInventory = true;
             //update the inventory display
         }
@@ -47,10 +47,10 @@ public class ItemObj : MonoBehaviour
         //Check if a Shop is the current active panel
         //Confirm player wants to sell the item
         //remove item from stash, or inventory or whatever; subrtact from array
-        GameControllerScript.gc_StashOfItems[item.GetComponent<ItemObj>().idInArrays]--;
-        GameControllerScript.gc_PlayerStash.Remove(item);
+//        GameControllerScript.gc_StashOfItems[item.GetComponent<ItemObj>().idInArrays]--;
+//        GameControllerScript.gc_PlayerStash.Remove(item);
         //give money to player
-        GameControllerScript.gc_Munnies += item.GetComponent<ItemObj>().cashValue; //Multiplied by a percentage determined in a constants file
+//        GameControllerScript.gc_Munnies += item.GetComponent<ItemObj>().cashValue; //Multiplied by a percentage determined in a constants file
         //update the inventory display
     }
 }
