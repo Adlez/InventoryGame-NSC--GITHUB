@@ -1,6 +1,13 @@
 Treasure Scavenge TO-DO List
 
 Note: you can find known problems in code by searching for " **FIX** " in the scripts
+-June 15th 2017(00:33)
+----------------
+	New Issue; Top Priority
+		- ShopDataCatalogue.ca line 67
+		the thing needs a parent, but it's being not being set because Global variables bluuuuu.
+		Fix it soon.
+----------------
 
 -June 9th 2017 (14:10)
 ----------------

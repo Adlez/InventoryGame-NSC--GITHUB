@@ -46,6 +46,7 @@ public class GameControllerScript : MonoBehaviour
     public int inspectorViewOfSelectedParty;
 
     public int gc_SelectedLevel;
+
     string textToDisplay = "";
     bool gc_GoodToGoOnJourney; //probably not necessary
     bool StashIconsCreated;

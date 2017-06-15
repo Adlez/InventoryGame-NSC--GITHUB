@@ -153,11 +153,11 @@ public class IconObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         { 
             if (itemParentName == "ShopContentPanel")//Icon is in the shop, probably
             {
-                item.GetComponent<ItemObj>().BuyItem(item);
+                //item.GetComponent<ItemObj>().BuyItem(item);
             }
             else//Icon is in the stash or a party inventory, probably
             {
-                item.GetComponent<ItemObj>().SellItem(item);
+                //item.GetComponent<ItemObj>().SellItem(item);
             }
            
         }

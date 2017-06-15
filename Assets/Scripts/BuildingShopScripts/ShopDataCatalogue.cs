@@ -61,21 +61,35 @@ public class ShopDataCatalogue : MonoBehaviour
         if (item.GetComponent<ItemObj>().cashValue < GameControllerScript.gc_Munnies)
         {
             //Confirm the purchase
+            
+            //This is ending up as null
+            // **FIX**
+            GameObject tempParentObj = DisplayInventory.inventoryList.GetComponent<DisplayInventory>().di_TempParentOfStashItems;
+
             //Add the item to the "Stash", inventory whatever; add by array
-            GameControllerScript.gc_StashOfItems[item.GetComponent<ItemObj>().idInArrays] += 1;
-            item.GetComponent<ItemObj>().io_CurrentContainer = -3; //Set container to Stash
+            GameControllerScript.gc_StashOfItems[item.GetComponent<ItemObj>().idInArrays] += 1;//just an int, not the object itself.
+            GameObject lootItem = sdc_GameControllerObj.GetComponent<GameControllerScript>().gc_CatalogueObj.GetComponent<ItemCatalogueData>().CreateAnItemAndIcon(item.GetComponent<ItemObj>().idInArrays, -3, tempParentObj, tempParentObj);
+
+
+            GameControllerScript.gc_PlayerStash.Add(lootItem);//For the sake of having the objects created
+            lootItem.GetComponent<ItemObj>().io_CurrentContainer = -3; //Set container to Stash
             //Remove any button Functionality that may be present
-            item.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.RemoveAllListeners();
+            lootItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.RemoveAllListeners();
             //Add Function to button
-            item.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate 
-                { sdc_GameControllerObj.GetComponent<GameControllerScript>().gc_ContainerChangeObject.GetComponent<ChangingContainerScript>().ChangeContainer(item); });
-            GameControllerScript.gc_PlayerStash.Add(item);
+            lootItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate 
+                { sdc_GameControllerObj.GetComponent<GameControllerScript>().gc_ContainerChangeObject.GetComponent<ChangingContainerScript>().ChangeContainer(lootItem); });
+            GameControllerScript.gc_PlayerStash.Add(lootItem);
             //take the player's money
-            GameControllerScript.gc_Munnies -= item.GetComponent<ItemObj>().cashValue;
-            item.GetComponent<ItemObj>().io_InInventory = true;
+            GameControllerScript.gc_Munnies -= lootItem.GetComponent<ItemObj>().cashValue;
+            lootItem.GetComponent<ItemObj>().io_InInventory = true;
 
             //update the inventory display
             sdc_GameControllerObj.GetComponent<GameControllerScript>().UpdateMunnieDisplay();
+
+            //Note on some functionality:
+            //Originally icons were meant to be created and destroyed dynamically when panels were being displayed in order to save processor power and memory
+            //This has proven to make the code too complex across all the scripts since I didn't keep good track of when and where things are created and destroyed
+            //Now the code looks like a complete mess, but is functional across the board; At least functional where it counts so far.
         }
     }
 

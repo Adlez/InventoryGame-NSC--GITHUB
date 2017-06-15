@@ -42,6 +42,7 @@ public class MenuNavigaion : MonoBehaviour
     public GameObject mn_ExcavatedLootPanel;
     public GameObject mn_PartyInvenAndWagoDisplay;
     public GameObject mn_WagoInvenDisplayBtn;
+    public GameObject mn_InventorySometimesOffStuff;
     public Text mn_WagoInvenDisplayText;
 
     private void Awake()
@@ -51,6 +52,16 @@ public class MenuNavigaion : MonoBehaviour
         mn_PartyAdventureTimerArray[1] = mn_PartyAdventureTimer2;
         mn_PartyAdventureTimerArray[2] = mn_PartyAdventureTimer3;
         mn_PartyAdventureTimerArray[3] = mn_PartyAdventureTimer4;
+    }
+
+    public void ExtraFunctionToHideInventoryStuff()
+    {
+        mn_InventorySometimesOffStuff.SetActive(false);
+    }
+
+    public void MakeSureInventoryStuffIsShown()
+    {
+        mn_InventorySometimesOffStuff.SetActive(true);
     }
 
     public void ShowHideLevelPartyPanels()

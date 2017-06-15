@@ -31,10 +31,15 @@ public class DisplayInventory : MonoBehaviour
 
     public void DisplayPlayerStash(int di_BinaryLookAtStash)
     {
-        DestroyStashIcons();
+        di_PlayerStashItemList = GameControllerScript.gc_PlayerStash;
+        for (int i = 0; i < di_PlayerStashIconList.Count; ++i)
+        {
+            di_PlayerStashItemList[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
+        }
+        //DestroyStashIcons();
         if(di_BinaryLookAtStash == 1) // we're about to look at the stash
         {
-            CreateStashItems();
+            //CreateStashItems();
         }
     }
 
@@ -117,7 +122,7 @@ public class DisplayInventory : MonoBehaviour
         }
     }
 
-    public void CreateStashItems()
+    public void CreateStashItems()//created using the array
     {
         di_StashArray = GameControllerScript.gc_StashOfItems; //array of all items in game
         var gcScript = di_GameController.GetComponent<GameControllerScript>();
@@ -129,39 +134,42 @@ public class DisplayInventory : MonoBehaviour
                 int numOfItems = di_StashArray[i]; //get the number of the items
 
                 for (int j = 0; j < numOfItems; ++j)
-                {
-                    GameObject stashItemObj = new GameObject("ItemInStash");//Temp Name
-                    stashItemObj.transform.SetParent(di_TempParentOfStashItems.transform);
-                    stashItemObj.AddComponent<ItemObj>();
+                {//int itemID, int firstContainer, GameObject parentObj, GameObject iconDisplayObj
+                    GameObject stashItemObj = ItemCatalogueData.itemObj.CreateAnItemAndIcon(i, -3, gcScript.gc_PlayerStashPanel, gcScript.gc_PlayerStashPanel);// new GameObject("ItemInStash");//Temp Name
+                    //stashItemObj.transform.SetParent(di_TempParentOfStashItems.transform);
+                    //stashItemObj.AddComponent<ItemObj>();
 
-                    GameObject originalItem = gcScript.gc_CatalogueObj.GetComponent<ItemCatalogueData>().icd_ArrayOfItems[i];
+                    //GameObject originalItem = gcScript.gc_CatalogueObj.GetComponent<ItemCatalogueData>().icd_ArrayOfItems[i];
 
-                    stashItemObj.name += originalItem.name;
-                    stashItemObj.AddComponent<LayoutElement>().minHeight = 1.0f;
-                    stashItemObj.AddComponent<LayoutElement>().minWidth = 1.0f;
+                    //stashItemObj.name += originalItem.name;
+                    //stashItemObj.AddComponent<LayoutElement>().minHeight = 1.0f;
+                    //stashItemObj.AddComponent<LayoutElement>().minWidth = 1.0f;
 
 
-                    di_PlayerStashItemList.Add(stashItemObj);
+                    //di_PlayerStashItemList.Add(stashItemObj);
 
-                    stashItemObj.GetComponent<ItemObj>().isArtefact = originalItem.GetComponent<ItemObj>().isArtefact;
-                    stashItemObj.GetComponent<ItemObj>().cashValue = originalItem.GetComponent<ItemObj>().cashValue;
+                    //stashItemObj.GetComponent<ItemObj>().isArtefact = originalItem.GetComponent<ItemObj>().isArtefact;
+                    //stashItemObj.GetComponent<ItemObj>().cashValue = originalItem.GetComponent<ItemObj>().cashValue;
 
-                    stashItemObj.GetComponent<ItemObj>().idInArrays = originalItem.GetComponent<ItemObj>().idInArrays;
-                    stashItemObj.GetComponent<ItemObj>().invIcon = originalItem.GetComponent<ItemObj>().invIcon;
-                    stashItemObj.GetComponent<ItemObj>().fullImage = originalItem.GetComponent<ItemObj>().fullImage;
-                    stashItemObj.GetComponent<ItemObj>().description = originalItem.GetComponent<ItemObj>().description;
-                    stashItemObj.GetComponent<ItemObj>().oddsOfFinding = originalItem.GetComponent<ItemObj>().oddsOfFinding;
-                    stashItemObj.GetComponent<ItemObj>().maxFindAtOnce = originalItem.GetComponent<ItemObj>().maxFindAtOnce;
-                    stashItemObj.GetComponent<ItemObj>().typeID = originalItem.GetComponent<ItemObj>().typeID;
-                    stashItemObj.GetComponent<ItemObj>().io_CurrentContainer = -3; //Stash
+                    //stashItemObj.GetComponent<ItemObj>().idInArrays = originalItem.GetComponent<ItemObj>().idInArrays;
+                    //stashItemObj.GetComponent<ItemObj>().invIcon = originalItem.GetComponent<ItemObj>().invIcon;
+                    //stashItemObj.GetComponent<ItemObj>().fullImage = originalItem.GetComponent<ItemObj>().fullImage;
+                    //stashItemObj.GetComponent<ItemObj>().description = originalItem.GetComponent<ItemObj>().description;
+                    //stashItemObj.GetComponent<ItemObj>().oddsOfFinding = originalItem.GetComponent<ItemObj>().oddsOfFinding;
+                    //stashItemObj.GetComponent<ItemObj>().maxFindAtOnce = originalItem.GetComponent<ItemObj>().maxFindAtOnce;
+                    //stashItemObj.GetComponent<ItemObj>().typeID = originalItem.GetComponent<ItemObj>().typeID;
+                    //stashItemObj.GetComponent<ItemObj>().io_CurrentContainer = -3; //Stash
 
-                    GameObject newIcon = IconObj.MakeIconObject(stashItemObj, gcScript.gc_PlayerStashPanel, "Item");
+                    //GameObject newIcon = IconObj.MakeIconObject(stashItemObj, gcScript.gc_PlayerStashPanel, "Item");
 
-                    newIcon.GetComponent<Button>().onClick.AddListener(delegate {di_GameController.GetComponent<GameControllerScript>().gc_ContainerChangeObject.GetComponent<ChangingContainerScript>().ChangeContainer(stashItemObj); });
+                    stashItemObj.GetComponent<ItemObj>().io_invIconObject.AddComponent<Button>();
+                    stashItemObj.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate { di_GameController.GetComponent<GameControllerScript>().gc_ContainerChangeObject.GetComponent<ChangingContainerScript>().ChangeContainer(stashItemObj); });
+;
+                    //newIcon.GetComponent<Button>().onClick.AddListener(delegate {di_GameController.GetComponent<GameControllerScript>().gc_ContainerChangeObject.GetComponent<ChangingContainerScript>().ChangeContainer(stashItemObj); });
 
-                    //newIcon.GetComponent<Button>().onClick.AddListener(delegate { RemoveFromStash(stashItemObj, GameControllerScript.GetSelectedPartyIndex()); });
-                    stashItemObj.GetComponent<ItemObj>().io_invIconObject = newIcon;
-                    di_PlayerStashIconList.Add(newIcon);
+                    ////newIcon.GetComponent<Button>().onClick.AddListener(delegate { RemoveFromStash(stashItemObj, GameControllerScript.GetSelectedPartyIndex()); });
+                    //stashItemObj.GetComponent<ItemObj>().io_invIconObject = newIcon;
+                    di_PlayerStashIconList.Add(stashItemObj.GetComponent<ItemObj>().io_invIconObject);
                 }
             }
         }
