@@ -1,6 +1,43 @@
 Treasure Scavenge TO-DO List
 
 Note: you can find known problems in code by searching for " **FIX** " in the scripts
+Note: you can find Long-Term goals for the project at the bottom of this file.
+
+-June 27th 2017 (21:44)
+----------------
+Next on the To-Do list:
+new short term goals:
+	a. After excavation is completed the excavation buttons need to be disabled again, the party and the levels need
+		to set as not being active. 
+	b. characters need to not be all available by default, remove all but four from the player's available roster
+	c. create a shop that the player can hire new characters from (Adventure Co. ?), this function would likely be
+		nearly identical to buying an item from the shop.
+		
+*Long Term goal ix. 	create a universal "CreateItem" function
+this long term goal has been accomplished. The function exists in ItemCatalogueData.cs and is named: CreatAnItemAndIcon,
+	the function takes in an item's id number, the first container that the item is held by, the parent (which is currently the
+	same as the first container, and also the object/panel the icon should be displayed on)
+
+	
+
+fixes:
+	found the cause of problem c. from June 9th. The issue was being caused by using a greater than equal to sign
+	(>=) and a less than equal to (<=) in an if statement to determine if there was any issue with the party ID.
+	The issue was fixed by removing the chevrons from the logic statement.
+	
+	issue a. from June 9th has been repaired by never destroying the objects, instead only making the items icons
+	inactive and reactivating them when needed. The items were being destroyed in the ChangeContainer script but those
+	functions have been removed/commented out. The new method works but isn't ideal (the items are moved from list to list
+	and made visible or invisible depending on which container is being displayed, ideally the icons would be created and 
+	destroyed dynamically using integers), but it works for now at least.
+	
+	issue e. from June 9th was being caused by the buttons not altering the active party in the GameController script. New
+	function has been added to the four buttons to assign the ActiveParty to correct this and it is now (should be) working
+	as intended.
+	
+	still haven't rememberedwhat g. from  June 9th was.
+----------------
+
 -June 15th 2017(00:33)
 ----------------
 	New Issue; Top Priority
@@ -101,7 +138,7 @@ v. 		add UI control for gamecontroller
 vi. 	have timer STOP when excavation is ready
 vii.	have visible timers count DOWN instead of up
 viii. 	apply proper item, level, and character values
-ix. 	create a universal "CreateItem" function, I had one but I ended up losing it in
+check \ ix. 	create a universal "CreateItem" function, I had one but I ended up losing it in
 			making the new ChangeContainer functions
 x. 		create a script containing every function for every UI button and have the buttons
 			use that

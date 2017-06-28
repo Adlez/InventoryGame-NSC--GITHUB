@@ -64,6 +64,20 @@ public class GameControllerScript : MonoBehaviour
         return gc_SelectedParty;
     }
 
+    public void SetSelectedParty(int id)
+    {
+        gc_SelectedParty = id;
+        for (int j = 0; j < MenuNavigaion.menuNavCataloguePointer.mn_SelectedPartiesTextFields.Count; ++j)
+        {
+            //int partyIndexDisplay = gc_SelectedLevel + 1;
+            int tempInt = gc_SelectedParty;
+            tempInt += 1;
+            string tempString = tempInt.ToString();
+
+            MenuNavigaion.menuNavCataloguePointer.mn_SelectedPartiesTextFields[j].text = tempString;
+        }
+    }
+
     public void AdjustSelectedParty(int id)
     {
         if (gc_SelectedParty + id != -1 && gc_SelectedParty + id != 4)
@@ -87,11 +101,11 @@ public class GameControllerScript : MonoBehaviour
         }
     }
 
-    public void SetSelectedParty(int id)
+/*    public void SetSelectedParty(int id)
     {
         gc_SelectedParty = id;
     }
-   
+ */  
 
     void CheckLoot()
     {
@@ -105,7 +119,7 @@ public class GameControllerScript : MonoBehaviour
 
     public void AttemptAnAdventure(int partyID, int levelID)
     {
-        if(partyID <= 0 || partyID >= 3)
+        if(partyID < 0 || partyID > 3)
         {
             textToDisplay = "Something went screwy, party is being set to 1.";
             gc_MenuNavObj.GetComponent<MenuNavigaion>().mn_MessageToPlayerText.text = textToDisplay;

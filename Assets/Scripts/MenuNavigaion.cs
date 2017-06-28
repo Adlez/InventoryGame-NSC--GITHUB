@@ -148,9 +148,15 @@ public class MenuNavigaion : MonoBehaviour
         GameControllerScript.gc_CurActiveCanvasPanel = newPanel;
     }
 
+    // **FIX** rename function to FlipPanelOnOff
     public void HideOldPanel(GameObject oldPanel)
     {
         oldPanel.SetActive(!oldPanel.activeSelf);
+    }
+
+    public void HidePanel(GameObject panel)
+    {
+        panel.SetActive(false);
     }
 
     public static void UpdateDisplayPanel(string objectName, string objectDesc, Sprite objectPortrait)

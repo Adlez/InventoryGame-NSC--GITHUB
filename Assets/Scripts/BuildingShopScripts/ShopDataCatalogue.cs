@@ -9,6 +9,7 @@ public class ShopDataCatalogue : MonoBehaviour
 
     public GameObject sdc_GameControllerObj;
     public GameObject sdc_ItemCatalogue;
+    public GameObject sdc_StashContainer;
 
     public int[][] sds_AllShopsStock = new int[6][];
 
@@ -62,26 +63,21 @@ public class ShopDataCatalogue : MonoBehaviour
         {
             //Confirm the purchase
             
-            //This is ending up as null
-            // **FIX**
-            GameObject tempParentObj = DisplayInventory.inventoryList.GetComponent<DisplayInventory>().di_TempParentOfStashItems;
-
             //Add the item to the "Stash", inventory whatever; add by array
             GameControllerScript.gc_StashOfItems[item.GetComponent<ItemObj>().idInArrays] += 1;//just an int, not the object itself.
-            GameObject lootItem = sdc_GameControllerObj.GetComponent<GameControllerScript>().gc_CatalogueObj.GetComponent<ItemCatalogueData>().CreateAnItemAndIcon(item.GetComponent<ItemObj>().idInArrays, -3, tempParentObj, tempParentObj);
+            GameObject boughtItem = sdc_GameControllerObj.GetComponent<GameControllerScript>().gc_CatalogueObj.GetComponent<ItemCatalogueData>().CreateAnItemAndIcon(item.GetComponent<ItemObj>().idInArrays, -3, sdc_StashContainer, sdc_StashContainer);
 
-
-            GameControllerScript.gc_PlayerStash.Add(lootItem);//For the sake of having the objects created
-            lootItem.GetComponent<ItemObj>().io_CurrentContainer = -3; //Set container to Stash
+            //GameControllerScript.gc_PlayerStash.Add(boughtItem);//For the sake of having the objects created
+            //boughtItem.GetComponent<ItemObj>().io_CurrentContainer = -3; //Set container to Stash
             //Remove any button Functionality that may be present
-            lootItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.RemoveAllListeners();
+            boughtItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.RemoveAllListeners();
             //Add Function to button
-            lootItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate 
-                { sdc_GameControllerObj.GetComponent<GameControllerScript>().gc_ContainerChangeObject.GetComponent<ChangingContainerScript>().ChangeContainer(lootItem); });
-            GameControllerScript.gc_PlayerStash.Add(lootItem);
+            boughtItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate 
+                { sdc_GameControllerObj.GetComponent<GameControllerScript>().gc_ContainerChangeObject.GetComponent<ChangingContainerScript>().ChangeContainer(boughtItem); });
+            GameControllerScript.gc_PlayerStash.Add(boughtItem);
             //take the player's money
-            GameControllerScript.gc_Munnies -= lootItem.GetComponent<ItemObj>().cashValue;
-            lootItem.GetComponent<ItemObj>().io_InInventory = true;
+            GameControllerScript.gc_Munnies -= boughtItem.GetComponent<ItemObj>().cashValue;
+            boughtItem.GetComponent<ItemObj>().io_InInventory = true;
 
             //update the inventory display
             sdc_GameControllerObj.GetComponent<GameControllerScript>().UpdateMunnieDisplay();

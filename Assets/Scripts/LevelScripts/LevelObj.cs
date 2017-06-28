@@ -63,13 +63,13 @@ public class LevelObj : MonoBehaviour
 
         if (odds <= lv_GameController.GetComponent<GameControllerScript>().gc_CatalogueObj.GetComponent<ItemCatalogueData>().icd_ArrayOfItems[index].GetComponent<ItemObj>().oddsOfFinding)
         {
-            _potentialLootItem = new GameObject(); //Create new object
-            _potentialLootItem = lv_GameController.GetComponent<GameControllerScript>().gc_CatalogueObj.GetComponent<ItemCatalogueData>().icd_ArrayOfItems[index]; //Assign the new object the attributes of the correct item
-            GameObject lootItem = lv_GameController.GetComponent<GameControllerScript>().gc_CatalogueObj.GetComponent<ItemCatalogueData>().CreateAnItemAndIcon(_potentialLootItem.GetComponent<ItemObj>().idInArrays, -1, lv_LootDisplayPanel, lv_LootDisplayPanel);//shouldn't be the same when done
+ //           _potentialLootItem = new GameObject(); //Create new object
+ //           _potentialLootItem = lv_GameController.GetComponent<GameControllerScript>().gc_CatalogueObj.GetComponent<ItemCatalogueData>().icd_ArrayOfItems[index]; //Assign the new object the attributes of the correct item
+            GameObject lootItem = lv_GameController.GetComponent<GameControllerScript>().gc_CatalogueObj.GetComponent<ItemCatalogueData>().CreateAnItemAndIcon(index, -1, lv_LootDisplayPanel, lv_LootDisplayPanel);//shouldn't be the same when done
             lootItem.GetComponent<ItemObj>().io_invIconObject.AddComponent<Button>();
             lootItem.GetComponent<ItemObj>().io_invIconObject.GetComponent<Button>().onClick.AddListener(delegate { lv_GameController.GetComponent<GameControllerScript>().gc_ContainerChangeObject.GetComponent<ChangingContainerScript>().ChangeContainer(lootItem); });
 
-            Destroy(_potentialLootItem);
+//            Destroy(_potentialLootItem);
 
             lv_PotentialLootList.Add(lootItem); //Add the new object to the list
         }

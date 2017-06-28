@@ -32,7 +32,7 @@ public class DisplayInventory : MonoBehaviour
     public void DisplayPlayerStash(int di_BinaryLookAtStash)
     {
         di_PlayerStashItemList = GameControllerScript.gc_PlayerStash;
-        for (int i = 0; i < di_PlayerStashIconList.Count; ++i)
+        for (int i = 0; i < di_PlayerStashItemList.Count; ++i)
         {
             di_PlayerStashItemList[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
         }
@@ -76,49 +76,6 @@ public class DisplayInventory : MonoBehaviour
         for(int i = 0; i < GameControllerScript.gc_Parties[activePartyID].GetComponent<PartyObj>().po_ItemsInBagsList.Count; ++i)
         {
             GameControllerScript.gc_Parties[activePartyID].GetComponent<PartyObj>().po_ItemsInBagsList[i].GetComponent<ItemObj>().io_invIconObject.SetActive(true);
-        }
-    }
-
-/*    public void DestroyPartyBagIcons(int activePartyID)
-    {
-        
-        if(di_PartyBagsIconsList[activePartyID][0] != null)
-        {
-            int temp = 0;
-            while (di_PartyBagsIconsList[activePartyID].Count > 0)
-            {
-                Destroy(di_PartyBagsIconsList[activePartyID][0]);
-                di_PartyBagsIconsList[activePartyID].Remove(di_PartyBagsIconsList[activePartyID][0]);
-                temp++;
-            }
-            int temp2 = 0;
-            while (di_PartyBagsItemsList[activePartyID].Count > 0)
-            {
-                Destroy(di_PartyBagsItemsList[activePartyID][0].GetComponent<ItemObj>().io_invIconObject);
-                Destroy(di_PartyBagsItemsList[activePartyID][0]);
-                di_PartyBagsItemsList[activePartyID].Remove(di_PartyBagsItemsList[activePartyID][0]);
-                temp2++;
-            }
-        }
-        
-    }
-*/
-    public void DestroyStashIcons()
-    {
-        int temp = 0;
-        while (di_PlayerStashIconList.Count > 0)
-        {
-            Destroy(di_PlayerStashIconList[0]);
-            di_PlayerStashIconList.Remove(di_PlayerStashIconList[0]);
-            temp++;
-        }
-        int temp2 = 0;
-        while(di_PlayerStashItemList.Count > 0)
-        {
-            Destroy(di_PlayerStashItemList[0].GetComponent<ItemObj>().io_invIconObject);
-            Destroy(di_PlayerStashItemList[0]);
-            di_PlayerStashItemList.Remove(di_PlayerStashItemList[0]);
-            temp2++;
         }
     }
 
